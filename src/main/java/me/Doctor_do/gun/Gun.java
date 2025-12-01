@@ -1,4 +1,4 @@
-package me.CHANGEME.slimefunaddon;
+package me.Doctor_do.gun;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,7 +13,12 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
-public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
+public class Gun extends JavaPlugin implements SlimefunAddon {
+
+    @Override
+    public void onLoad() {
+        getLogger().info("Doctor.do-Gun插件已成功载入！");
+    }
 
     @Override
     public void onEnable() {
@@ -47,7 +52,7 @@ public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
          * 它代表了一个3x3的有序合成配方。
          * 该配方所需的机器将在后面通过RecipeType指定。
          */
-        ItemStack[] recipe = { new ItemStack(Material.EMERALD), null, new ItemStack(Material.EMERALD), null, new ItemStack(Material.DIAMOND), null, new ItemStack(Material.EMERALD), null, new ItemStack(Material.EMERALD) };
+        ItemStack[] recipe = {new ItemStack(Material.EMERALD), null, new ItemStack(Material.EMERALD), null, new ItemStack(Material.DIAMOND), null, new ItemStack(Material.EMERALD), null, new ItemStack(Material.EMERALD)};
 
         /*
          * 4. 注册物品
@@ -58,11 +63,15 @@ public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
          */
         SlimefunItem item = new SlimefunItem(itemGroup, slimefunItem, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
         item.register(this);
+
+        getLogger().info("Doctor.do-Gun插件已成功启用！");
     }
 
     @Override
     public void onDisable() {
         // 禁用插件的逻辑...
+
+        getLogger().info("Doctor.do-Gun插件已卸载！");
     }
 
     @Override
