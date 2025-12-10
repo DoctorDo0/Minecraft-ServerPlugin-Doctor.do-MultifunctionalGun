@@ -1,6 +1,6 @@
 ## CHANGE 更改此处为你的附属名称
 #name: SlimefunAddon
-name: Doctor.do-Gun
+name: Doctor.do-MultifunctionalGun
 
 ## CHANGE 更改此处为你的名称
 #author: CHANGEME
@@ -8,15 +8,15 @@ author: Doctor.do
 
 ## CHANGE 这是对你插件的介绍
 #description: A generic Slimefun4-Addon
-description: A plugin based Slimefun4-Addon,create a new weapon
+description: A plugin based Slimefun4-Addon,create a new weapon,called MultifunctionalGun
 
 ## CHANGE 指向你的 JavaPlugin 主类
 #main: me.CHANGEME.slimefunaddon.ExampleAddon
-main: me.Doctor_do.gun.Gun
+main: me.Doctor_do.multifunctionalgun.MultifunctionalGun
 
 ## 你可以更改为你的项目仓库地址，或者你的个人网站。你也可以移除此项目。
 #website: https://github.com/Slimefun/Addon-Template
-website: https://github.com/DoctorDo0/Minecraft-ServerPlugin-Doctor.do-Gun
+website: https://github.com/DoctorDo0/Minecraft-ServerPlugin-Doctor.do-MultifunctionalGun
 
 ## 该值将在构建时被自动替换为pom.xml中定义的版本。
 ## 不要更改此项目。

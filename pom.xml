@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.Doctor_do</groupId>
-    <artifactId>Gun</artifactId>
+    <artifactId>MultifunctionalGun</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -65,6 +65,12 @@
                     <artifactId>dough-api</artifactId>
                 </exclusion>
             </exclusions>
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <version>1.18.24</version>-->
+<!--            <scope>provided</scope>-->
         </dependency>
     </dependencies>
 </project>
