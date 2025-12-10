@@ -1,170 +1,170 @@
 package me.Doctor_do.multifunctionalgun.items.materials;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import me.Doctor_do.multifunctionalgun.items.DMG_SFItemStack;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public final class Basic_Materials {
 
     // 注册模板
-//    public static SlimefunItemStack ?? = new SlimefunItemStack(
+//    public static SlimefunItemStack ?? = new DMG_ItemStack(
 //            "??",
 //            Material.AIR,
 //            "&f??(??_Name)",
-//            "&7??_Lore"
+//            "&8??_Lore"
 //    );
 
-    public static SlimefunItemStack SPECIAL_ALLOY = new SlimefunItemStack(
+    public static SlimefunItemStack SPECIAL_ALLOY = new DMG_SFItemStack(
             "SPECIAL_ALLOY",
             Material.IRON_INGOT,
-            "&f特种合金(Special_Alloy_Name)",
-            "&7Special_Alloy_Lore"
+            "&f特种合金",
+            "&7普通的合金，强度很高，是一切的基石\n&8Special_Alloy"
     );
 
-    public static SlimefunItemStack HIGH_EXPLOSIVE = new SlimefunItemStack(
-            "HIGH_EXPLOSIVE",
-            Material.GUNPOWDER,
-            "&f高爆烈性炸药(High_Explosive_Name)",
-            "&7High_Explosive_Lore"
-    );
-
-    public static SlimefunItemStack DETONATOR = new SlimefunItemStack(
-            "DETONATOR",
-            Material.LANTERN,
-            "&f雷管(DETONATOR_Name)",
-            "&7DETONATOR_Lore"
-    );
-
-    public static SlimefunItemStack FUSE = new SlimefunItemStack(
-            "FUSE",
-            Material.WHITE_CARPET,
-            "&f触发引信(FUSE_Name)",
-            "&7FUSE_Lore"
-    );
-
-    public static SlimefunItemStack STEEL_CASING = new SlimefunItemStack(
+    public static SlimefunItemStack STEEL_CASING = new DMG_SFItemStack(
             "STEEL_CASING",
             Material.IRON_BLOCK,
-            "&f钢制外壳(STEEL_CASING_Name)",
-            "&7STEEL_CASING_Lore"
+            "&f钢制外壳",
+            "&7特种合金所制成的外壳，有广泛的应用\n&8STEEL_CASING"
     );
 
-    public static SlimefunItemStack FIRING_MECHANISM = new SlimefunItemStack(
+    public static SlimefunItemStack HIGH_EXPLOSIVE = new DMG_SFItemStack(
+            "HIGH_EXPLOSIVE",
+            Material.GUNPOWDER,
+            "&f高爆烈性炸药",
+            "&7比火药更猛烈。&7&l&m轻拿轻放！\n&8High_Explosive"
+    );
+
+    public static SlimefunItemStack DETONATOR = new DMG_SFItemStack(
+            "DETONATOR",
+            Material.LANTERN,
+            "&f雷管",
+            "&7用于激发火药，或者制造一场小型爆炸的物品。&7&l&m轻拿轻放！\n&8DETONATOR"
+    );
+
+    public static SlimefunItemStack FUSE = new DMG_SFItemStack(
+            "FUSE",
+            Material.WHITE_CARPET,
+            "&f触发引信",
+            "&7一圈引信，燃烧的很快，也可用于充当底火\n&8FUSE"
+    );
+
+    public static SlimefunItemStack FIRING_MECHANISM = new DMG_SFItemStack(
             "FIRING_MECHANISM",
             Material.TRIPWIRE_HOOK,
-            "&f击发装置(FIRING_MECHANISM_Name)",
-            "&7FIRING_MECHANISM_Lore"
+            "&f击发装置",
+            "\n&8FIRING_MECHANISM"
     );
 
-    public static SlimefunItemStack BARREL = new SlimefunItemStack(
+    public static SlimefunItemStack BARREL = new DMG_SFItemStack(
             "BARREL",
             Material.STICK,
-            "&f枪管(BARREL_Name)",
-            "&7BARREL_Lore"
+            "&f枪管",
+            "\n&8BARREL"
     );
 
-    public static SlimefunItemStack MAGAZINE = new SlimefunItemStack(
+    public static SlimefunItemStack MAGAZINE = new DMG_SFItemStack(
             "MAGAZINE",
             Material.IRON_INGOT,
-            "&f弹夹(MAGAZINE_Name)",
-            "&7MAGAZINE_Lore"
+            "&f弹夹",
+            "\n&8MAGAZINE"
     );
 
-    public static SlimefunItemStack GUNSTOCK = new SlimefunItemStack(
+    public static SlimefunItemStack GUNSTOCK = new DMG_SFItemStack(
             "GUNSTOCK",
             Material.OAK_PLANKS,
-            "&f枪托(GUNSTOCK_Name)",
-            "&7GUNSTOCK_Lore"
+            "&f枪托",
+            "\n&8GUNSTOCK"
     );
 
-    public static SlimefunItemStack ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM = new SlimefunItemStack(
+    public static SlimefunItemStack ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM = new DMG_SFItemStack(
             "ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM",
             Material.COMPARATOR,
-            "&f电磁气压动力系统(ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM_Name)",
-            "&7ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM_Lore"
+            "&f电磁气压动力系统",
+            "\n&8ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM"
     );
 
-    public static SlimefunItemStack ELECTROMAGNETIC_RAIL = new SlimefunItemStack(
+    public static SlimefunItemStack ELECTROMAGNETIC_RAIL = new DMG_SFItemStack(
             "ELECTROMAGNETIC_RAIL",
             Material.IRON_INGOT,
-            "&f电磁导轨(ELECTROMAGNETIC_RAIL_Name)",
-            "&7ELECTROMAGNETIC_RAIL_Lore"
+            "&f电磁导轨",
+            "\n&8ELECTROMAGNETIC_RAIL"
     );
 
-    public static SlimefunItemStack PNEUMATIC_PROPULSION_SYSTEM = new SlimefunItemStack(
+    public static SlimefunItemStack PNEUMATIC_PROPULSION_SYSTEM = new DMG_SFItemStack(
             "PNEUMATIC_PROPULSION_SYSTEM",
             Material.STICK,
-            "&f气动推进装置(PNEUMATIC_PROPULSION_SYSTEM_Name)",
-            "&7PNEUMATIC_PROPULSION_SYSTEM_Lore"
+            "&f气动推进装置",
+            "\n&8PNEUMATIC_PROPULSION_SYSTEM"
     );
 
-    public static SlimefunItemStack PRESSURE_BOTTLE = new SlimefunItemStack(
+    public static SlimefunItemStack PRESSURE_BOTTLE = new DMG_SFItemStack(
             "PRESSURE_BOTTLE",
             Material.BUCKET,
-            "&f气压瓶(PRESSURE_BOTTLE_Name)",
-            "&7PRESSURE_BOTTLE_Lore"
+            "&f气压瓶",
+            "\n&8PRESSURE_BOTTLE"
     );
 
-    public static SlimefunItemStack REGULATOR = new SlimefunItemStack(
+    public static SlimefunItemStack REGULATOR = new DMG_SFItemStack(
             "REGULATOR",
             Material.CLOCK,
-            "&f调节器(REGULATOR_Name)",
-            "&7REGULATOR_Lore"
+            "&f调节器",
+            "&7关键的部件，用于接收信号，并作出调整\n&8REGULATOR"
     );
 
-    public static SlimefunItemStack UNIVERSAL_INTERFACE = new SlimefunItemStack(
+    public static SlimefunItemStack UNIVERSAL_INTERFACE = new DMG_SFItemStack(
             "UNIVERSAL_INTERFACE",
             Material.COMPASS,
-            "&f通用接口(UNIVERSAL_INTERFACE_Name)",
-            "&7UNIVERSAL_INTERFACE_Lore"
+            "&f通用接口",
+            "&7关键的部件，承担各种作用，用于传输物品，能量，以及数据\n&8UNIVERSAL_INTERFACE"
     );
 
-    public static SlimefunItemStack UNFORMED_DEFLECTION_CRYSTAL = new SlimefunItemStack(
+    public static SlimefunItemStack UNFORMED_DEFLECTION_CRYSTAL = new DMG_SFItemStack(
             "UNFORMED_DEFLECTION_CRYSTAL",
             Material.AMETHYST_SHARD,
-            "&f一小块未成形的偏折晶体片(UNFORMED_DEFLECT_CRYSTAL_Name)",
-            "&7UNFORMED_DEFLECT_CRYSTAL_Lore"
+            "&f一小块未成形的偏折晶体片",
+            "&7一小块透光率高的透明晶体，并且能弯曲光线\n&8UNFORMED_DEFLECT_CRYSTAL"
     );
 
-    public static SlimefunItemStack VOLTAGE_REGULATOR_DIODE_CIRCUIT = new SlimefunItemStack(
+    public static SlimefunItemStack VOLTAGE_REGULATOR_DIODE_CIRCUIT = new DMG_SFItemStack(
             "VOLTAGE_REGULATOR_DIODE_CIRCUIT",
             Material.REPEATER,
-            "&f调压二极电路(VOLTAGE_REGULATOR_DIODE_CIRCUIT_Name)",
-            "&7VOLTAGE_REGULATOR_DIODE_CIRCUIT_Lore"
+            "&f调压二极电路",
+            "&7复杂的电路，或许有其他用途\n&8VOLTAGE_REGULATOR_DIODE_CIRCUIT"
     );
 
-    public static SlimefunItemStack RAY_GENERATOR = new SlimefunItemStack(
+    public static SlimefunItemStack RAY_GENERATOR = new DMG_SFItemStack(
             "RAY_GENERATOR",
             Material.INK_SAC,
-            "&f射线发生器(RAY_GENERATOR_Name)",
-            "&7RAY_GENERATOR_Lore"
+            "&f射线发生器",
+            "&7取自守卫者的生物器官组织，无法作为器件直接使用\n&8RAY_GENERATOR"
     );
 
-    public static SlimefunItemStack LASER_DIODE = new SlimefunItemStack(
+    public static SlimefunItemStack LASER_DIODE = new DMG_SFItemStack(
             "LASER_DIODE",
             Material.REDSTONE_TORCH,
-            "&f激光二极管(LASER_DIODE_Name)",
-            "&7LASER_DIODE_Lore"
+            "&f激光二极管",
+            "&7通电后闪闪发光\n&8LASER_DIODE"
     );
 
-    public static SlimefunItemStack ANTI_GRAVITY_VOID_PARTICLE = new SlimefunItemStack(
+    public static SlimefunItemStack ANTI_GRAVITY_VOID_PARTICLE = new DMG_SFItemStack(
             "ANTI_GRAVITY_VOID_PARTICLE",
             Material.IRON_NUGGET,
-            "&f反重力虚空粒子(ANTI_GRAVITY_VOID_PARTICLE_Name)",
-            "&7ANTI_GRAVITY_VOID_PARTICLE_Lore"
+            "&f反重力虚空粒子",
+            "&7奇妙的粒子，可以抵消重力，与凋零的飞行能力有关\n&8ANTI_GRAVITY_VOID_PARTICLE"
     );
 
-    public static SlimefunItemStack FORCE_FIELD_GENERATOT_ENGINE = new SlimefunItemStack(
+    public static SlimefunItemStack FORCE_FIELD_GENERATOT_ENGINE = new DMG_SFItemStack(
             "FORCE_FIELD_GENERATOT_ENGINE",
             Material.CONDUIT,
-            "&f力场生成引擎(FORCE_FIELD_GENERATOT_ENGINE_Name)",
-            "&7FORCE_FIELD_GENERATOT_ENGINE_Lore"
+            "&f力场生成引擎",
+            "&7产生反重力的核心引擎，&7&m或许有制作AT力场的潜力\n&8FORCE_FIELD_GENERATOT_ENGINE"
     );
 
-    public static SlimefunItemStack FORCE_FIELD_REFLECT_STABILIZER = new SlimefunItemStack(
+    public static SlimefunItemStack FORCE_FIELD_REFLECT_STABILIZER = new DMG_SFItemStack(
             "FORCE_FIELD_REFLECT_STABILIZER",
             Material.END_ROD,
-            "&f力场反射稳定器(FORCE_FIELD_REFLECT_STABILIZER_Name)",
-            "&7FORCE_FIELD_REFLECT_STABILIZER_Lore"
+            "&f力场反射稳定器",
+            "&7控制反重力场的另一个关键部件，用于安全的束缚力场，确保不会发生泄露\n&8FORCE_FIELD_REFLECT_STABILIZER"
     );
 }

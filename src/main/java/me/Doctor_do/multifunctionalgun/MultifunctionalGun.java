@@ -24,6 +24,7 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
         Plugin sfplugin = getServer().getPluginManager().getPlugin("Slimefun");
         if (sfplugin == null) {
             getLogger().warning("Slimefun plugin not found!");
+            getLogger().warning("未找到粘液科技插件！");
         }
     }
 

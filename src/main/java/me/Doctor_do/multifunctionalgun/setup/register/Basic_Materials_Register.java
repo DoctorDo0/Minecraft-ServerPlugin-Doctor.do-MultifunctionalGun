@@ -100,6 +100,15 @@ public class Basic_Materials_Register {
         );
 
         Basic_Materials_Item_Register(
+                Basic_Materials.STEEL_CASING,
+                new ItemStack[]{
+                        Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY,
+                        Basic_Materials.SPECIAL_ALLOY, null, Basic_Materials.SPECIAL_ALLOY,
+                        Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY
+                }
+        );
+
+        Basic_Materials_Item_Register(
                 Basic_Materials.HIGH_EXPLOSIVE,
                 RecipeType.GRIND_STONE,
                 new ItemStack[]{
@@ -128,20 +137,11 @@ public class Basic_Materials_Register {
         );
 
         Basic_Materials_Item_Register(
-                Basic_Materials.STEEL_CASING,
-                new ItemStack[]{
-                        Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY,
-                        Basic_Materials.SPECIAL_ALLOY, null, Basic_Materials.SPECIAL_ALLOY,
-                        Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY
-                }
-        );
-
-        Basic_Materials_Item_Register(
                 Basic_Materials.FIRING_MECHANISM,
                 new ItemStack[]{
                         new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.OAK_TRAPDOOR), new ItemStack(Material.PISTON),
                         new ItemStack(Material.DISPENSER), Basic_Materials.SPECIAL_ALLOY, new ItemStack(Material.TRIPWIRE_HOOK),
-                        new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.PISTON), new ItemStack(Material.TRIPWIRE)
+                        new ItemStack(Material.STRING), new ItemStack(Material.PISTON), new ItemStack(Material.REPEATER)
                 }
         );
 
@@ -175,7 +175,7 @@ public class Basic_Materials_Register {
         Basic_Materials_Item_Register(
                 Basic_Materials.ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM,
                 new ItemStack[]{
-                        SlimefunItems.MULTIMETER, SlimefunItems.POWER_CRYSTAL, Basic_Materials.SPECIAL_ALLOY,
+                        SlimefunItems.ELECTRO_MAGNET, SlimefunItems.POWER_CRYSTAL, Basic_Materials.SPECIAL_ALLOY,
                         SlimefunItems.ADVANCED_CIRCUIT_BOARD, new ItemStack(Material.PISTON), new ItemStack(Material.OAK_TRAPDOOR),
                         Basic_Materials.SPECIAL_ALLOY, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.SMALL_CAPACITOR
                 }

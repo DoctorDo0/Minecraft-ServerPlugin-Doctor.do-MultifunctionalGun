@@ -69,7 +69,7 @@ public class Gun_And_Bullet_Register {
         Gun_And_Bullet_Item_Register(
                 Gun_And_Bullet.LIGHT_CONE,
                 new ItemStack[]{
-                        Basic_Materials.STEEL_CASING, Advanced_Materials.TEMPERATURE_REDUCE_COMPONENTS, SlimefunItems.ENERGIZED_CAPACITOR,
+                        Basic_Materials.STEEL_CASING, Advanced_Materials.TEMPERATURE_REDUCE_COMPONENTS, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
                         Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL, Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL, Advanced_Materials.PULSED_LASER_GENERATOR,
                         Basic_Materials.STEEL_CASING, SlimefunItems.POWER_CRYSTAL, SlimefunItems.ENERGIZED_CAPACITOR
                 }
@@ -133,7 +133,7 @@ public class Gun_And_Bullet_Register {
                 Gun_And_Bullet.STEEL_BALLS,
                 new ItemStack[]{
                         null, new ItemStack(Material.IRON_NUGGET), null,
-                        new ItemStack(Material.IRON_NUGGET), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_NUGGET),
+                        new ItemStack(Material.IRON_NUGGET), SlimefunItems.STEEL_INGOT, new ItemStack(Material.IRON_NUGGET),
                         null, new ItemStack(Material.IRON_NUGGET), null
                 }
         );
