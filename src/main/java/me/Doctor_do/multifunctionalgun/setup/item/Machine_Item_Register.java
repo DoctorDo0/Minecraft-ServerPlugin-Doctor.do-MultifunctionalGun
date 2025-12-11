@@ -20,7 +20,8 @@ public class Machine_Item_Register {
                         SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.HARDENED_GLASS, SlimefunItems.REINFORCED_ALLOY_INGOT,
                         Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, null, Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE,
                         SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.HARDENED_GLASS, SlimefunItems.REINFORCED_ALLOY_INGOT
-                }
+                },
+                new SlimefunItemStack(Machine.ENERGY_STORAGE_CAN_EMPTY, 4)
         );
 
         Machine_Item_Register_Interface(
@@ -68,6 +69,16 @@ public class Machine_Item_Register {
         );
     }
 
+    public void Machine_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
+        ItemsRegister.Item_Register_Interface(
+                Groups.machine_item_group,
+                item,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
+                itemStack,
+                recipeOutput
+        );
+    }
+
     public void Machine_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
         ItemsRegister.Item_Register_Interface(
                 Groups.machine_item_group,
@@ -76,5 +87,15 @@ public class Machine_Item_Register {
                 itemStack
         );
     }
+
+//    public void Machine_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.machine_item_group,
+//                item,
+//                recipeType,
+//                itemStack,
+//                recipeOutput
+//        );
+//    }
 
 }

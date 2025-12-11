@@ -200,7 +200,7 @@ public final class Basic_Materials {
             Material.END_ROD,
             "&f力场反射稳定器",
             "",
-            "&7控制反重力场的另一个关键部件，用于安全的束缚力场，确保不会发生泄露",
+            "&7用于安全的束缚力场，确保不会发生泄露",
             "&8FORCE_FIELD_REFLECT_STABILIZER"
     );
 }

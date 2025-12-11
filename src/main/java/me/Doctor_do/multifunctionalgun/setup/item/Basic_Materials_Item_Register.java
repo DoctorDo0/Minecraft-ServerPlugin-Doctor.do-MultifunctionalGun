@@ -110,12 +110,12 @@ public class Basic_Materials_Item_Register {
 
         Basic_Materials_Item_Register_Interface(
                 Basic_Materials.HIGH_EXPLOSIVE,
-                RecipeType.GRIND_STONE,
                 new ItemStack[]{
-                        new ItemStack(Material.TNT), new ItemStack(Material.GUNPOWDER), new ItemStack(Material.SUGAR),
-                        new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.COAL), SlimefunItems.MAGNESIUM_DUST,
+                        SlimefunItems.MAGNESIUM_DUST, new ItemStack(Material.GUNPOWDER), new ItemStack(Material.SUGAR),
+                        new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.COAL), null,
                         null, null, null
-                }
+                },
+                new SlimefunItemStack(Basic_Materials.HIGH_EXPLOSIVE, 8)
         );
 
         Basic_Materials_Item_Register_Interface(
@@ -124,7 +124,8 @@ public class Basic_Materials_Item_Register {
                         new ItemStack(Material.GLASS), Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.MAGNESIUM_DUST,
                         Basic_Materials.HIGH_EXPLOSIVE, new ItemStack(Material.TNT), SlimefunItems.COPPER_WIRE,
                         new ItemStack(Material.GLASS), Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.MAGNESIUM_DUST
-                }
+                },
+                new SlimefunItemStack(Basic_Materials.DETONATOR, 2)
         );
 
         Basic_Materials_Item_Register_Interface(
@@ -133,7 +134,8 @@ public class Basic_Materials_Item_Register {
                         new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL),
                         Basic_Materials.HIGH_EXPLOSIVE, new ItemStack(Material.TNT), Basic_Materials.HIGH_EXPLOSIVE,
                         new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL)
-                }
+                },
+                new SlimefunItemStack(Basic_Materials.FUSE, 4)
         );
 
         Basic_Materials_Item_Register_Interface(
@@ -214,7 +216,8 @@ public class Basic_Materials_Item_Register {
                         SlimefunItems.BASIC_CIRCUIT_BOARD, SlimefunItems.COPPER_WIRE, SlimefunItems.ENERGY_CONNECTOR,
                         Basic_Materials.SPECIAL_ALLOY, SlimefunItems.ELECTRIC_MOTOR, Basic_Materials.SPECIAL_ALLOY,
                         SlimefunItems.CARGO_CONNECTOR_NODE, SlimefunItems.COPPER_WIRE, SlimefunItems.BASIC_CIRCUIT_BOARD
-                }
+                },
+                new SlimefunItemStack(Basic_Materials.REGULATOR, 4)
         );
 
         Basic_Materials_Item_Register_Interface(
@@ -223,7 +226,8 @@ public class Basic_Materials_Item_Register {
                         SlimefunItems.SMALL_CAPACITOR, SlimefunItems.COPPER_WIRE, SlimefunItems.ENERGY_CONNECTOR,
                         Basic_Materials.SPECIAL_ALLOY, SlimefunItems.MULTIMETER, Basic_Materials.SPECIAL_ALLOY,
                         SlimefunItems.CARGO_CONNECTOR_NODE, SlimefunItems.COPPER_WIRE, SlimefunItems.SMALL_CAPACITOR
-                }
+                },
+                new SlimefunItemStack(Basic_Materials.UNIVERSAL_INTERFACE, 4)
         );
 
         Basic_Materials_Item_Register_Interface(
@@ -298,6 +302,16 @@ public class Basic_Materials_Item_Register {
         );
     }
 
+    public void Basic_Materials_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
+        ItemsRegister.Item_Register_Interface(
+                Groups.basic_material_item_group,
+                item,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
+                itemStack,
+                recipeOutput
+        );
+    }
+
     public void Basic_Materials_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
         ItemsRegister.Item_Register_Interface(
                 Groups.basic_material_item_group,
@@ -306,5 +320,15 @@ public class Basic_Materials_Item_Register {
                 itemStack
         );
     }
+
+//    public void Basic_Materials_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.basic_material_item_group,
+//                item,
+//                recipeType,
+//                itemStack,
+//                recipeOutput
+//        );
+//    }
 
 }

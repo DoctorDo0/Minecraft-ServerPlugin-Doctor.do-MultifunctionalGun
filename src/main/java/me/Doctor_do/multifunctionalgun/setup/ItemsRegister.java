@@ -28,4 +28,14 @@ public class ItemsRegister {
                 recipe
         ).register(MultifunctionalGun.getInstance());
     }
+
+    public static void Item_Register_Interface(SubItemGroup group, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,ItemStack recipeoutput) {
+        new SlimefunItem(
+                group,
+                item,
+                recipeType,
+                recipe,
+                recipeoutput
+        ).register(MultifunctionalGun.getInstance());
+    }
 }

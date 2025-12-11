@@ -117,7 +117,8 @@ public class Gun_And_Bullet_Item_Register {
                         null, SlimefunItems.HARDENED_METAL_INGOT, null,
                         SlimefunItems.STEEL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.STEEL_INGOT,
                         SlimefunItems.STEEL_INGOT, Basic_Materials.FUSE, SlimefunItems.STEEL_INGOT
-                }
+                },
+                new SlimefunItemStack(Gun_And_Bullet.RIFLE_BULLETS, 8)
         );
 
         Gun_And_Bullet_Item_Register_Interface(
@@ -135,7 +136,8 @@ public class Gun_And_Bullet_Item_Register {
                         null, new ItemStack(Material.IRON_NUGGET), null,
                         new ItemStack(Material.IRON_NUGGET), SlimefunItems.STEEL_INGOT, new ItemStack(Material.IRON_NUGGET),
                         null, new ItemStack(Material.IRON_NUGGET), null
-                }
+                },
+                new SlimefunItemStack(Gun_And_Bullet.STEEL_BALLS, 16)
         );
 
         Gun_And_Bullet_Item_Register_Interface(
@@ -144,7 +146,8 @@ public class Gun_And_Bullet_Item_Register {
                         null, SlimefunItems.STEEL_INGOT, null,
                         new ItemStack(Material.GLASS_PANE), Basic_Materials.HIGH_EXPLOSIVE, new ItemStack(Material.GLASS_PANE),
                         null, SlimefunItems.STEEL_INGOT, null
-                }
+                },
+                new SlimefunItemStack(Gun_And_Bullet.BURNING_STEEL_BALLS, 4)
         );
 
         Gun_And_Bullet_Item_Register_Interface(
@@ -153,7 +156,8 @@ public class Gun_And_Bullet_Item_Register {
                         null, SlimefunItems.REINFORCED_ALLOY_INGOT, null,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.HARDENED_METAL_INGOT,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.FUSE, SlimefunItems.HARDENED_METAL_INGOT
-                }
+                },
+                new SlimefunItemStack(Gun_And_Bullet.SPECIAL_BULLETS, 2)
         );
     }
 
@@ -166,13 +170,33 @@ public class Gun_And_Bullet_Item_Register {
         );
     }
 
-    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
+    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
         ItemsRegister.Item_Register_Interface(
                 Groups.gun_and_bullet_item_group,
                 item,
-                recipeType,
-                itemStack
+                RecipeType.ENHANCED_CRAFTING_TABLE,
+                itemStack,
+                recipeOutput
         );
     }
+
+//    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.gun_and_bullet_item_group,
+//                item,
+//                recipeType,
+//                itemStack
+//        );
+//    }
+//
+//    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.gun_and_bullet_item_group,
+//                item,
+//                recipeType,
+//                itemStack,
+//                recipeOutput
+//        );
+//    }
 
 }

@@ -51,8 +51,9 @@ public final class Gun_And_Bullet {
             Material.CROSSBOW,
             "&f突击步枪",
             "",
-            "&7基础枪械之一，非常经典的武器，可以快速射击，威力不俗",
-            "&7需要: &r" + Gun_And_Bullet.RIFLE_BULLETS.getDisplayName(),
+            "&7基础枪械之一，非常经典的武器",
+            "&7可以快速射击，伤害不俗，子弹消耗速度很快",
+            "&7需要: " + Gun_And_Bullet.RIFLE_BULLETS.getDisplayName(),
             "&8ASSAULT_RIFLE"
     );
 
@@ -61,8 +62,9 @@ public final class Gun_And_Bullet {
             Material.CROSSBOW,
             "&f榴弹发射器",
             "",
-            "&7基础枪械之一，不算常见的武器，射击速度慢，但威力巨大，使用时请小心",
-            "&7需要: &r" + Gun_And_Bullet.GRENADE.getDisplayName(),
+            "&7基础枪械之一，非常经典的武器",
+            "&7将榴弹抛射出去，造成范围性的爆炸伤害，使用时请小心",
+            "&7需要: " + Gun_And_Bullet.GRENADE.getDisplayName(),
             "&8GRENADE_LAUNCHER"
     );
 
@@ -71,8 +73,9 @@ public final class Gun_And_Bullet {
             Material.CROSSBOW,
             "&f提卡气动步枪",
             "",
-            "&7基础枪械之一，一把做工粗糙，但耐用的武器，装载了电磁轨道炮模块，威力中等",
-            "&7需要: &r" + Gun_And_Bullet.STEEL_BALLS.getDisplayName() + " 或 " + Gun_And_Bullet.BURNING_STEEL_BALLS.getDisplayName(),
+            "&7基础枪械之一，做工粗糙，但耐用的武器",
+            "&7装载了气压瓶和电磁轨道炮模块，威力中等，消耗电力时威力更大",
+            "&7需要: " + Gun_And_Bullet.STEEL_BALLS.getDisplayName() + "&7 或 " + Gun_And_Bullet.BURNING_STEEL_BALLS.getDisplayName(),
             "&8TICA_RIFLE"
     );
 
@@ -81,8 +84,9 @@ public final class Gun_And_Bullet {
             Material.REPEATER,
             "&f光锥",
             "",
-            "&7基础枪械之一，像一把来自未来的武器，伤害极高，不需要子弹",
-            "&7需要: &r" + "&7消耗更多的电力",
+            "&7基础枪械之一，像一把来自未来的武器",
+            "&7能量武器，伤害高，不消耗子弹",
+            "&7需要: " + "&f消耗更多的电力",
             "&8LIGHT_CONE"
     );
 
@@ -91,8 +95,9 @@ public final class Gun_And_Bullet {
             Material.CROSSBOW,
             "&f反器材狙击步枪",
             "",
-            "&7基础枪械之一，非常经典的武器，射击速度慢，但威力高，且射击距离极远",
-            "&7需要: &r" + Gun_And_Bullet.SPECIAL_BULLETS.getDisplayName(),
+            "&7基础枪械之一，不算常见的武器",
+            "&7射击速度慢，但伤害高，且射击距离极远",
+            "&7需要: " + Gun_And_Bullet.SPECIAL_BULLETS.getDisplayName(),
             "&8ANTI_MATERIEL_SNIPER_RIFLE"
     );
 

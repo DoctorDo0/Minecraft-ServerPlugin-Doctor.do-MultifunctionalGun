@@ -11,7 +11,7 @@ public final class Advanced_Materials {
             Material.REDSTONE_TORCH,
             "&f脉冲激光发生器",
             "",
-            "&7功率更高了，而且非常的&r&x&a&a&a&a&a&a烫&r&7，被照射的物体表面会变成等离子体",
+            "&7功率更高了，高温使得被照射的物体表面变成了等离子体",
             "&8PULSED_LASER_GENERATOR"
     );
 
@@ -74,7 +74,7 @@ public final class Advanced_Materials {
             Material.IRON_BLOCK,
             "&f结构强化模块",
             "",
-            "&7一个更为坚固的外壳，强度更高，可以保护里面的东西不会损坏。&7&m也更沉了",
+            "&7一个更坚固的外壳，可以保护里面的东西不会损坏。&7&m也更沉了",
             "&8STRUCTURAL_REINFORCEMENT_MODULE"
     );
 
@@ -110,7 +110,7 @@ public final class Advanced_Materials {
             Material.BEACON,
             "&f高容量能源存储阵列",
             "",
-            "&7一块容量非常大的电池阵列，需要足够的电力供应。&7&m等等，我家怎么停电了?",
+            "&7容量巨大的电池阵列，需要足够的电力供应。&7&m等等，我家怎么停电了?",
             "&8HIGH_ENERGY_STORAGE_ARRAY"
     );
 }

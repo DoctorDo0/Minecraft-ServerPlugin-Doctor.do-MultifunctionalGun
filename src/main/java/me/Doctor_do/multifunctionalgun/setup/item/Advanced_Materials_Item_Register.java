@@ -131,13 +131,33 @@ public class Advanced_Materials_Item_Register {
         );
     }
 
-    public void Advanced_Materials_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
-        ItemsRegister.Item_Register_Interface(
-                Groups.advanced_material_item_group,
-                item,
-                recipeType,
-                itemStack
-        );
-    }
+//    public void Advanced_Materials_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.advanced_material_item_group,
+//                item,
+//                RecipeType.ENHANCED_CRAFTING_TABLE,
+//                itemStack,
+//                recipeOutput
+//        );
+//    }
+//
+//    public void Advanced_Materials_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.advanced_material_item_group,
+//                item,
+//                recipeType,
+//                itemStack
+//        );
+//    }
+//
+//    public void Advanced_Materials_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
+//        ItemsRegister.Item_Register_Interface(
+//                Groups.advanced_material_item_group,
+//                item,
+//                recipeType,
+//                itemStack,
+//                recipeOutput
+//        );
+//    }
 
 }
