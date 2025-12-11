@@ -1,6 +1,7 @@
 package me.Doctor_do.multifunctionalgun;
 
 import me.Doctor_do.multifunctionalgun.setup.ItemsRegister;
+import me.Doctor_do.multifunctionalgun.setup.ResearchRegister;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
@@ -40,12 +41,20 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
             // 你可以在这里添加自动更新功能
         }
 
-        // 注册流程方法
-        new ItemsRegister();
-        //15,5,12,22
         //方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型
 
+        // 注册物品流程方法
+        new ItemsRegister();
+        //15,5,12,22
+
+        // 注册研究流程方法
+        if (cfg.getBoolean("options.enable-researches")) {
+            new ResearchRegister();
+        }
+        //1748319447
+
         getLogger().info("Doctor.do-MultifunctionalGun插件已成功启用！");
+        getLogger().info("Hash Code: " + MultifunctionalGun.getInstance().hashCode());
     }
 
 //    @Override

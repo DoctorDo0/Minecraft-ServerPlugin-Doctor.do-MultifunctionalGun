@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.register;
+package me.Doctor_do.multifunctionalgun.setup.item;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -14,8 +14,8 @@ import me.Doctor_do.multifunctionalgun.setup.ItemsRegister;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class Gun_And_Bullet_Register {
-    public static void Gun_And_Bullet_Items() {
+public class Gun_And_Bullet_Item_Register {
+    public Gun_And_Bullet_Item_Register() {
 
         new SlimefunItem(
                 Groups.gun_and_bullet_item_group,
@@ -39,7 +39,7 @@ public class Gun_And_Bullet_Register {
                 }
         ).register(MultifunctionalGun.getInstance());
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.ASSAULT_RIFLE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Gun_And_Bullet.RIFLE_BULLETS, Basic_Materials.STEEL_CASING,
@@ -48,7 +48,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.GRENADE_LAUNCHER,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Gun_And_Bullet.GRENADE, Basic_Materials.STEEL_CASING,
@@ -57,7 +57,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.TICA_RIFLE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Basic_Materials.ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM, Basic_Materials.PRESSURE_BOTTLE,
@@ -66,7 +66,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.LIGHT_CONE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Advanced_Materials.TEMPERATURE_REDUCE_COMPONENTS, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
@@ -75,7 +75,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Gun_And_Bullet.SPECIAL_BULLETS, Basic_Materials.STEEL_CASING,
@@ -84,7 +84,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.SCOPE,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_ALLOY_INGOT,
@@ -93,7 +93,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.LASER_SIGHT,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL, SlimefunItems.REINFORCED_ALLOY_INGOT,
@@ -102,7 +102,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.FIREARM_EXPANSION_BACKPACK,
                 new ItemStack[]{
                         Basic_Materials.REGULATOR, SlimefunItems.HARDENED_GLASS, Basic_Materials.UNIVERSAL_INTERFACE,
@@ -111,7 +111,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.RIFLE_BULLETS,
                 new ItemStack[]{
                         null, SlimefunItems.HARDENED_METAL_INGOT, null,
@@ -120,7 +120,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.GRENADE,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Basic_Materials.FUSE, SlimefunItems.REINFORCED_ALLOY_INGOT,
@@ -129,7 +129,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.STEEL_BALLS,
                 new ItemStack[]{
                         null, new ItemStack(Material.IRON_NUGGET), null,
@@ -138,7 +138,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.BURNING_STEEL_BALLS,
                 new ItemStack[]{
                         null, SlimefunItems.STEEL_INGOT, null,
@@ -147,7 +147,7 @@ public class Gun_And_Bullet_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register(
+        Gun_And_Bullet_Item_Register_Interface(
                 Gun_And_Bullet.SPECIAL_BULLETS,
                 new ItemStack[]{
                         null, SlimefunItems.REINFORCED_ALLOY_INGOT, null,
@@ -157,8 +157,8 @@ public class Gun_And_Bullet_Register {
         );
     }
 
-    public static void Gun_And_Bullet_Item_Register(SlimefunItemStack item, ItemStack[] itemStack) {
-        ItemsRegister.Item_Register_Method(
+    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack) {
+        ItemsRegister.Item_Register_Interface(
                 Groups.gun_and_bullet_item_group,
                 item,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -166,8 +166,8 @@ public class Gun_And_Bullet_Register {
         );
     }
 
-    public static void Gun_And_Bullet_Item_Register(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
-        ItemsRegister.Item_Register_Method(
+    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
+        ItemsRegister.Item_Register_Interface(
                 Groups.gun_and_bullet_item_group,
                 item,
                 recipeType,
