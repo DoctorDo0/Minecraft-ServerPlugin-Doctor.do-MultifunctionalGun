@@ -1,12 +1,12 @@
 package me.Doctor_do.multifunctionalgun.items.materials;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import me.Doctor_do.multifunctionalgun.items.DMG_SFItemStack;
+import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
 import org.bukkit.Material;
 
 public final class Advanced_Materials {
 
-    public static SlimefunItemStack PULSED_LASER_GENERATOR = new DMG_SFItemStack(
+    public static SlimefunItemStack PULSED_LASER_GENERATOR = new DMG_SlimefunItemStack(
             "PULSED_LASER_GENERATOR",
             Material.REDSTONE_TORCH,
             "&f脉冲激光发生器",
@@ -15,7 +15,7 @@ public final class Advanced_Materials {
             "&8PULSED_LASER_GENERATOR"
     );
 
-    public static SlimefunItemStack COMPLETE_DEFLECTION_CRYSTAL = new DMG_SFItemStack(
+    public static SlimefunItemStack COMPLETE_DEFLECTION_CRYSTAL = new DMG_SlimefunItemStack(
             "COMPLETE_DEFLECTION_CRYSTAL",
             Material.TINTED_GLASS,
             "&f完整的偏折晶体块",
@@ -24,7 +24,7 @@ public final class Advanced_Materials {
             "&8COMPLETE_DEFLECTION_CRYSTAL"
     );
 
-    public static SlimefunItemStack FORCE_FIELD_CONTAINMENT_GENERATOR = new DMG_SFItemStack(
+    public static SlimefunItemStack FORCE_FIELD_CONTAINMENT_GENERATOR = new DMG_SlimefunItemStack(
             "FORCE_FIELD_CONTAINMENT_GENERATOR",
             Material.STRUCTURE_BLOCK,
             "&f力场束缚发生器",
@@ -33,7 +33,7 @@ public final class Advanced_Materials {
             "&8FORCE_FIELD_CONTAINMENT_GENERATOR"
     );
 
-    public static SlimefunItemStack STORAGE_CONTAINER = new DMG_SFItemStack(
+    public static SlimefunItemStack STORAGE_CONTAINER = new DMG_SlimefunItemStack(
             "STORAGE_CONTAINER",
             Material.CHEST,
             "&f存储容器",
@@ -42,7 +42,7 @@ public final class Advanced_Materials {
             "&8STORAGE_CONTAINER"
     );
 
-    public static SlimefunItemStack SENSOR_MONITORING_ARRAY = new DMG_SFItemStack(
+    public static SlimefunItemStack SENSOR_MONITORING_ARRAY = new DMG_SlimefunItemStack(
             "SENSOR_MONITORING_ARRAY",
             Material.OBSERVER,
             "&f传感器监测阵列",
@@ -51,7 +51,7 @@ public final class Advanced_Materials {
             "&8SENSOR_MONITORING_ARRAY"
     );
 
-    public static SlimefunItemStack REGULATOR_ARRAY = new DMG_SFItemStack(
+    public static SlimefunItemStack REGULATOR_ARRAY = new DMG_SlimefunItemStack(
             "REGULATOR_ARRAY",
             Material.CLOCK,
             "&f调节器阵列",
@@ -60,7 +60,7 @@ public final class Advanced_Materials {
             "&8REGULATOR_ARRAY"
     );
 
-    public static SlimefunItemStack INTERFACE_ARRAY = new DMG_SFItemStack(
+    public static SlimefunItemStack INTERFACE_ARRAY = new DMG_SlimefunItemStack(
             "INTERFACE_ARRAY",
             Material.COMPASS,
             "&f接口阵列",
@@ -69,7 +69,7 @@ public final class Advanced_Materials {
             "&8INTERFACE_ARRAY"
     );
 
-    public static SlimefunItemStack STRUCTURAL_REINFORCEMENT_MODULE = new DMG_SFItemStack(
+    public static SlimefunItemStack STRUCTURAL_REINFORCEMENT_MODULE = new DMG_SlimefunItemStack(
             "STRUCTURAL_REINFORCEMENT_MODULE",
             Material.IRON_BLOCK,
             "&f结构强化模块",
@@ -78,7 +78,7 @@ public final class Advanced_Materials {
             "&8STRUCTURAL_REINFORCEMENT_MODULE"
     );
 
-    public static SlimefunItemStack CENTRAL_DATA_PROCESSING_HUB = new DMG_SFItemStack(
+    public static SlimefunItemStack CENTRAL_DATA_PROCESSING_HUB = new DMG_SlimefunItemStack(
             "CENTRAL_DATA_PROCESSING_HUB",
             Material.COMMAND_BLOCK,
             "&f中央数据处理核心中枢",
@@ -87,7 +87,7 @@ public final class Advanced_Materials {
             "&8CENTRAL_DATA_PROCESSING_HUB"
     );
 
-    public static SlimefunItemStack TEMPERATURE_RAISE_COMPONENTS = new DMG_SFItemStack(
+    public static SlimefunItemStack TEMPERATURE_RAISE_COMPONENTS = new DMG_SlimefunItemStack(
             "TEMPERATURE_RAISE_COMPONENTS",
             Material.ORANGE_WOOL,
             "&f升温发热组",
@@ -96,7 +96,7 @@ public final class Advanced_Materials {
             "&8TEMPERATURE_RAISE_COMPONENTS"
     );
 
-    public static SlimefunItemStack TEMPERATURE_REDUCE_COMPONENTS = new DMG_SFItemStack(
+    public static SlimefunItemStack TEMPERATURE_REDUCE_COMPONENTS = new DMG_SlimefunItemStack(
             "TEMPERATURE_REDUCE_COMPONENTS",
             Material.LIGHT_BLUE_WOOL,
             "&f降温冷却组",
@@ -105,7 +105,7 @@ public final class Advanced_Materials {
             "&8TEMPERATURE_REDUCE_COMPONENTS"
     );
 
-    public static SlimefunItemStack HIGH_ENERGY_STORAGE_ARRAY = new DMG_SFItemStack(
+    public static SlimefunItemStack HIGH_ENERGY_STORAGE_ARRAY = new DMG_SlimefunItemStack(
             "HIGH_ENERGY_STORAGE_ARRAY",
             Material.BEACON,
             "&f高容量能源存储阵列",

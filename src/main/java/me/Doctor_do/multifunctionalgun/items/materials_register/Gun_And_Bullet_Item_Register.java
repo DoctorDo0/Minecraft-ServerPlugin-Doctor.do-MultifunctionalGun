@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.item;
+package me.Doctor_do.multifunctionalgun.items.materials_register;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -10,7 +10,8 @@ import me.Doctor_do.multifunctionalgun.items.materials.Advanced_Materials;
 import me.Doctor_do.multifunctionalgun.items.materials.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.items.materials.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.items.materials.Machine;
-import me.Doctor_do.multifunctionalgun.setup.ItemsRegister;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_item_setup.SimpleSlimefunItem_NotPlaceable;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_item_setup.SpecialSlimefunItem_Gun;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,7 +29,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         ).register(MultifunctionalGun.getInstance());
 
-        new SlimefunItem(
+        new SimpleSlimefunItem_NotPlaceable(
                 Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -39,7 +40,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         ).register(MultifunctionalGun.getInstance());
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.ASSAULT_RIFLE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Gun_And_Bullet.RIFLE_BULLETS, Basic_Materials.STEEL_CASING,
@@ -48,7 +49,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.GRENADE_LAUNCHER,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Gun_And_Bullet.GRENADE, Basic_Materials.STEEL_CASING,
@@ -57,7 +58,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.TICA_RIFLE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Basic_Materials.ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM, Basic_Materials.PRESSURE_BOTTLE,
@@ -66,7 +67,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.LIGHT_CONE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Advanced_Materials.TEMPERATURE_REDUCE_COMPONENTS, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
@@ -75,7 +76,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE,
                 new ItemStack[]{
                         Basic_Materials.STEEL_CASING, Gun_And_Bullet.SPECIAL_BULLETS, Basic_Materials.STEEL_CASING,
@@ -84,7 +85,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.SCOPE,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_ALLOY_INGOT,
@@ -93,7 +94,7 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SpecialSlimefunItem_Gun(
                 Gun_And_Bullet.LASER_SIGHT,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL, SlimefunItems.REINFORCED_ALLOY_INGOT,
@@ -102,16 +103,18 @@ public class Gun_And_Bullet_Item_Register {
                 }
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        new SimpleSlimefunItem_NotPlaceable(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.FIREARM_EXPANSION_BACKPACK,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         Basic_Materials.REGULATOR, SlimefunItems.HARDENED_GLASS, Basic_Materials.UNIVERSAL_INTERFACE,
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Advanced_Materials.STORAGE_CONTAINER, SlimefunItems.REINFORCED_ALLOY_INGOT,
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Advanced_Materials.FORCE_FIELD_CONTAINMENT_GENERATOR, SlimefunItems.REINFORCED_ALLOY_INGOT
                 }
-        );
+        ).register(MultifunctionalGun.getInstance());
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SimpleSlimefunItem_NotPlaceable(
                 Gun_And_Bullet.RIFLE_BULLETS,
                 new ItemStack[]{
                         null, SlimefunItems.HARDENED_METAL_INGOT, null,
@@ -121,16 +124,17 @@ public class Gun_And_Bullet_Item_Register {
                 new SlimefunItemStack(Gun_And_Bullet.RIFLE_BULLETS, 8)
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SimpleSlimefunItem_NotPlaceable(
                 Gun_And_Bullet.GRENADE,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Basic_Materials.FUSE, SlimefunItems.REINFORCED_ALLOY_INGOT,
                         Basic_Materials.HIGH_EXPLOSIVE, Basic_Materials.DETONATOR, Basic_Materials.HIGH_EXPLOSIVE,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.HARDENED_METAL_INGOT
-                }
+                },
+                new SlimefunItemStack(Gun_And_Bullet.GRENADE, 1)
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SimpleSlimefunItem_NotPlaceable(
                 Gun_And_Bullet.STEEL_BALLS,
                 new ItemStack[]{
                         null, new ItemStack(Material.IRON_NUGGET), null,
@@ -140,7 +144,7 @@ public class Gun_And_Bullet_Item_Register {
                 new SlimefunItemStack(Gun_And_Bullet.STEEL_BALLS, 16)
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SimpleSlimefunItem_NotPlaceable(
                 Gun_And_Bullet.BURNING_STEEL_BALLS,
                 new ItemStack[]{
                         null, SlimefunItems.STEEL_INGOT, null,
@@ -150,7 +154,7 @@ public class Gun_And_Bullet_Item_Register {
                 new SlimefunItemStack(Gun_And_Bullet.BURNING_STEEL_BALLS, 4)
         );
 
-        Gun_And_Bullet_Item_Register_Interface(
+        GunAndBullet_SimpleSlimefunItem_NotPlaceable(
                 Gun_And_Bullet.SPECIAL_BULLETS,
                 new ItemStack[]{
                         null, SlimefunItems.REINFORCED_ALLOY_INGOT, null,
@@ -161,42 +165,23 @@ public class Gun_And_Bullet_Item_Register {
         );
     }
 
-    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack) {
-        ItemsRegister.Item_Register_Interface(
+    public void GunAndBullet_SpecialSlimefunItem_Gun(SlimefunItemStack item, ItemStack[] itemStack) {
+        new SpecialSlimefunItem_Gun(
                 Groups.gun_and_bullet_item_group,
                 item,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 itemStack
-        );
+        ).register(MultifunctionalGun.getInstance());
     }
 
-    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
-        ItemsRegister.Item_Register_Interface(
+    public void GunAndBullet_SimpleSlimefunItem_NotPlaceable(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
+        new SimpleSlimefunItem_NotPlaceable(
                 Groups.gun_and_bullet_item_group,
                 item,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 itemStack,
                 recipeOutput
-        );
+        ).register(MultifunctionalGun.getInstance());
     }
-
-//    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
-//        ItemsRegister.Item_Register_Interface(
-//                Groups.gun_and_bullet_item_group,
-//                item,
-//                recipeType,
-//                itemStack
-//        );
-//    }
-//
-//    public void Gun_And_Bullet_Item_Register_Interface(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
-//        ItemsRegister.Item_Register_Interface(
-//                Groups.gun_and_bullet_item_group,
-//                item,
-//                recipeType,
-//                itemStack,
-//                recipeOutput
-//        );
-//    }
 
 }

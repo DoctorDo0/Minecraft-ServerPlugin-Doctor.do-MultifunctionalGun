@@ -1,12 +1,12 @@
 package me.Doctor_do.multifunctionalgun.items.materials;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import me.Doctor_do.multifunctionalgun.items.DMG_SFItemStack;
+import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
 import org.bukkit.Material;
 
 public final class Gun_And_Bullet {
 
-    public static SlimefunItemStack RIFLE_BULLETS = new DMG_SFItemStack(
+    public static SlimefunItemStack RIFLE_BULLETS = new DMG_SlimefunItemStack(
             "RIFLE_BULLETS",
             Material.IRON_NUGGET,
             "&f步枪子弹",
@@ -14,7 +14,7 @@ public final class Gun_And_Bullet {
             "&8RIFLE_BULLETS"
     );
 
-    public static SlimefunItemStack GRENADE = new DMG_SFItemStack(
+    public static SlimefunItemStack GRENADE = new DMG_SlimefunItemStack(
             "GRENADE",
             Material.SNOWBALL,
             "&f榴弹",
@@ -22,7 +22,7 @@ public final class Gun_And_Bullet {
             "&8GRENADE"
     );
 
-    public static SlimefunItemStack STEEL_BALLS = new DMG_SFItemStack(
+    public static SlimefunItemStack STEEL_BALLS = new DMG_SlimefunItemStack(
             "STEEL_BALLS",
             Material.IRON_NUGGET,
             "&f钢珠",
@@ -30,7 +30,7 @@ public final class Gun_And_Bullet {
             "&8STEEL_BALLS"
     );
 
-    public static SlimefunItemStack BURNING_STEEL_BALLS = new DMG_SFItemStack(
+    public static SlimefunItemStack BURNING_STEEL_BALLS = new DMG_SlimefunItemStack(
             "BURNING_STEEL_BALLS",
             Material.GOLD_NUGGET,
             "&f燃烧弹",
@@ -38,7 +38,7 @@ public final class Gun_And_Bullet {
             "&8BURNING_STEEL_BALLS"
     );
 
-    public static SlimefunItemStack SPECIAL_BULLETS = new DMG_SFItemStack(
+    public static SlimefunItemStack SPECIAL_BULLETS = new DMG_SlimefunItemStack(
             "SPECIAL_BULLETS",
             Material.IRON_INGOT,
             "&f特种子弹",
@@ -46,7 +46,7 @@ public final class Gun_And_Bullet {
             "&8SPECIAL_BULLETS"
     );
 
-    public static SlimefunItemStack ASSAULT_RIFLE = new DMG_SFItemStack(
+    public static SlimefunItemStack ASSAULT_RIFLE = new DMG_SlimefunItemStack(
             "ASSAULT_RIFLE",
             Material.CROSSBOW,
             "&f突击步枪",
@@ -57,7 +57,7 @@ public final class Gun_And_Bullet {
             "&8ASSAULT_RIFLE"
     );
 
-    public static SlimefunItemStack GRENADE_LAUNCHER = new DMG_SFItemStack(
+    public static SlimefunItemStack GRENADE_LAUNCHER = new DMG_SlimefunItemStack(
             "GRENADE_LAUNCHER",
             Material.CROSSBOW,
             "&f榴弹发射器",
@@ -68,7 +68,7 @@ public final class Gun_And_Bullet {
             "&8GRENADE_LAUNCHER"
     );
 
-    public static SlimefunItemStack TICA_RIFLE = new DMG_SFItemStack(
+    public static SlimefunItemStack TICA_RIFLE = new DMG_SlimefunItemStack(
             "TICA_RIFLE",
             Material.CROSSBOW,
             "&f提卡气动步枪",
@@ -79,7 +79,7 @@ public final class Gun_And_Bullet {
             "&8TICA_RIFLE"
     );
 
-    public static SlimefunItemStack LIGHT_CONE = new DMG_SFItemStack(
+    public static SlimefunItemStack LIGHT_CONE = new DMG_SlimefunItemStack(
             "LIGHT_CONE",
             Material.REPEATER,
             "&f光锥",
@@ -90,7 +90,7 @@ public final class Gun_And_Bullet {
             "&8LIGHT_CONE"
     );
 
-    public static SlimefunItemStack ANTI_MATERIEL_SNIPER_RIFLE = new DMG_SFItemStack(
+    public static SlimefunItemStack ANTI_MATERIEL_SNIPER_RIFLE = new DMG_SlimefunItemStack(
             "ANTI_MATERIEL_SNIPER_RIFLE",
             Material.CROSSBOW,
             "&f反器材狙击步枪",
@@ -101,7 +101,7 @@ public final class Gun_And_Bullet {
             "&8ANTI_MATERIEL_SNIPER_RIFLE"
     );
 
-    public static SlimefunItemStack SCOPE = new DMG_SFItemStack(
+    public static SlimefunItemStack SCOPE = new DMG_SlimefunItemStack(
             "SCOPE",
             Material.SPYGLASS,
             "&f瞄准镜",
@@ -110,7 +110,7 @@ public final class Gun_And_Bullet {
             "&8SCOPE"
     );
 
-    public static SlimefunItemStack LASER_SIGHT = new DMG_SFItemStack(
+    public static SlimefunItemStack LASER_SIGHT = new DMG_SlimefunItemStack(
             "LASER_SIGHT",
             Material.END_ROD,
             "&f激光瞄准器",
@@ -119,7 +119,7 @@ public final class Gun_And_Bullet {
             "&8LASER_SIGHT"
     );
 
-    public static SlimefunItemStack FIREARM_EXPANSION_BACKPACK = new DMG_SFItemStack(
+    public static SlimefunItemStack FIREARM_EXPANSION_BACKPACK = new DMG_SlimefunItemStack(
             "FIREARM_EXPANSION_BACKPACK",
             Material.CHEST,
             "&f枪械扩容背包",
@@ -128,7 +128,7 @@ public final class Gun_And_Bullet {
             "&8FIREARM_EXPANSION_BACKPACK"
     );
 
-    public static SlimefunItemStack REINFORCED_COMPUTER_ARRAY = new DMG_SFItemStack(
+    public static SlimefunItemStack REINFORCED_COMPUTER_ARRAY = new DMG_SlimefunItemStack(
             "REINFORCED_COMPUTER_ARRAY",
             Material.COMMAND_BLOCK,
             "&f强化计算机阵列",
@@ -137,7 +137,7 @@ public final class Gun_And_Bullet {
             "&8REINFORCED_COMPUTER_ARRAY"
     );
 
-    public static SlimefunItemStack ENDLESS_WEAPON = new DMG_SFItemStack(
+    public static SlimefunItemStack ENDLESS_WEAPON = new DMG_SlimefunItemStack(
             "ENDLESS_WEAPON",
             Material.REPEATER,
             "&f最终成品",
