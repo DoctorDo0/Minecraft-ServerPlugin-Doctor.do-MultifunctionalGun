@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.items.materials;
+package me.Doctor_do.multifunctionalgun.setup.item_register.materials;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
@@ -6,7 +6,7 @@ import org.bukkit.Material;
 
 public final class Machine {
 
-    public static SlimefunItemStack ENERGY_STORAGE_CAN_EMPTY = new DMG_SlimefunItemStack(
+    public final static SlimefunItemStack ENERGY_STORAGE_CAN_EMPTY = new DMG_SlimefunItemStack(
             "ENERGY_STORAGE_CAN_EMPTY",
             Material.GLASS_BOTTLE,
             "&f能量存储罐(空)",
@@ -15,7 +15,7 @@ public final class Machine {
             "&8ENERGY_STORAGE_CAN_EMPTY"
     );
 
-    public static SlimefunItemStack ENERGY_STORAGE_CAN_FULL = new DMG_SlimefunItemStack(
+    public final static SlimefunItemStack ENERGY_STORAGE_CAN_FULL = new DMG_SlimefunItemStack(
             "ENERGY_STORAGE_CAN_FULL",
             Material.DRAGON_BREATH,
             "&f能量存储罐(满)",
@@ -24,7 +24,7 @@ public final class Machine {
             "&8ENERGY_STORAGE_CAN_FULL"
     );
 
-    public static SlimefunItemStack MASS_ENERGY_ENGINE_GENERATOR = new DMG_SlimefunItemStack(
+    public final static SlimefunItemStack MASS_ENERGY_ENGINE_GENERATOR = new DMG_SlimefunItemStack(
             "MASS_ENERGY_ENGINE_GENERATOR",
             Material.RESPAWN_ANCHOR,
             "&f质能引擎发电机",
@@ -33,7 +33,7 @@ public final class Machine {
             "&8MASS_ENERGY_ENGINE_GENERATOR"
     );
 
-    public static SlimefunItemStack ENERGY_COMPRESSION_PLANT = new DMG_SlimefunItemStack(
+    public final static SlimefunItemStack ENERGY_COMPRESSION_PLANT = new DMG_SlimefunItemStack(
             "ENERGY_COMPRESSION_PLANT",
             Material.RESPAWN_ANCHOR,
             "&f能量压缩厂",
@@ -42,7 +42,7 @@ public final class Machine {
             "&8ENERGY_COMPRESSION_PLANT"
     );
 
-    public static SlimefunItemStack ENERGY_LOADING_PLANT = new DMG_SlimefunItemStack(
+    public final static SlimefunItemStack ENERGY_LOADING_PLANT = new DMG_SlimefunItemStack(
             "ENERGY_LOADING_PLANT",
             Material.RESPAWN_ANCHOR,
             "&f能量装填厂",

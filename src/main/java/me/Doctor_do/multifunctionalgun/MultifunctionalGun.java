@@ -1,5 +1,7 @@
 package me.Doctor_do.multifunctionalgun;
 
+import me.Doctor_do.multifunctionalgun.listener.MobDropListener;
+import me.Doctor_do.multifunctionalgun.listener.PlayerUseWeaponListener;
 import me.Doctor_do.multifunctionalgun.setup.ItemsRegister;
 import me.Doctor_do.multifunctionalgun.setup.ResearchRegister;
 import org.bukkit.plugin.Plugin;
@@ -44,6 +46,8 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
 
         //方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型
 
+//        new SetUp(cfg);
+
         // 注册物品流程方法
         new ItemsRegister();
         //15,5,12,22
@@ -52,10 +56,14 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
         if (cfg.getBoolean("options.enable-researches")) {
             new ResearchRegister();
         }
+        getLogger().info("Hash Code: " + MultifunctionalGun.getInstance().hashCode());
         //1748319447
 
+        // 测试监听器与事件
+        new MobDropListener();
+        new PlayerUseWeaponListener();
+
         getLogger().info("Doctor.do-MultifunctionalGun插件已成功启用！");
-        getLogger().info("Hash Code: " + MultifunctionalGun.getInstance().hashCode());
     }
 
 //    @Override

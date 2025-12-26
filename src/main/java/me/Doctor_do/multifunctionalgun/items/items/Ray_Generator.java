@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.slimefun_item_setup;
+package me.Doctor_do.multifunctionalgun.items.items;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -14,12 +14,12 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class Anti_Gravity_Void_Particle extends SimpleSlimefunItem implements NotPlaceable, RandomMobDrop {
+public class Ray_Generator extends SimpleSlimefunItem implements NotPlaceable, RandomMobDrop {
 
-    private final ItemSetting<Boolean> dropSetting = new ItemSetting<>(this, "drop-from-wither", true);
-    private final ItemSetting<Integer> chance = new IntRangeSetting(this, "wither-drop-chance", 0, 75, 100);
+    private final ItemSetting<Boolean> dropSetting = new ItemSetting<>(this, "drop-from-guardians", true);
+    private final ItemSetting<Integer> chance = new IntRangeSetting(this, "guardian-drop-chance", 0, 75, 100);
 
-    public Anti_Gravity_Void_Particle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public Ray_Generator(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
 
         addItemSetting(dropSetting);
@@ -31,7 +31,7 @@ public class Anti_Gravity_Void_Particle extends SimpleSlimefunItem implements No
         return chance.getValue();
     }
 
-    public boolean isDroppedFromWither() {
+    public boolean isDroppedFromGuardians() {
         return dropSetting.getValue();
     }
 
@@ -40,5 +40,4 @@ public class Anti_Gravity_Void_Particle extends SimpleSlimefunItem implements No
     public ItemUseHandler getItemHandler() {
         return PlayerRightClickEvent::cancel;
     }
-
 }

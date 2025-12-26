@@ -2,20 +2,17 @@ package me.Doctor_do.multifunctionalgun.setup;
 
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.items.materials.Advanced_Materials;
-import me.Doctor_do.multifunctionalgun.items.materials.Basic_Materials;
-import me.Doctor_do.multifunctionalgun.items.materials.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.items.materials.Machine;
+import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Advanced_Materials;
+import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Machine;
 import org.bukkit.NamespacedKey;
 
 public class ResearchRegister {
 
-//    public ResearchRegister(@Nonnull NamespacedKey key, int id, @Nonnull String defaultName, int defaultCost) {
-//        super(key, id, defaultName, defaultCost);
-//    }
-
     public ResearchRegister() {
 
+        // 原始教程
 //        NamespacedKey researchKey = new NamespacedKey(this, "fire_cake");
 //        Research research = new Research(researchKey, 123, "你不会想吃这些东西的", 10);
 //        research.addItems(cake);
@@ -37,7 +34,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "metal_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 1,
-                "metal_research_group_name",
+                "DMG:合金",
                 5
         ).addItems(
                 Basic_Materials.SPECIAL_ALLOY,
@@ -47,7 +44,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "bullet_materials_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 2,
-                "bullet_materials_research_group_name",
+                "DMG:弹药合成材料",
                 15
         ).addItems(
                 Basic_Materials.HIGH_EXPLOSIVE,
@@ -58,7 +55,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "gun_materials_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 3,
-                "gun_materials_research_group_name",
+                "DMG:枪械合成材料",
                 15
         ).addItems(
                 Basic_Materials.FIRING_MECHANISM,
@@ -74,11 +71,11 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "basic_materials_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 4,
-                "basic_materials_research_group_Name",
+                "DMG:基础材料",
                 10
         ).addItems(
                 Basic_Materials.REGULATOR,
-                Basic_Materials.UNIVERSAL_INTERFACE,
+                Basic_Materials.GENERIC_INTERFACE,
                 Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL,
                 Basic_Materials.VOLTAGE_REGULATOR_DIODE_CIRCUIT,
                 Basic_Materials.RAY_GENERATOR,
@@ -91,7 +88,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "advanced_materials_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 5,
-                "advanced_materials_research_group_Name",
+                "DMG:高级材料",
                 20
         ).addItems(
                 Advanced_Materials.PULSED_LASER_GENERATOR,
@@ -103,7 +100,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "computer_components_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 6,
-                "computer_components_research_group_Name",
+                "DMG:计算组件",
                 25
         ).addItems(
                 Advanced_Materials.SENSOR_MONITORING_ARRAY,
@@ -119,7 +116,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "machine_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 7,
-                "machine_research_group_Name",
+                "DMG:机器",
                 30
         ).addItems(
                 Machine.ENERGY_STORAGE_CAN_EMPTY,
@@ -132,7 +129,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "bullet_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 8,
-                "bullet_research_group_Name",
+                "DMG:弹药",
                 25
         ).addItems(
                 Gun_And_Bullet.RIFLE_BULLETS,
@@ -145,12 +142,12 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "gun_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 9,
-                "gun_research_group_Name",
+                "DMG:枪械",
                 40
         ).addItems(
                 Gun_And_Bullet.ASSAULT_RIFLE,
                 Gun_And_Bullet.GRENADE_LAUNCHER,
-                Gun_And_Bullet.TICA_RIFLE,
+                Gun_And_Bullet.TIKA_RIFLE,
                 Gun_And_Bullet.LIGHT_CONE,
                 Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE,
                 Gun_And_Bullet.SCOPE,
@@ -161,7 +158,7 @@ public class ResearchRegister {
         new Research(
                 new NamespacedKey(MultifunctionalGun.getInstance(), "endless_research_group"),
                 MultifunctionalGun.getInstance().hashCode() + 10,
-                "endless_research_group_Name",
+                "DMG:最终成品",
                 50
         ).addItems(
                 Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY,

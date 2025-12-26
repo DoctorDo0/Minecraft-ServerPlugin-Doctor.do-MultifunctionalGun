@@ -7,8 +7,8 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
-public final class Groups {
-    // 组分类，嵌套+次级
+public class Groups {
+
     public static final NestedItemGroup main_contents_item_group = new NestedItemGroup(
             new NamespacedKey(MultifunctionalGun.getInstance(), "main_contents_item_group"),
             new CustomItemStack(Material.REPEATER, "&4Doctor.do的多功能枪械")

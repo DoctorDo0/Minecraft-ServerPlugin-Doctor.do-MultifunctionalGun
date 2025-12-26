@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.items.materials_register;
+package me.Doctor_do.multifunctionalgun.setup.item_register.materials_register;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -6,18 +6,25 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
-import me.Doctor_do.multifunctionalgun.items.materials.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.items.blocks.ItemType_Item;
+import me.Doctor_do.multifunctionalgun.items.items.Anti_Gravity_Void_Particle;
+import me.Doctor_do.multifunctionalgun.items.items.Ray_Generator;
+import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
-import me.Doctor_do.multifunctionalgun.setup.slimefun_item_setup.Anti_Gravity_Void_Particle;
-import me.Doctor_do.multifunctionalgun.setup.slimefun_item_setup.SimpleSlimefunItem_NotPlaceable;
-import me.Doctor_do.multifunctionalgun.setup.slimefun_item_setup.Ray_Generator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class Basic_Materials_Item_Register {
-    public Basic_Materials_Item_Register() {
+public final class Basic_Materials_Item_Register {
 
-        // 老式注册方法
+    private final static MultifunctionalGun plugin = MultifunctionalGun.getInstance();
+
+    private Basic_Materials_Item_Register() {
+        // 构造器访问权限控制，禁止新建对象
+    }
+
+    public static void Basic_Materials_Item_Register_Setup() {
+
+        // 原始教程
 //        SlimefunItemStack HIGH_EXPLOSIVE = new SlimefunItemStack(
 //                "HIGH_EXPLOSIVE",
 //                Material.GUNPOWDER,
@@ -34,54 +41,7 @@ public class Basic_Materials_Item_Register {
 //        SlimefunItem sf_item_HIGH_EXPLOSIVE = new SlimefunItem(basic_material_item_group, HIGH_EXPLOSIVE, RecipeType.GRIND_STONE, recipe_HIGH_EXPLOSIVE);
 //        sf_item_HIGH_EXPLOSIVE.register(plugin);
 
-        // 新式注册方法
-//        new SlimefunItem(
-//                basic_material_item_group,
-//                new SlimefunItemStack(
-//                        "??",
-//                        Material.AIR,
-//                        "??_Name",
-//                        "??_Lore"
-//                ),
-//                RecipeType.ENHANCED_CRAFTING_TABLE,
-//                new ItemStack[]{
-//                        null, null, null,
-//                        null, null, null,
-//                        null, null, null
-//                }
-//        ).register(plugin);
-
-        // 新式注册方法2.0
-//        SlimefunItemStack ?? = new SlimefunItemStack(
-//                "??",
-//                Material.AIR,
-//                "??_Name",
-//                "??_Lore"
-//        );
-//        new SlimefunItem(
-//                basic_material_item_group,
-//                ??,
-//                RecipeType.ENHANCED_CRAFTING_TABLE,
-//                new ItemStack[]{
-//                        null, null, null,
-//                        null, null, null,
-//                        null, null, null
-//                }
-//        ).register(plugin);
-
         // 注册模板
-//        new SlimefunItem(
-//                basic_material_item_group,
-//                ??,
-//                RecipeType.ENHANCED_CRAFTING_TABLE,
-//                new ItemStack[]{
-//                        null, null, null,
-//                        null, null, null,
-//                        null, null, null
-//                }
-//        ).register(plugin);
-
-        // 新式注册模板
 //        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
 //                Basic_Materials.SPECIAL_ALLOY,
 //                new ItemStack[]{
@@ -92,7 +52,7 @@ public class Basic_Materials_Item_Register {
 //        );
 
         // 正式注册流程--------------------------------
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.SPECIAL_ALLOY,
                 RecipeType.SMELTERY,
                 new ItemStack[]{
@@ -103,7 +63,7 @@ public class Basic_Materials_Item_Register {
                 new SlimefunItemStack(Basic_Materials.SPECIAL_ALLOY, 2)
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.STEEL_CASING,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY,
@@ -112,7 +72,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.HIGH_EXPLOSIVE,
                 new ItemStack[]{
                         SlimefunItems.MAGNESIUM_DUST, new ItemStack(Material.GUNPOWDER), new ItemStack(Material.SUGAR),
@@ -122,7 +82,7 @@ public class Basic_Materials_Item_Register {
                 new SlimefunItemStack(Basic_Materials.HIGH_EXPLOSIVE, 8)
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.DETONATOR,
                 new ItemStack[]{
                         new ItemStack(Material.GLASS), Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.MAGNESIUM_DUST,
@@ -132,7 +92,7 @@ public class Basic_Materials_Item_Register {
                 new SlimefunItemStack(Basic_Materials.DETONATOR, 2)
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.FUSE,
                 new ItemStack[]{
                         new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL),
@@ -142,7 +102,7 @@ public class Basic_Materials_Item_Register {
                 new SlimefunItemStack(Basic_Materials.FUSE, 4)
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.FIRING_MECHANISM,
                 new ItemStack[]{
                         new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.OAK_TRAPDOOR), new ItemStack(Material.PISTON),
@@ -151,7 +111,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.BARREL,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY,
@@ -160,7 +120,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.MAGAZINE,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, new ItemStack(Material.CHEST), Basic_Materials.SPECIAL_ALLOY,
@@ -169,7 +129,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.GUNSTOCK,
                 new ItemStack[]{
                         new ItemStack(Material.LEATHER), new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.LEATHER),
@@ -178,7 +138,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.ELECTROMAGNETIC_PNEUMATIC_POWER_SYSTEM,
                 new ItemStack[]{
                         SlimefunItems.ELECTRO_MAGNET, SlimefunItems.POWER_CRYSTAL, Basic_Materials.SPECIAL_ALLOY,
@@ -187,7 +147,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.ELECTROMAGNETIC_RAIL,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY, Basic_Materials.SPECIAL_ALLOY,
@@ -196,7 +156,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.PNEUMATIC_PROPULSION_SYSTEM,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, new ItemStack(Material.OAK_TRAPDOOR), Basic_Materials.SPECIAL_ALLOY,
@@ -205,7 +165,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.PRESSURE_BOTTLE,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, new ItemStack(Material.PISTON), Basic_Materials.SPECIAL_ALLOY,
@@ -214,7 +174,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.REGULATOR,
                 new ItemStack[]{
                         SlimefunItems.BASIC_CIRCUIT_BOARD, SlimefunItems.COPPER_WIRE, SlimefunItems.ENERGY_CONNECTOR,
@@ -224,17 +184,17 @@ public class Basic_Materials_Item_Register {
                 new SlimefunItemStack(Basic_Materials.REGULATOR, 4)
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
-                Basic_Materials.UNIVERSAL_INTERFACE,
+        BasicMaterials_ItemType_Item(
+                Basic_Materials.GENERIC_INTERFACE,
                 new ItemStack[]{
                         SlimefunItems.SMALL_CAPACITOR, SlimefunItems.COPPER_WIRE, SlimefunItems.ENERGY_CONNECTOR,
                         Basic_Materials.SPECIAL_ALLOY, SlimefunItems.MULTIMETER, Basic_Materials.SPECIAL_ALLOY,
                         SlimefunItems.CARGO_CONNECTOR_NODE, SlimefunItems.COPPER_WIRE, SlimefunItems.SMALL_CAPACITOR
                 },
-                new SlimefunItemStack(Basic_Materials.UNIVERSAL_INTERFACE, 4)
+                new SlimefunItemStack(Basic_Materials.GENERIC_INTERFACE, 4)
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL,
                 new ItemStack[]{
                         new ItemStack(Material.GLASS), new ItemStack(Material.DIAMOND), new ItemStack(Material.GLASS),
@@ -243,7 +203,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.VOLTAGE_REGULATOR_DIODE_CIRCUIT,
                 new ItemStack[]{
                         new ItemStack(Material.GLASS), new ItemStack(Material.REDSTONE), new ItemStack(Material.GLASS),
@@ -259,9 +219,9 @@ public class Basic_Materials_Item_Register {
                 new ItemStack[]{
                         null, null, null, null, new CustomItemStack(Material.GUARDIAN_SPAWN_EGG, "&f击杀守卫者掉落"), null, null, null, null
                 }
-        ).register(MultifunctionalGun.getInstance());
+        ).register(plugin);
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.LASER_DIODE,
                 new ItemStack[]{
                         Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), null,
@@ -277,9 +237,9 @@ public class Basic_Materials_Item_Register {
                 new ItemStack[]{
                         null, null, null, null, new CustomItemStack(Material.WITHER_SKELETON_SPAWN_EGG, "&f击杀凋零掉落"), null, null, null, null
                 }
-        ).register(MultifunctionalGun.getInstance());
+        ).register(plugin);
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.FORCE_FIELD_GENERATOT_ENGINE,
                 new ItemStack[]{
                         SlimefunItems.BLISTERING_INGOT_3, Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, SlimefunItems.BLISTERING_INGOT_3,
@@ -288,7 +248,7 @@ public class Basic_Materials_Item_Register {
                 }
         );
 
-        BasicMaterials_SimpleSlimefunItem_NotPlaceable(
+        BasicMaterials_ItemType_Item(
                 Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_ALLOY_INGOT,
@@ -299,42 +259,33 @@ public class Basic_Materials_Item_Register {
 
     }
 
-    public void BasicMaterials_SimpleSlimefunItem_NotPlaceable(SlimefunItemStack item, ItemStack[] itemStack) {
-        new SimpleSlimefunItem_NotPlaceable(
+    public static void BasicMaterials_ItemType_Item(SlimefunItemStack item, ItemStack[] itemStack) {
+        new ItemType_Item(
                 Groups.basic_material_item_group,
                 item,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 itemStack
-        ).register(MultifunctionalGun.getInstance());
+        ).register(plugin);
     }
 
-    public void BasicMaterials_SimpleSlimefunItem_NotPlaceable(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
-        new SimpleSlimefunItem_NotPlaceable(
+    public static void BasicMaterials_ItemType_Item(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
+        new ItemType_Item(
                 Groups.basic_material_item_group,
                 item,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 itemStack,
                 recipeOutput
-        ).register(MultifunctionalGun.getInstance());
+        ).register(plugin);
     }
 
-//    public void BasicMaterials_SimpleSlimefunItem_NotPlaceable(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack) {
-//        new SimpleSlimefunItem_NotPlaceable(
-//                Groups.basic_material_item_group,
-//                item,
-//                recipeType,
-//                itemStack
-//        ).register(MultifunctionalGun.getInstance());
-//    }
-
-    public void BasicMaterials_SimpleSlimefunItem_NotPlaceable(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
-        new SimpleSlimefunItem_NotPlaceable(
+    public static void BasicMaterials_ItemType_Item(SlimefunItemStack item, RecipeType recipeType, ItemStack[] itemStack, ItemStack recipeOutput) {
+        new ItemType_Item(
                 Groups.basic_material_item_group,
                 item,
                 recipeType,
                 itemStack,
                 recipeOutput
-        ).register(MultifunctionalGun.getInstance());
+        ).register(plugin);
     }
 
 }
