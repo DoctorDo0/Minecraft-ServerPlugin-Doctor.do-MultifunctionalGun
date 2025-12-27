@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.item_register.materials;
+package me.Doctor_do.multifunctionalgun.setup.items_register.items;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;

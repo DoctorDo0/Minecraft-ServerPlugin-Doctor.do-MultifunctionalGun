@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.item_register.materials;
+package me.Doctor_do.multifunctionalgun.setup.items_register.items;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
@@ -7,8 +7,13 @@ import me.Doctor_do.multifunctionalgun.items.weapons.LightCone;
 import me.Doctor_do.multifunctionalgun.items.weapons.TIKA_Rifle;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.UUID;
 
 public final class Gun_And_Bullet {
 
@@ -177,7 +182,16 @@ public final class Gun_And_Bullet {
     static {
         ItemMeta EndlessWeaponItemMeta = ENDLESS_WEAPON.getItemMeta();
         assert EndlessWeaponItemMeta != null;
-//        EndlessWeaponItemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,?)
+        EndlessWeaponItemMeta.addAttributeModifier(
+                Attribute.GENERIC_ATTACK_DAMAGE,
+                new AttributeModifier(
+                        UUID.randomUUID(),
+                        Attribute.GENERIC_ATTACK_DAMAGE.getKey().getKey(),
+                        5,
+                        AttributeModifier.Operation.ADD_NUMBER,
+                        EquipmentSlot.HAND
+                )
+        );
         EndlessWeaponItemMeta.setUnbreakable(true);
         EndlessWeaponItemMeta.addEnchant(Enchantment.DURABILITY, 10, true);
         ENDLESS_WEAPON.setItemMeta(EndlessWeaponItemMeta);

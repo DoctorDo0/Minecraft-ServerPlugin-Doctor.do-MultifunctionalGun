@@ -8,10 +8,9 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials_register.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -49,6 +48,11 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         if (capacity <= 0) {
             this.capacity = capacity_temp;
         } else this.capacity = capacity;
+
+        useableInWorkbench = false;
+        hidden = false;
+        enchantable = false;
+        disenchantable = false;
     }
 
     public float getMaxItemCharge(ItemStack itemStack) {
@@ -215,6 +219,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             if (!modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
                 Gun_And_Bullet_Item_Register.getScopeInstance().ScopeUseEvent(event);
+                Gun_And_Bullet_Item_Register.getLaserSightInstance().LaserSightUseEvent(event);
             }
 
         } else {

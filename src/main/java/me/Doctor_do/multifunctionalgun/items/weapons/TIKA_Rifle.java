@@ -28,6 +28,8 @@ public class TIKA_Rifle extends SlimefunItem implements NotPlaceable, Rechargeab
 
     public TIKA_Rifle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override

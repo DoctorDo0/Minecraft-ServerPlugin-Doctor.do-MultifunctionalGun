@@ -3,7 +3,7 @@ package me.Doctor_do.multifunctionalgun.recipetypes;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Machine;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Machine;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 

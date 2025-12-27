@@ -2,7 +2,7 @@ package me.Doctor_do.multifunctionalgun.items.weapons;
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials_register.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

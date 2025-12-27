@@ -28,6 +28,8 @@ public class LightCone extends SlimefunItem implements NotPlaceable, Rechargeabl
 
     public LightCone(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override

@@ -20,6 +20,8 @@ public class AntiMaterielSniperRifle extends SlimefunItem implements NotPlaceabl
 
     public AntiMaterielSniperRifle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override

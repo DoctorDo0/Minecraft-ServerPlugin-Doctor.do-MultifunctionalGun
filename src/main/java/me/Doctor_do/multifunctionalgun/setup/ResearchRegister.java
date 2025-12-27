@@ -2,16 +2,19 @@ package me.Doctor_do.multifunctionalgun.setup;
 
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Advanced_Materials;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Basic_Materials;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Machine;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Advanced_Materials;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Machine;
 import org.bukkit.NamespacedKey;
 
 public class ResearchRegister {
 
-    public ResearchRegister() {
+    private ResearchRegister() {
+        // 禁止创建实例对象
+    }
 
+    public static void Research_Register_Setup() {
         // 原始教程
 //        NamespacedKey researchKey = new NamespacedKey(this, "fire_cake");
 //        Research research = new Research(researchKey, 123, "你不会想吃这些东西的", 10);

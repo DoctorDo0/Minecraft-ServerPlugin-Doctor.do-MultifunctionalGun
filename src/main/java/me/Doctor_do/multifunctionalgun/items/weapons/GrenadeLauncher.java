@@ -20,6 +20,8 @@ public class GrenadeLauncher extends SlimefunItem implements NotPlaceable {
 
     public GrenadeLauncher(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override

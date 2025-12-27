@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.item_register.materials_register;
+package me.Doctor_do.multifunctionalgun.setup.items_register.items_setup;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -8,10 +8,10 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.blocks.ItemType_Item;
 import me.Doctor_do.multifunctionalgun.items.weapons.*;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Advanced_Materials;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Basic_Materials;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Machine;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Advanced_Materials;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Machine;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -76,7 +76,7 @@ public final class Gun_And_Bullet_Item_Register {
         EndlessWeapon.register(plugin);
 
         // 一个占位符，物品可被注册但不可见，用于支持被模式选择
-        AssaultRifle_And_GrenadeLauncher = new SlimefunItem(
+        AssaultRifle_And_GrenadeLauncher = new AssaultRifle_And_GrenadeLauncher(
                 Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER,
                 RecipeType.NULL,
@@ -147,7 +147,7 @@ public final class Gun_And_Bullet_Item_Register {
                 Gun_And_Bullet.LIGHT_CONE,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        Basic_Materials.STEEL_CASING, Advanced_Materials.TEMPERATURE_REDUCE_COMPONENTS, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
+                        Basic_Materials.STEEL_CASING, Basic_Materials.STEEL_CASING, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
                         Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL, Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL, Advanced_Materials.PULSED_LASER_GENERATOR,
                         Basic_Materials.STEEL_CASING, SlimefunItems.POWER_CRYSTAL, SlimefunItems.ENERGIZED_CAPACITOR
                 }

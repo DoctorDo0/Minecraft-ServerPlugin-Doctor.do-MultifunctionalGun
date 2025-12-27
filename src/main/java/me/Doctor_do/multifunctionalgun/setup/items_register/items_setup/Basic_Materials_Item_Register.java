@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.item_register.materials_register;
+package me.Doctor_do.multifunctionalgun.setup.items_register.items_setup;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -9,7 +9,7 @@ import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.blocks.ItemType_Item;
 import me.Doctor_do.multifunctionalgun.items.items.Anti_Gravity_Void_Particle;
 import me.Doctor_do.multifunctionalgun.items.items.Ray_Generator;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -95,9 +95,9 @@ public final class Basic_Materials_Item_Register {
         BasicMaterials_ItemType_Item(
                 Basic_Materials.FUSE,
                 new ItemStack[]{
-                        new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL),
+                        new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.STRING), new ItemStack(Material.WHITE_WOOL),
                         Basic_Materials.HIGH_EXPLOSIVE, new ItemStack(Material.TNT), Basic_Materials.HIGH_EXPLOSIVE,
-                        new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_WOOL)
+                        new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.STRING), new ItemStack(Material.WHITE_WOOL)
                 },
                 new SlimefunItemStack(Basic_Materials.FUSE, 4)
         );

@@ -9,6 +9,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import static org.bukkit.Bukkit.getLogger;
@@ -17,6 +18,8 @@ public class LaserSight extends SlimefunItem implements NotPlaceable {
 
     public LaserSight(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override
@@ -29,11 +32,11 @@ public class LaserSight extends SlimefunItem implements NotPlaceable {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         event.cancel();
-        LaserSightUseEvent(player);
+        LaserSightUseEvent(event.getInteractEvent());
     }
 
-    public void LaserSightUseEvent(Player player) {
-        player.sendMessage(ChatColors.color("&7测试:&fGun:&fLaserSight"));
+    public void LaserSightUseEvent(PlayerInteractEvent event) {
+        event.getPlayer().sendMessage(ChatColors.color("&7测试:&fGun:&fLaserSight"));
         getLogger().info("&7测试:&fGun:&fLaserSight");
     }
 }

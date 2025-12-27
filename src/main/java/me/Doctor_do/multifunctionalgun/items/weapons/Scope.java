@@ -18,6 +18,8 @@ public class Scope extends SlimefunItem implements NotPlaceable {
 
     public Scope(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override

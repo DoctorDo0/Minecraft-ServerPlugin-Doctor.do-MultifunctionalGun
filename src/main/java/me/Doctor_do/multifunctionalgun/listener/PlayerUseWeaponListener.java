@@ -1,8 +1,8 @@
 package me.Doctor_do.multifunctionalgun.listener;
 
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.item_register.materials_register.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

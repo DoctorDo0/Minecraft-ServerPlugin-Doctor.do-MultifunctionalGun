@@ -18,6 +18,8 @@ public class FirearmExpansionBackpack extends SlimefunItem implements NotPlaceab
 
     public FirearmExpansionBackpack(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override
