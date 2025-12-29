@@ -26,17 +26,17 @@ import java.util.List;
 public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Rechargeable {
     public static Plugin plugin = MultifunctionalGun.getInstance();
 
-    private final static Float capacity_temp = 20000.0F;
+    private final static float capacity_temp = 20000.0F;
 
     public static float getMaxItemCharge_Temp() {
         return capacity_temp;
     }
 
     //    private final float COST = 0.3F;
-    private final Float COST = 1.0F;
+    private final float COST = 1.0F;
     private final NamespacedKey EndlessWeapon_Mode = new NamespacedKey(plugin, "ENDLESS_WEAPON_MODE");
     private final List<EndlessWeapon_Mode> modes = new ArrayList<>();
-    private final Float capacity;
+    private final float capacity;
 
     public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, float capacity, String... items) {
         super(itemGroup, item, recipeType, recipe);
@@ -70,65 +70,52 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         return index;
     }
 
+    @SuppressWarnings("all")
     private void refreshItemLoreFromMode(ItemStack item, int index) {
         String assault_rifle_and_grenade_launcher_name = Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName();
         String tika_rifle_name = Gun_And_Bullet.TIKA_RIFLE.getDisplayName();
         String light_cone_name = Gun_And_Bullet.LIGHT_CONE.getDisplayName();
         String anti_materiel_sniper_rifle_name = Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName();
         ItemMeta itemMeta = item.getItemMeta();
-        List<String> lorelist = itemMeta.getLore();
-        String textlore = lorelist.get(4);
+        assert itemMeta != null;
+        List<String> loreList = itemMeta.getLore();
+        assert loreList != null;
+        String listText = loreList.get(4);
+        assert listText != null;
+        String modeName = modes.get(index).getItem().getItemName();
         // 判断是否一致，如果不一致，则统一将name替换为%modes%
+        assert assault_rifle_and_grenade_launcher_name != null;
+        assert tika_rifle_name != null;
+        assert light_cone_name != null;
+        assert anti_materiel_sniper_rifle_name != null;
         if (
-                item.getItemMeta().getLore().get(4).contains(assault_rifle_and_grenade_launcher_name)
-                        && modes.get(index).getItem().getItemName() != assault_rifle_and_grenade_launcher_name
+                listText.contains(assault_rifle_and_grenade_launcher_name) && !modeName.equals(assault_rifle_and_grenade_launcher_name)
         ) {
-            textlore = textlore.replace(assault_rifle_and_grenade_launcher_name, "%modes%");
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+            listText = listText.replace(assault_rifle_and_grenade_launcher_name, "%modes%");
         } else if (
-                item.getItemMeta().getLore().get(4).contains(tika_rifle_name)
-                        && modes.get(index).getItem().getItemName() != tika_rifle_name
+                listText.contains(tika_rifle_name) && !modeName.equals(tika_rifle_name)
         ) {
-            textlore = textlore.replace(tika_rifle_name, "%modes%");
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+            listText = listText.replace(tika_rifle_name, "%modes%");
         } else if (
-                item.getItemMeta().getLore().get(4).contains(light_cone_name)
-                        && modes.get(index).getItem().getItemName() != light_cone_name
+                listText.contains(light_cone_name) && !modeName.equals(light_cone_name)
         ) {
-            textlore = textlore.replace(light_cone_name, "%modes%");
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+            listText = listText.replace(light_cone_name, "%modes%");
         } else if (
-                item.getItemMeta().getLore().get(4).contains(anti_materiel_sniper_rifle_name)
-                        && modes.get(index).getItem().getItemName() != anti_materiel_sniper_rifle_name
+                listText.contains(anti_materiel_sniper_rifle_name) && !modeName.equals(anti_materiel_sniper_rifle_name)
         ) {
-            textlore = textlore.replace(anti_materiel_sniper_rifle_name, "%modes%");
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+            listText = listText.replace(anti_materiel_sniper_rifle_name, "%modes%");
         } else {
-            textlore = "§7当前模式: %modes%";
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+            listText = "§7当前模式: %modes%";
         }
         // 收尾工作，将%modes%替换为应有的name
-        if (item.getItemMeta().getLore().get(4).contains("%modes%")) {
-            textlore = textlore.replace("%modes%", modes.get(index).getItem().getItemName());
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+        if (listText.contains("%modes%")) {
+            listText = listText.replace("%modes%", modeName);
         } else {
-            textlore = "§7当前模式: %modes%";
-            lorelist.set(4, textlore);
-            itemMeta.setLore(lorelist);
-            item.setItemMeta(itemMeta);
+            listText = "§7当前模式: %modes%";
         }
+        loreList.set(4, listText);
+        itemMeta.setLore(loreList);
+        item.setItemMeta(itemMeta);
     }
 
     @Override
@@ -200,6 +187,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //        }
     }
 
+    @SuppressWarnings("all")
     public void LeftClickEvent(Player player, PlayerInteractEvent event, ItemStack item) {
         event.setUseInteractedBlock(Event.Result.DENY);
         event.setUseItemInHand(Event.Result.DENY);
@@ -228,6 +216,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         }
     }
 
+    @SuppressWarnings("all")
     public void RightClickEvent(Player player, PlayerInteractEvent event, ItemStack item) {
         event.setUseInteractedBlock(Event.Result.DENY);
         event.setUseItemInHand(Event.Result.DENY);
@@ -241,7 +230,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Register.getAssaultRifleInstance().CauseDamageToEntity(event, GrenadeLauncher.damage_temp);
+                Gun_And_Bullet_Item_Register.getAssaultRifleInstance().CauseDamageToEntity(event, AssaultRifle.damage_temp);
             }
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.TIKA_RIFLE.getDisplayName())) {

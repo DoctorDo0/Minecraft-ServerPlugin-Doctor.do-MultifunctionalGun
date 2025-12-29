@@ -155,7 +155,7 @@ public final class Gun_And_Bullet {
             Material.BARRIER,
             Gun_And_Bullet.ASSAULT_RIFLE.getDisplayName() + " + " + Gun_And_Bullet.GRENADE_LAUNCHER.getDisplayName(),
             "",
-            "&7一个占位符，无实际作用，属性为不可见，不应该被显示",
+            "&7一个占位符，无实际作用，仅用于支持模式选择，属性为不可见，不应该被显示",
             "&7需要: " + Gun_And_Bullet.RIFLE_BULLETS.getDisplayName() + " + " + Gun_And_Bullet.GRENADE.getDisplayName(),
             "&8ASSAULT_RIFLE"
     );
@@ -171,8 +171,8 @@ public final class Gun_And_Bullet {
             "&7当前模式: %modes%",
             "",
 //            LoreBuilder.RIGHT_CLICK_TO_USE,
-            "&e左键&7使用",
-            "&e右键&7使用",
+            "&e左键&7使用副武器",
+            "&e右键&7使用主武器",
             "&7按住 &eShift + 左键&7 以打开背包",
             "&7按住 &eShift + 右键&7 以更改模式",
             "&8ENDLESS_WEAPON"

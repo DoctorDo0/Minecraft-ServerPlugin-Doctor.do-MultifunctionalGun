@@ -29,10 +29,8 @@ public class FirearmExpansionBackpack extends SlimefunItem implements NotPlaceab
     }
 
     private void onItemUseRightClick(PlayerRightClickEvent event) {
-        Player player = event.getPlayer();
-        ItemStack item = event.getItem();
         event.cancel();
-        Slimefun.getLocalization().sendMessage(player, "该物品无法单独使用！");
+        Slimefun.getLocalization().sendMessage(event.getPlayer(), "该物品无法单独使用！");
     }
 
     public void UseFirearmExpansionBackpack(Player player) {

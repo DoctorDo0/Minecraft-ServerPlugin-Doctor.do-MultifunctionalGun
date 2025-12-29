@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import static org.bukkit.Bukkit.getLogger;
 
 public class GrenadeLauncher extends SlimefunItem implements NotPlaceable {
-    public static final Integer damage_temp = 100;
+    public static final Integer damage_temp = 120;
     public static Integer damage = damage_temp;
 
     public GrenadeLauncher(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {

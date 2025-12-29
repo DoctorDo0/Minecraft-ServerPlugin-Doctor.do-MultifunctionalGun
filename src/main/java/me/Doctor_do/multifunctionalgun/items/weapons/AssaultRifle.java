@@ -15,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import static org.bukkit.Bukkit.getLogger;
 
 public class AssaultRifle extends SlimefunItem implements NotPlaceable {
-    public static final Integer damage_temp = 20;
-    public static Integer damage = damage_temp;
+    public static final int damage_temp = 24;
+    public static int damage = damage_temp;
 
     public AssaultRifle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
