@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.items_register.items;
+package me.Doctor_do.multifunctionalgun.setup.slimefun_items;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
@@ -178,8 +178,32 @@ public final class Gun_And_Bullet {
             "&8ENDLESS_WEAPON"
     );
 
+    public final static SlimefunItemStack TEST_ITEM = new DMG_SlimefunItemStack(
+            "TEST_ITEM",
+            Material.COMMAND_BLOCK,
+            "&f测试物品",
+            ""
+    );
+
     // 修改物品属性，初始化时执行
     static {
+        // 测试物品
+        ItemMeta TestItemMeta = TEST_ITEM.getItemMeta();
+        assert TestItemMeta != null;
+        TestItemMeta.addAttributeModifier(
+                Attribute.GENERIC_ATTACK_DAMAGE,
+                new AttributeModifier(
+                        UUID.randomUUID(),
+                        Attribute.GENERIC_ATTACK_DAMAGE.getKey().getKey(),
+                        1000,
+                        AttributeModifier.Operation.ADD_NUMBER,
+                        EquipmentSlot.HAND
+                )
+        );
+        TestItemMeta.setUnbreakable(true);
+        TEST_ITEM.setItemMeta(TestItemMeta);
+
+        // 最终成品
         ItemMeta EndlessWeaponItemMeta = ENDLESS_WEAPON.getItemMeta();
         assert EndlessWeaponItemMeta != null;
         EndlessWeaponItemMeta.addAttributeModifier(
@@ -196,6 +220,7 @@ public final class Gun_And_Bullet {
         EndlessWeaponItemMeta.addEnchant(Enchantment.DURABILITY, 10, true);
         ENDLESS_WEAPON.setItemMeta(EndlessWeaponItemMeta);
 
+        // 其他物品属性
         ItemMeta item_meta;
         item_meta = ASSAULT_RIFLE.getItemMeta();
         assert item_meta != null;

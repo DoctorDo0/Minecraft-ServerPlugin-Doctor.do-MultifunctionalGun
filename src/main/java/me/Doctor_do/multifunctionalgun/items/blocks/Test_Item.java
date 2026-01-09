@@ -9,7 +9,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,6 +19,9 @@ public class Test_Item extends SlimefunItem implements NotPlaceable {
 
     public Test_Item(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
+        hidden = true;
+        enchantable = false;
+        disenchantable = false;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class Test_Item extends SlimefunItem implements NotPlaceable {
         lore.add("§7Plugin:" + MultifunctionalGun.getInstance().toString());
         lore.add("§7Plugin:Version:" + MultifunctionalGun.getInstance().getDescription().getVersion());
         lore.add("§7Hash Code:" + MultifunctionalGun.getInstance().hashCode());
-        lore.add("§7Item: " + Gun_And_Bullet_Item_Register.getEndlessWeaponInstance().toString());
+        lore.add("§7Item: " + Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().toString());
         lore.add("§8TEST_ITEM");
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);

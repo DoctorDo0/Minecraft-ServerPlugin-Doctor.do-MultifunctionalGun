@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.items_register.items_setup;
+package me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -7,22 +7,23 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.blocks.ItemType_Item;
+import me.Doctor_do.multifunctionalgun.items.blocks.Test_Item;
 import me.Doctor_do.multifunctionalgun.items.weapons.*;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Advanced_Materials;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Basic_Materials;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Machine;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public final class Gun_And_Bullet_Item_Register {
+public final class Gun_And_Bullet_Item_Setup {
 
     private final static MultifunctionalGun plugin = MultifunctionalGun.getInstance();
 
-    private Gun_And_Bullet_Item_Register() {
+    private Gun_And_Bullet_Item_Setup() {
         // 构造器访问权限控制，禁止新建对象
     }
 
@@ -52,6 +53,14 @@ public final class Gun_And_Bullet_Item_Register {
     }
 
     public static void Gun_And_Bullet_Item_Register_setup() {
+
+        // 一个测试物品，修改了部分属性，右键修改物品的lore，附上一些插件内部数据，装饰用
+        new Test_Item(
+                Groups.gun_and_bullet_item_group,
+                Gun_And_Bullet.TEST_ITEM,
+                RecipeType.NULL,
+                new ItemStack[9]
+        ).register(plugin);
 
         // 最终成品，物品注册，包含关联数据，如最大电容，携带功能
         EndlessWeapon = new EndlessWeapon(
@@ -83,19 +92,6 @@ public final class Gun_And_Bullet_Item_Register {
                 new ItemStack[9]
         );
         AssaultRifle_And_GrenadeLauncher.register(plugin);
-
-        // 一个测试物品，右键修改物品的lore，附上一些插件内部数据，装饰用
-//        new Test_Item(
-//                Groups.gun_and_bullet_item_group,
-//                new DMG_SlimefunItemStack(
-//                        "DMG_TEST_ITEM",
-//                        Material.COMMAND_BLOCK,
-//                        "&f测试物品",
-//                        ""
-//                ),
-//                RecipeType.NULL,
-//                new ItemStack[9]
-//        ).register(plugin);
 
         GunAndBullet_ItemType_Item(
                 Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY,

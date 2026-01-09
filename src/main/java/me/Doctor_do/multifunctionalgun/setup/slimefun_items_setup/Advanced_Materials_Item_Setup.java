@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.items_register.items_setup;
+package me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -6,16 +6,16 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.blocks.ItemType_Item;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Advanced_Materials;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public final class Advanced_Materials_Item_Register {
+public final class Advanced_Materials_Item_Setup {
 
     private final static MultifunctionalGun plugin = MultifunctionalGun.getInstance();
 
-    private Advanced_Materials_Item_Register() {
+    private Advanced_Materials_Item_Setup() {
         // 构造器访问权限控制，禁止新建对象
     }
 

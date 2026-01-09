@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.setup.items_register.items;
+package me.Doctor_do.multifunctionalgun.setup.slimefun_items;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
@@ -157,15 +157,6 @@ public final class Basic_Materials {
             "",
             "&7复杂的电路，或许有其他用途",
             "&8VOLTAGE_REGULATOR_DIODE_CIRCUIT"
-    );
-
-    public final static SlimefunItemStack RAY_GENERATOR = new DMG_SlimefunItemStack(
-            "RAY_GENERATOR",
-            Material.INK_SAC,
-            "&f射线发生器",
-            "",
-            "&7取自守卫者的生物器官组织，无法作为器件直接使用",
-            "&8RAY_GENERATOR"
     );
 
     public final static SlimefunItemStack LASER_DIODE = new DMG_SlimefunItemStack(
