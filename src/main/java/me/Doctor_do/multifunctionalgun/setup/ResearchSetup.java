@@ -2,15 +2,15 @@ package me.Doctor_do.multifunctionalgun.setup;
 
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Advanced_Materials;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Basic_Materials;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Machine;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import org.bukkit.NamespacedKey;
 
-public class ResearchRegister {
+public class ResearchSetup {
 
-    private ResearchRegister() {
+    private ResearchSetup() {
         // 禁止创建实例对象
     }
 

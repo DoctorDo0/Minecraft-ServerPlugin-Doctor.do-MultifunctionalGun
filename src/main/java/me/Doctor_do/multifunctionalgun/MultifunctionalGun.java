@@ -41,7 +41,7 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
         }
 
         //方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型，...不定多行输入，方法回调实现链式调用，接口，接口实现，static静态代码块，注解
-        //反射，lamda表达式，增强for循环
+        //反射，lambda表达式，增强for循环，匿名内部类
 
         // 使用设置类进行初始化
         Setup.SetupAll(cfg);

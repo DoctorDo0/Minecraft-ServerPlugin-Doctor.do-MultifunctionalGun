@@ -1,8 +1,8 @@
 package me.Doctor_do.multifunctionalgun.listener;
 
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,19 +25,15 @@ public class PlayerUseWeaponListener implements Listener {
         Player player = event.getPlayer();
         Action action = event.getAction();
         ItemStack item = event.getItem();
-        // 同一个物品栈
-//        ItemStack item = player.getInventory().getItemInMainHand();
-//        ItemStack item2 = event.getItem();
-//        ItemStack item3 = event.getPlayer().getInventory().getItemInMainHand();
 
         if (item != null && item.hasItemMeta() &&
                 Objects.requireNonNull(item.getItemMeta()).hasDisplayName() &&
                 item.getItemMeta().getDisplayName().equals(Gun_And_Bullet.ENDLESS_WEAPON.getDisplayName())) {
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
-                Gun_And_Bullet_Item_Register.getEndlessWeaponInstance().LeftClickEvent(player, event, item);
+                Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().LeftClickEvent(player, event, item);
             }
             if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
-                Gun_And_Bullet_Item_Register.getEndlessWeaponInstance().RightClickEvent(player, event, item);
+                Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().RightClickEvent(player, event, item);
             }
         }
 

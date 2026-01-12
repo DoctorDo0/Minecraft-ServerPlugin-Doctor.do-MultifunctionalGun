@@ -9,8 +9,8 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items.Gun_And_Bullet;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -38,7 +38,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private final List<EndlessWeapon_Mode> modes = new ArrayList<>();
     private final float capacity;
 
-    public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, float capacity, String... items) {
+    public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, float capacity, String[] items) {
         super(itemGroup, item, recipeType, recipe);
 
         for (int i = 0; i < items.length; i++) {
@@ -77,17 +77,10 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         String light_cone_name = Gun_And_Bullet.LIGHT_CONE.getDisplayName();
         String anti_materiel_sniper_rifle_name = Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName();
         ItemMeta itemMeta = item.getItemMeta();
-        assert itemMeta != null;
         List<String> loreList = itemMeta.getLore();
-        assert loreList != null;
         String listText = loreList.get(4);
-        assert listText != null;
         String modeName = modes.get(index).getItem().getItemName();
         // 判断是否一致，如果不一致，则统一将name替换为%modes%
-        assert assault_rifle_and_grenade_launcher_name != null;
-        assert tika_rifle_name != null;
-        assert light_cone_name != null;
-        assert anti_materiel_sniper_rifle_name != null;
         if (
                 listText.contains(assault_rifle_and_grenade_launcher_name) && !modeName.equals(assault_rifle_and_grenade_launcher_name)
         ) {
@@ -148,6 +141,10 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         event.cancel();
+        // 同一个物品栈
+//        ItemStack item1 = player.getInventory().getItemInMainHand();
+//        ItemStack item2 = event.getItem();
+//        ItemStack item3 = event.getPlayer().getInventory().getItemInMainHand();
         // Permission 权限区分
 //        if (player.hasPermission("minecraft.admin")) {}
         // MainHand 玩家主手物品类型判断
@@ -201,18 +198,18 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Register.getGrenadeLauncherInstance().CauseDamageToEntity(event, GrenadeLauncher.damage_temp);
+                Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().CauseDamageToEntity(event, GrenadeLauncher.damage_temp);
             }
 
             if (!modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Register.getScopeInstance().ScopeUseEvent(event);
-                Gun_And_Bullet_Item_Register.getLaserSightInstance().LaserSightUseEvent(event);
+                Gun_And_Bullet_Item_Setup.getScopeInstance().ScopeUseEvent(event);
+                Gun_And_Bullet_Item_Setup.getLaserSightInstance().LaserSightUseEvent(event);
             }
 
         } else {
             refreshItemLoreFromMode(item, index);
-            Gun_And_Bullet_Item_Register.getFirearmExpansionBackpackInstance().UseFirearmExpansionBackpack(player);
+            Gun_And_Bullet_Item_Setup.getFirearmExpansionBackpackInstance().UseFirearmExpansionBackpack(player);
         }
     }
 
@@ -230,7 +227,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Register.getAssaultRifleInstance().CauseDamageToEntity(event, AssaultRifle.damage_temp);
+                Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().CauseDamageToEntity(event, AssaultRifle.damage_temp);
             }
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.TIKA_RIFLE.getDisplayName())) {
@@ -240,9 +237,9 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                    if (sfItem != null) {
 //                        sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                    }
-                    Gun_And_Bullet_Item_Register.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.damage_temp * 3);
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.damage_temp * 3);
                 } else {
-                    Gun_And_Bullet_Item_Register.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.damage_temp);
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.damage_temp);
                     lowPower(event.getPlayer());
                 }
             }
@@ -254,7 +251,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                    if (sfItem != null) {
 //                        sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                    }
-                    Gun_And_Bullet_Item_Register.getLightConeInstance().CauseDamageToEntity(event, LightCone.damage_temp);
+                    Gun_And_Bullet_Item_Setup.getLightConeInstance().CauseDamageToEntity(event, LightCone.damage_temp);
                 } else {
                     lowPower(event.getPlayer());
                 }
@@ -262,7 +259,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Register.getAntiMaterielSniperRifleInstance().CauseDamageToEntity(event, AntiMaterielSniperRifle.damage_temp);
+                Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().CauseDamageToEntity(event, AntiMaterielSniperRifle.damage_temp);
             }
 
         } else {
@@ -285,6 +282,6 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     }
 
     public void lowPower(Player player) {
-        Slimefun.getLocalization().sendMessage(player, "电力不足！");
+        Slimefun.getLocalization().sendMessage(player, "电力不足！", true, str -> str.replace("! Missing string \"", "").replace("\"", ""));
     }
 }

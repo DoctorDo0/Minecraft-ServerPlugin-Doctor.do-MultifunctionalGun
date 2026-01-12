@@ -2,7 +2,7 @@ package me.Doctor_do.multifunctionalgun.items.weapons;
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import me.Doctor_do.multifunctionalgun.setup.items_register.items_setup.Gun_And_Bullet_Item_Register;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -26,7 +26,7 @@ public class EndlessWeapon_Mode {
     // 此处，以及后面的item.getValue()，调用ItemSetting<>内存放的数据，为之前录入的%SlimefunItem%.getDisplayName()
     @Nullable
     SlimefunItem getItem() {
-        return Gun_And_Bullet_Item_Register.getItemByDisplayName(item.getValue());
+        return Gun_And_Bullet_Item_Setup.getItemByDisplayName(item.getValue());
     }
 
     boolean isEnabled() {
