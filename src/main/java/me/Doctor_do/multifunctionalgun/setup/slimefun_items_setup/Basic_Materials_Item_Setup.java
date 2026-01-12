@@ -8,7 +8,6 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.blocks.ItemType_Item;
 import me.Doctor_do.multifunctionalgun.items.items.Anti_Gravity_Void_Particle;
-import me.Doctor_do.multifunctionalgun.items.items.Ray_Generator;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
 import org.bukkit.Material;
@@ -212,21 +211,12 @@ public final class Basic_Materials_Item_Setup {
                 }
         );
 
-        new Ray_Generator(
-                Groups.basic_material_item_group,
-                Basic_Materials.RAY_GENERATOR,
-                RecipeTypes.KILL_MOB_DROP,
-                new ItemStack[]{
-                        null, null, null, null, new CustomItemStack(Material.GUARDIAN_SPAWN_EGG, "&f击杀守卫者掉落"), null, null, null, null
-                }
-        ).register(plugin);
-
         BasicMaterials_ItemType_Item(
                 Basic_Materials.LASER_DIODE,
                 new ItemStack[]{
-                        Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), null,
-                        new ItemStack(Material.GLASS), Basic_Materials.RAY_GENERATOR, SlimefunItems.COPPER_WIRE,
-                        Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), null
+                        Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), new ItemStack(Material.REDSTONE),
+                        new ItemStack(Material.GLASS), new ItemStack(Material.AMETHYST_SHARD), SlimefunItems.COPPER_WIRE,
+                        Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), new ItemStack(Material.REDSTONE)
                 }
         );
 

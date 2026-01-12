@@ -81,7 +81,6 @@ public class ResearchSetup {
                 Basic_Materials.GENERIC_INTERFACE,
                 Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL,
                 Basic_Materials.VOLTAGE_REGULATOR_DIODE_CIRCUIT,
-                Basic_Materials.RAY_GENERATOR,
                 Basic_Materials.LASER_DIODE,
                 Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE,
                 Basic_Materials.FORCE_FIELD_GENERATOT_ENGINE,

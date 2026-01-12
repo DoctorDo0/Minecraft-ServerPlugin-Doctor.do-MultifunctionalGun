@@ -159,15 +159,6 @@ public final class Basic_Materials {
             "&8VOLTAGE_REGULATOR_DIODE_CIRCUIT"
     );
 
-    public final static SlimefunItemStack RAY_GENERATOR = new DMG_SlimefunItemStack(
-            "RAY_GENERATOR",
-            Material.INK_SAC,
-            "&f射线发生器",
-            "",
-            "&7取自守卫者的生物器官组织，无法作为器件直接使用",
-            "&8RAY_GENERATOR"
-    );
-
     public final static SlimefunItemStack LASER_DIODE = new DMG_SlimefunItemStack(
             "LASER_DIODE",
             Material.REDSTONE_TORCH,
