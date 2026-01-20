@@ -248,6 +248,13 @@ x  强化合金锭  x
 	机器：
 
 --------
+	质能引擎发电机
+	消耗：反重力虚空粒子/能量存储罐(满)
+	生产：能量存储罐(空)
+	电力生产：2000J/s with 1 item,1000J/sfTick with 1 item
+	消耗时间：
+	缓存：100_000J
+
 	能量装填厂
 	生产：能量存储罐(满)
 	消耗：能量存储罐(空)+反重力虚空粒子
@@ -256,7 +263,7 @@ x  强化合金锭  x
 	能量压缩厂
 	生产：能量存储罐(满)
 	消耗：能量存储罐(空)
-	电力消耗：1000J/item
+	电力消耗：2400J/s with 1 item
 --------
 质能引擎发电机(系统的能源供应部件，一整套的能源供应系统，产生能量并输送至各处)
 ->
@@ -517,4 +524,20 @@ x  特种合金  活塞
 	物品功能
 	背包界面，与前置物品数量是否足够的判断条件
 
-    炼金术自传对于普通工具是否可复用
+	炼金术自传对于普通工具是否可复用
+
+优化项目:
+	删除注释代码:
+	    MultifunctionalGun
+		Anti_Gravity_Void_Particle
+		MobDropListener
+	其他代码:
+	    Setup--删除哈希码
+	    ItemType_Item--修改注释，改为大段注释，并加入文本描述
+	    EndlessWeapon--修改注释，改为大段注释，并加入文本描述
+	目前希望保留:
+	    ResearchSetup--模板代码
+	    Basic_Materials--模板代码
+	    Basic_Materials_Item_Setup--模板代码
+	    EndlessWeapon--问题众多，待定
+	    ItemType_Block--无用代码，暂做保留

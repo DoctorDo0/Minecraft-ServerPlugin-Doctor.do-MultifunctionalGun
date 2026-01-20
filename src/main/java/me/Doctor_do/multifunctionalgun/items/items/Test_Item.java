@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.items.blocks;
+package me.Doctor_do.multifunctionalgun.items.items;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
