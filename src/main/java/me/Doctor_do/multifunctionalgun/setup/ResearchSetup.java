@@ -124,8 +124,8 @@ public class ResearchSetup {
                 Machine.ENERGY_STORAGE_CAN_EMPTY,
                 Machine.ENERGY_STORAGE_CAN_FULL,
                 Machine.MASS_ENERGY_ENGINE_GENERATOR,
-                Machine.ENERGY_COMPRESSION_PLANT,
-                Machine.ENERGY_LOADING_PLANT
+                Machine.ENERGY_COMPRESSOR,
+                Machine.ENERGY_CONVERTER
         ).register();
 
         new Research(

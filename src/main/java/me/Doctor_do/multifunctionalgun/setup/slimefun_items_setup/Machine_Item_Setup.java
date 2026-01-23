@@ -6,7 +6,9 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Item;
-import me.Doctor_do.multifunctionalgun.items.general.ItemType_Machine;
+import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Compressor;
+import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Converter;
+import me.Doctor_do.multifunctionalgun.items.electric.generator.Mass_Energy_Engine_Generator;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
@@ -44,7 +46,7 @@ public final class Machine_Item_Setup {
                 }
         ).register(plugin);
 
-        new ItemType_Machine(
+        new Mass_Energy_Engine_Generator(
                 Groups.machine_item_group,
                 Machine.MASS_ENERGY_ENGINE_GENERATOR,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -55,9 +57,9 @@ public final class Machine_Item_Setup {
                 }
         ).register(plugin);
 
-        new ItemType_Machine(
+        new Energy_Compressor(
                 Groups.machine_item_group,
-                Machine.ENERGY_COMPRESSION_PLANT,
+                Machine.ENERGY_COMPRESSOR,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         SlimefunItems.POWER_CRYSTAL, Advanced_Materials.STORAGE_CONTAINER, SlimefunItems.POWER_CRYSTAL,
@@ -66,12 +68,12 @@ public final class Machine_Item_Setup {
                 }
         ).register(plugin);
 
-        new ItemType_Machine(
+        new Energy_Converter(
                 Groups.machine_item_group,
-                Machine.ENERGY_LOADING_PLANT,
+                Machine.ENERGY_CONVERTER,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER, Machine.ENERGY_COMPRESSION_PLANT, Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER,
+                        Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER, Machine.ENERGY_COMPRESSOR, Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER,
                         Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, Machine.ENERGY_STORAGE_CAN_EMPTY, Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE,
                         Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER, Machine.MASS_ENERGY_ENGINE_GENERATOR, Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER
                 }

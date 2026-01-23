@@ -27,7 +27,7 @@ public class RecipeTypes {
             ),
             new CustomItemStack(
                     Material.RESPAWN_ANCHOR,
-                    "&f使用 " + Machine.ENERGY_COMPRESSION_PLANT.getDisplayName() + " &f或 " + Machine.ENERGY_LOADING_PLANT.getDisplayName() + " 制造"
+                    "&f使用 " + Machine.ENERGY_COMPRESSOR.getDisplayName() + " &f或 " + Machine.ENERGY_CONVERTER.getDisplayName() + " 制造"
             )
     );
 }
