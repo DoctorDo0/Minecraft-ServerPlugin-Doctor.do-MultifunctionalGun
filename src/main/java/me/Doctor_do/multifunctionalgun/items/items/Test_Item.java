@@ -38,11 +38,14 @@ public class Test_Item extends SlimefunItem implements NotPlaceable {
         assert itemMeta != null;
         List<String> lore = itemMeta.getLore();
         assert lore != null;
-        lore.add("§7Plugin:" + MultifunctionalGun.getInstance().toString());
-        lore.add("§7Plugin:Version:" + MultifunctionalGun.getInstance().getDescription().getVersion());
-        lore.add("§7Hash Code:" + MultifunctionalGun.getInstance().hashCode());
-        lore.add("§7Item: " + Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().toString());
-        lore.add("§8TEST_ITEM");
+        if (lore.contains("§f-->右键增加标签并覆盖本标签<--")){
+            lore.remove("§f-->右键增加标签并覆盖本标签<--");
+            lore.add("§7Plugin:" + MultifunctionalGun.getInstance().toString());
+            lore.add("§7Plugin:Version:" + MultifunctionalGun.getInstance().getDescription().getVersion());
+            lore.add("§7Hash Code:" + MultifunctionalGun.getInstance().hashCode());
+            lore.add("§7Item: " + Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().toString());
+            lore.add("§8TEST_ITEM");
+        }
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         Slimefun.getLocalization().sendMessage(player, "Test_Item_RightClick");

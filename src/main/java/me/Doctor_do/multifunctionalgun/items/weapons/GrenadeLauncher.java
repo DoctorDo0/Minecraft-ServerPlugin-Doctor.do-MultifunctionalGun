@@ -15,8 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import static org.bukkit.Bukkit.getLogger;
 
 public class GrenadeLauncher extends SlimefunItem implements NotPlaceable {
-    public static final Integer damage_temp = 120;
-    public static Integer damage = damage_temp;
+    public static final Integer DAMAGE = 120;
 
     public GrenadeLauncher(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -34,7 +33,7 @@ public class GrenadeLauncher extends SlimefunItem implements NotPlaceable {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         event.cancel();
-        TestCanTriggerEvent(event.getInteractEvent(), damage);
+        TestCanTriggerEvent(event.getInteractEvent(), DAMAGE);
     }
 
     public void TestCanTriggerEvent(PlayerInteractEvent event, Integer damage) {

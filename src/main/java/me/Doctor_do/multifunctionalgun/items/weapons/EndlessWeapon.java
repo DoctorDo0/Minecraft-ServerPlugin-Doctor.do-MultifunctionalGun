@@ -198,7 +198,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().CauseDamageToEntity(event, GrenadeLauncher.damage_temp);
+                Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().CauseDamageToEntity(event, GrenadeLauncher.DAMAGE);
             }
 
             if (!modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
@@ -227,7 +227,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().CauseDamageToEntity(event, AssaultRifle.damage_temp);
+                Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().CauseDamageToEntity(event, AssaultRifle.DAMAGE);
             }
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.TIKA_RIFLE.getDisplayName())) {
@@ -237,9 +237,9 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                    if (sfItem != null) {
 //                        sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                    }
-                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.damage_temp * 3);
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.DAMAGE * 3);
                 } else {
-                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.damage_temp);
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.DAMAGE);
                     lowPower(event.getPlayer());
                 }
             }
@@ -251,7 +251,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                    if (sfItem != null) {
 //                        sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                    }
-                    Gun_And_Bullet_Item_Setup.getLightConeInstance().CauseDamageToEntity(event, LightCone.damage_temp);
+                    Gun_And_Bullet_Item_Setup.getLightConeInstance().CauseDamageToEntity(event, LightCone.DAMAGE);
                 } else {
                     lowPower(event.getPlayer());
                 }
@@ -259,7 +259,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             if (modes.get(index).getItem().getItemName().equals(Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName())) {
 //                SlimefunItem sfItem = modes.get(index).getItem();
-                Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().CauseDamageToEntity(event, AntiMaterielSniperRifle.damage_temp);
+                Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().CauseDamageToEntity(event, AntiMaterielSniperRifle.DAMAGE);
             }
 
         } else {

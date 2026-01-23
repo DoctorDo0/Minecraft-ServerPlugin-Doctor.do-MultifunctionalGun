@@ -1,6 +1,8 @@
 package me.Doctor_do.multifunctionalgun.setup.slimefun_items;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
+import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
 import me.Doctor_do.multifunctionalgun.items.weapons.LightCone;
@@ -85,7 +87,7 @@ public final class Gun_And_Bullet {
             "&f提卡气动步枪",
             "",
             "&7基础枪械之一，做工粗糙，但耐用的武器",
-            LoreBuilder.powerCharged(0, (int) TIKA_Rifle.getMaxItemCharge_Temp()),
+            LoreBuilder.powerCharged(0, (int) TIKA_Rifle.CAPACITY),
             "&7装载了气压瓶和电磁轨道炮模块，威力中等，消耗电力时威力更大",
             "&7需要: " + Gun_And_Bullet.STEEL_BALLS.getDisplayName() + "&7 或 " + Gun_And_Bullet.BURNING_STEEL_BALLS.getDisplayName(),
             "&8TIKA_RIFLE"
@@ -97,7 +99,7 @@ public final class Gun_And_Bullet {
             "&f光锥",
             "",
             "&7基础枪械之一，像一把来自未来的武器",
-            LoreBuilder.powerCharged(0, (int) LightCone.getMaxItemCharge_Temp()),
+            LoreBuilder.powerCharged(0, (int) LightCone.CAPACITY),
             "&7能量武器，伤害高，不消耗子弹",
             "&7需要: " + "&f消耗更多的电力",
             "&8LIGHT_CONE"
@@ -182,7 +184,16 @@ public final class Gun_And_Bullet {
             "TEST_ITEM",
             Material.COMMAND_BLOCK,
             "&f测试物品",
-            ""
+            "",
+            LoreBuilder.machine(MachineTier.BASIC, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.AVERAGE, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.MEDIUM, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.GOOD, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.END_GAME, MachineType.GENERATOR),
+            LoreBuilder.machine(MachineTier.END_GAME, MachineType.CAPACITOR),
+            "&f-->右键增加标签并覆盖本标签<--"
     );
 
     // 修改物品属性，初始化时执行

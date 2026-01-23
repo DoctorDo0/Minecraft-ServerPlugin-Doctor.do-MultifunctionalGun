@@ -16,15 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import static org.bukkit.Bukkit.getLogger;
 
 public class TIKA_Rifle extends SlimefunItem implements NotPlaceable, Rechargeable {
-    public final static float capacity_temp = 200.0F;
-    public static float capacity = capacity_temp;
-    public final static float COST = 2.0F;
-    public static final int damage_temp = 6;
-    public static int damage = damage_temp;
-
-    public static float getMaxItemCharge_Temp() {
-        return capacity_temp;
-    }
+    public static final float CAPACITY = 200.0F;
+    public static final float COST = 2.0F;
+    public static final int DAMAGE = 6;
 
     public TIKA_Rifle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -34,7 +28,7 @@ public class TIKA_Rifle extends SlimefunItem implements NotPlaceable, Rechargeab
 
     @Override
     public float getMaxItemCharge(ItemStack itemStack) {
-        return capacity;
+        return CAPACITY;
     }
 
     @Override
@@ -48,9 +42,9 @@ public class TIKA_Rifle extends SlimefunItem implements NotPlaceable, Rechargeab
         ItemStack item = event.getItem();
         event.cancel();
         if (removeItemCharge(item, COST)) {
-            TestCanTriggerEvent(event.getInteractEvent(), damage + 16);
+            TestCanTriggerEvent(event.getInteractEvent(), DAMAGE + 16);
         } else {
-            TestCanTriggerEvent(event.getInteractEvent(), damage);
+            TestCanTriggerEvent(event.getInteractEvent(), DAMAGE);
         }
     }
 

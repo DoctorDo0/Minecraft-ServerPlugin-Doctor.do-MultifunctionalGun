@@ -16,15 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import static org.bukkit.Bukkit.getLogger;
 
 public class LightCone extends SlimefunItem implements NotPlaceable, Rechargeable {
-    public final static float capacity_temp = 500.0F;
-    public static float capacity = capacity_temp;
-    public final static float COST = 40.0F;
-    public static final int damage_temp = 40;
-    public static int damage = damage_temp;
-
-    public static float getMaxItemCharge_Temp() {
-        return capacity_temp;
-    }
+    public static final float CAPACITY = 500.0F;
+    public static final float COST = 40.0F;
+    public static final int DAMAGE = 40;
 
     public LightCone(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -34,7 +28,7 @@ public class LightCone extends SlimefunItem implements NotPlaceable, Rechargeabl
 
     @Override
     public float getMaxItemCharge(ItemStack itemStack) {
-        return capacity;
+        return CAPACITY;
     }
 
     @Override
@@ -48,7 +42,7 @@ public class LightCone extends SlimefunItem implements NotPlaceable, Rechargeabl
         ItemStack item = event.getItem();
         event.cancel();
         if (removeItemCharge(item, COST)) {
-            TestCanTriggerEvent(event.getInteractEvent(), damage);
+            TestCanTriggerEvent(event.getInteractEvent(), DAMAGE);
         }
     }
 

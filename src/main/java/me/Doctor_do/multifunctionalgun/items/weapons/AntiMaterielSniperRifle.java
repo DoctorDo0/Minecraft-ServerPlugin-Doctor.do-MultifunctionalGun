@@ -15,8 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import static org.bukkit.Bukkit.getLogger;
 
 public class AntiMaterielSniperRifle extends SlimefunItem implements NotPlaceable {
-    public static final int damage_temp = 80;
-    public static int damage = damage_temp;
+    public static final int DAMAGE = 80;
 
     public AntiMaterielSniperRifle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -34,7 +33,7 @@ public class AntiMaterielSniperRifle extends SlimefunItem implements NotPlaceabl
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         event.cancel();
-        TestCanTriggerEvent(event.getInteractEvent(), damage);
+        TestCanTriggerEvent(event.getInteractEvent(), DAMAGE);
     }
 
     public void TestCanTriggerEvent(PlayerInteractEvent event, Integer damage) {
