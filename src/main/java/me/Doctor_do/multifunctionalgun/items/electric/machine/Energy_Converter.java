@@ -49,7 +49,7 @@ public class Energy_Converter extends AContainer implements RecipeDisplayItem/*,
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(4,
+        registerRecipe(1,
                 new ItemStack[]{
                         new CustomItemStack(Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, 4),
                         new CustomItemStack(Machine.ENERGY_STORAGE_CAN_EMPTY)},
@@ -66,13 +66,15 @@ public class Energy_Converter extends AContainer implements RecipeDisplayItem/*,
         List<ItemStack> displayRecipes = new ArrayList<>(recipes.size() * 2);
 
         for (MachineRecipe recipe : recipes) {
+            displayRecipes.add(new ItemStack(Material.AIR));
+            displayRecipes.add(new ItemStack(Material.AIR));
             for (int i = 0; i < recipe.getInput().length; i++) {
                 if (i == 0) {
                     displayRecipes.add(recipe.getInput()[i]);
                     displayRecipes.add(recipe.getOutput()[recipe.getOutput().length - 1]);
                 } else {
                     displayRecipes.add(recipe.getInput()[i]);
-                    displayRecipes.add(new CustomItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE, ""));
+                    displayRecipes.add(new ItemStack(Material.AIR));
                 }
             }
         }

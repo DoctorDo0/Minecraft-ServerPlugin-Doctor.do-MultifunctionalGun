@@ -193,6 +193,10 @@ public final class Gun_And_Bullet {
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.GENERATOR),
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.CAPACITOR),
+            LoreBuilder.speed(0),
+            LoreBuilder.powerBuffer(0),
+            LoreBuilder.powerPerSecond(0),
+            LoreBuilder.powerCharged(0, 0),
             "&f-->右键增加标签并覆盖本标签<--"
     );
 

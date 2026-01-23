@@ -215,7 +215,7 @@ public final class Basic_Materials_Item_Setup {
                 Basic_Materials.LASER_DIODE,
                 new ItemStack[]{
                         Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), new ItemStack(Material.REDSTONE),
-                        new ItemStack(Material.GLASS), new ItemStack(Material.AMETHYST_SHARD), SlimefunItems.COPPER_WIRE,
+                        new ItemStack(Material.GLASS), new ItemStack(Material.PRISMARINE_CRYSTALS), SlimefunItems.COPPER_WIRE,
                         Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.GLOWSTONE_DUST), new ItemStack(Material.REDSTONE)
                 }
         );

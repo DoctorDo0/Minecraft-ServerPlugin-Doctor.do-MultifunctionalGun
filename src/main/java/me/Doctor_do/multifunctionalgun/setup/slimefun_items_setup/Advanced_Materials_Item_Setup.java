@@ -34,7 +34,7 @@ public final class Advanced_Materials_Item_Setup {
                 Advanced_Materials.COMPLETE_DEFLECTION_CRYSTAL,
                 new ItemStack[]{
                         Basic_Materials.SPECIAL_ALLOY, SlimefunItems.HARDENED_GLASS, Basic_Materials.SPECIAL_ALLOY,
-                        new ItemStack(Material.AMETHYST_SHARD), Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.AMETHYST_SHARD),
+                        new ItemStack(Material.AMETHYST_BLOCK), Basic_Materials.UNFORMED_DEFLECTION_CRYSTAL, new ItemStack(Material.AMETHYST_BLOCK),
                         Basic_Materials.SPECIAL_ALLOY, SlimefunItems.HARDENED_GLASS, Basic_Materials.SPECIAL_ALLOY
                 }
         );

@@ -9,10 +9,10 @@ import me.Doctor_do.multifunctionalgun.items.general.ItemType_Item;
 import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Compressor;
 import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Converter;
 import me.Doctor_do.multifunctionalgun.items.electric.generator.Mass_Energy_Engine_Generator;
-import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public final class Machine_Item_Setup {
@@ -51,7 +51,7 @@ public final class Machine_Item_Setup {
                 Machine.MASS_ENERGY_ENGINE_GENERATOR,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, Advanced_Materials.STORAGE_CONTAINER, Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE,
+                        Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, new ItemStack(Material.SHULKER_BOX), Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE,
                         SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.NETHER_STAR_REACTOR, SlimefunItems.BLISTERING_INGOT_3,
                         Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, SlimefunItems.ENERGIZED_CAPACITOR, Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE
                 }
@@ -62,7 +62,7 @@ public final class Machine_Item_Setup {
                 Machine.ENERGY_COMPRESSOR,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        SlimefunItems.POWER_CRYSTAL, Advanced_Materials.STORAGE_CONTAINER, SlimefunItems.POWER_CRYSTAL,
+                        SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.SHULKER_BOX), SlimefunItems.POWER_CRYSTAL,
                         Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER, Basic_Materials.ANTI_GRAVITY_VOID_PARTICLE, Basic_Materials.FORCE_FIELD_REFLECT_STABILIZER,
                         SlimefunItems.ENERGIZED_CAPACITOR, Machine.MASS_ENERGY_ENGINE_GENERATOR, SlimefunItems.ENERGIZED_CAPACITOR
                 }
