@@ -134,11 +134,11 @@ public class ResearchSetup {
                 "DMG:弹药",
                 25
         ).addItems(
-                Gun_And_Bullet.RIFLE_BULLETS,
+                Gun_And_Bullet.RIFLE_BULLET,
                 Gun_And_Bullet.GRENADE,
-                Gun_And_Bullet.STEEL_BALLS,
-                Gun_And_Bullet.BURNING_STEEL_BALLS,
-                Gun_And_Bullet.SPECIAL_BULLETS
+                Gun_And_Bullet.STEEL_BALL,
+                Gun_And_Bullet.BURNING_STEEL_BALL,
+                Gun_And_Bullet.SPECIAL_BULLET
         ).register();
 
         new Research(
@@ -154,7 +154,7 @@ public class ResearchSetup {
                 Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE,
                 Gun_And_Bullet.SCOPE,
                 Gun_And_Bullet.LASER_SIGHT,
-                Gun_And_Bullet.FIREARM_EXPANSION_BACKPACK
+                Gun_And_Bullet.EXPANSION_BACKPACK
         ).register();
 
         new Research(

@@ -36,7 +36,7 @@ public final class Gun_And_Bullet_Item_Setup {
     public static SlimefunItem AntiMaterielSniperRifle;
     public static SlimefunItem Scope;
     public static SlimefunItem LaserSight;
-    public static SlimefunItem FirearmExpansionBackpack;
+    public static SlimefunItem ExpansionBackpack;
 
     // 通过物品名称来反向查找指定物品，返回值为物品对象，类型为SlimefunItemStack
     @Nullable
@@ -68,7 +68,7 @@ public final class Gun_And_Bullet_Item_Setup {
                 Gun_And_Bullet.ENDLESS_WEAPON,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        Gun_And_Bullet.LASER_SIGHT, Gun_And_Bullet.SCOPE, Gun_And_Bullet.FIREARM_EXPANSION_BACKPACK,
+                        Gun_And_Bullet.LASER_SIGHT, Gun_And_Bullet.SCOPE, Gun_And_Bullet.EXPANSION_BACKPACK,
                         Gun_And_Bullet.ASSAULT_RIFLE, Gun_And_Bullet.TIKA_RIFLE, Gun_And_Bullet.LIGHT_CONE,
                         Gun_And_Bullet.GRENADE_LAUNCHER, Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE, Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY
                 },
@@ -107,7 +107,7 @@ public final class Gun_And_Bullet_Item_Setup {
                 Gun_And_Bullet.ASSAULT_RIFLE,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        Basic_Materials.STEEL_CASING, Gun_And_Bullet.RIFLE_BULLETS, Basic_Materials.STEEL_CASING,
+                        Basic_Materials.STEEL_CASING, Gun_And_Bullet.RIFLE_BULLET, Basic_Materials.STEEL_CASING,
                         Basic_Materials.BARREL, Basic_Materials.FIRING_MECHANISM, Basic_Materials.GUNSTOCK,
                         Basic_Materials.STEEL_CASING, Basic_Materials.MAGAZINE, Basic_Materials.STEEL_CASING
                 }
@@ -155,7 +155,7 @@ public final class Gun_And_Bullet_Item_Setup {
                 Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
-                        Basic_Materials.STEEL_CASING, Gun_And_Bullet.SPECIAL_BULLETS, Basic_Materials.STEEL_CASING,
+                        Basic_Materials.STEEL_CASING, Gun_And_Bullet.SPECIAL_BULLET, Basic_Materials.STEEL_CASING,
                         Basic_Materials.BARREL, Basic_Materials.FIRING_MECHANISM, Basic_Materials.GUNSTOCK,
                         Basic_Materials.STEEL_CASING, Basic_Materials.MAGAZINE, Basic_Materials.STEEL_CASING
                 }
@@ -186,9 +186,9 @@ public final class Gun_And_Bullet_Item_Setup {
         );
         LaserSight.register(plugin);
 
-        FirearmExpansionBackpack = new FirearmExpansionBackpack(
+        ExpansionBackpack = new ExpansionBackpack(
                 Groups.gun_and_bullet_item_group,
-                Gun_And_Bullet.FIREARM_EXPANSION_BACKPACK,
+                Gun_And_Bullet.EXPANSION_BACKPACK,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         Basic_Materials.REGULATOR, SlimefunItems.HARDENED_GLASS, Basic_Materials.GENERIC_INTERFACE,
@@ -196,16 +196,16 @@ public final class Gun_And_Bullet_Item_Setup {
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Advanced_Materials.FORCE_FIELD_CONTAINMENT_GENERATOR, SlimefunItems.REINFORCED_ALLOY_INGOT
                 }
         );
-        FirearmExpansionBackpack.register(plugin);
+        ExpansionBackpack.register(plugin);
 
         GunAndBullet_ItemType_Item(
-                Gun_And_Bullet.RIFLE_BULLETS,
+                Gun_And_Bullet.RIFLE_BULLET,
                 new ItemStack[]{
                         null, SlimefunItems.HARDENED_METAL_INGOT, null,
                         SlimefunItems.STEEL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.STEEL_INGOT,
                         SlimefunItems.STEEL_INGOT, Basic_Materials.FUSE, SlimefunItems.STEEL_INGOT
                 },
-                new SlimefunItemStack(Gun_And_Bullet.RIFLE_BULLETS, 8)
+                new SlimefunItemStack(Gun_And_Bullet.RIFLE_BULLET, 8)
         );
 
         GunAndBullet_ItemType_Item(
@@ -218,33 +218,33 @@ public final class Gun_And_Bullet_Item_Setup {
         );
 
         GunAndBullet_ItemType_Item(
-                Gun_And_Bullet.STEEL_BALLS,
+                Gun_And_Bullet.STEEL_BALL,
                 new ItemStack[]{
                         null, new ItemStack(Material.IRON_NUGGET), null,
                         new ItemStack(Material.IRON_NUGGET), SlimefunItems.STEEL_INGOT, new ItemStack(Material.IRON_NUGGET),
                         null, new ItemStack(Material.IRON_NUGGET), null
                 },
-                new SlimefunItemStack(Gun_And_Bullet.STEEL_BALLS, 16)
+                new SlimefunItemStack(Gun_And_Bullet.STEEL_BALL, 16)
         );
 
         GunAndBullet_ItemType_Item(
-                Gun_And_Bullet.BURNING_STEEL_BALLS,
+                Gun_And_Bullet.BURNING_STEEL_BALL,
                 new ItemStack[]{
                         null, SlimefunItems.STEEL_INGOT, null,
                         new ItemStack(Material.GLASS_PANE), Basic_Materials.HIGH_EXPLOSIVE, new ItemStack(Material.GLASS_PANE),
                         null, SlimefunItems.STEEL_INGOT, null
                 },
-                new SlimefunItemStack(Gun_And_Bullet.BURNING_STEEL_BALLS, 4)
+                new SlimefunItemStack(Gun_And_Bullet.BURNING_STEEL_BALL, 4)
         );
 
         GunAndBullet_ItemType_Item(
-                Gun_And_Bullet.SPECIAL_BULLETS,
+                Gun_And_Bullet.SPECIAL_BULLET,
                 new ItemStack[]{
                         null, SlimefunItems.REINFORCED_ALLOY_INGOT, null,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.HARDENED_METAL_INGOT,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.FUSE, SlimefunItems.HARDENED_METAL_INGOT
                 },
-                new SlimefunItemStack(Gun_And_Bullet.SPECIAL_BULLETS, 2)
+                new SlimefunItemStack(Gun_And_Bullet.SPECIAL_BULLET, 2)
         );
     }
 
@@ -299,8 +299,8 @@ public final class Gun_And_Bullet_Item_Setup {
         return (LaserSight) LaserSight;
     }
 
-    public static FirearmExpansionBackpack getFirearmExpansionBackpackInstance() {
-        return (FirearmExpansionBackpack) FirearmExpansionBackpack;
+    public static ExpansionBackpack getExpansionBackpackInstance() {
+        return (ExpansionBackpack) ExpansionBackpack;
     }
 
 }

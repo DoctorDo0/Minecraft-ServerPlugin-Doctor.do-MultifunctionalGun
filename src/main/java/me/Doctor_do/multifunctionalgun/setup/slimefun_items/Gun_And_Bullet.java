@@ -13,14 +13,15 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.UUID;
 
 public final class Gun_And_Bullet {
 
-    public final static SlimefunItemStack RIFLE_BULLETS = new DMG_SlimefunItemStack(
-            "RIFLE_BULLETS",
+    public final static SlimefunItemStack RIFLE_BULLET = new DMG_SlimefunItemStack(
+            "RIFLE_BULLET",
             Material.IRON_NUGGET,
             "&f步枪子弹",
             "",
@@ -29,30 +30,30 @@ public final class Gun_And_Bullet {
 
     public final static SlimefunItemStack GRENADE = new DMG_SlimefunItemStack(
             "GRENADE",
-            Material.SNOWBALL,
+            Material.FIRE_CHARGE,
             "&f榴弹",
             "",
             "&8GRENADE"
     );
 
-    public final static SlimefunItemStack STEEL_BALLS = new DMG_SlimefunItemStack(
-            "STEEL_BALLS",
+    public final static SlimefunItemStack STEEL_BALL = new DMG_SlimefunItemStack(
+            "STEEL_BALL",
             Material.IRON_NUGGET,
             "&f钢珠",
             "",
             "&8STEEL_BALLS"
     );
 
-    public final static SlimefunItemStack BURNING_STEEL_BALLS = new DMG_SlimefunItemStack(
-            "BURNING_STEEL_BALLS",
+    public final static SlimefunItemStack BURNING_STEEL_BALL = new DMG_SlimefunItemStack(
+            "BURNING_STEEL_BALL",
             Material.GOLD_NUGGET,
             "&f燃烧弹",
             "",
             "&8BURNING_STEEL_BALLS"
     );
 
-    public final static SlimefunItemStack SPECIAL_BULLETS = new DMG_SlimefunItemStack(
-            "SPECIAL_BULLETS",
+    public final static SlimefunItemStack SPECIAL_BULLET = new DMG_SlimefunItemStack(
+            "SPECIAL_BULLET",
             Material.IRON_INGOT,
             "&f特种子弹",
             "",
@@ -66,7 +67,7 @@ public final class Gun_And_Bullet {
             "",
             "&7基础枪械之一，非常经典的武器",
             "&7可以快速射击，伤害不俗，子弹消耗速度很快",
-            "&7需要: " + Gun_And_Bullet.RIFLE_BULLETS.getDisplayName(),
+            "&7需要: " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName(),
             "&8ASSAULT_RIFLE"
     );
 
@@ -89,7 +90,7 @@ public final class Gun_And_Bullet {
             "&7基础枪械之一，做工粗糙，但耐用的武器",
             LoreBuilder.powerCharged(0, (int) TIKA_Rifle.CAPACITY),
             "&7装载了气压瓶和电磁轨道炮模块，威力中等，消耗电力时威力更大",
-            "&7需要: " + Gun_And_Bullet.STEEL_BALLS.getDisplayName() + "&7 或 " + Gun_And_Bullet.BURNING_STEEL_BALLS.getDisplayName(),
+            "&7需要: " + Gun_And_Bullet.STEEL_BALL.getDisplayName() + "&7 或 " + Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName(),
             "&8TIKA_RIFLE"
     );
 
@@ -112,7 +113,7 @@ public final class Gun_And_Bullet {
             "",
             "&7基础枪械之一，不算常见的武器",
             "&7射击速度慢，但伤害高，且射击距离极远",
-            "&7需要: " + Gun_And_Bullet.SPECIAL_BULLETS.getDisplayName(),
+            "&7需要: " + Gun_And_Bullet.SPECIAL_BULLET.getDisplayName(),
             "&8ANTI_MATERIEL_SNIPER_RIFLE"
     );
 
@@ -134,13 +135,13 @@ public final class Gun_And_Bullet {
             "&8LASER_SIGHT"
     );
 
-    public final static SlimefunItemStack FIREARM_EXPANSION_BACKPACK = new DMG_SlimefunItemStack(
-            "FIREARM_EXPANSION_BACKPACK",
+    public final static SlimefunItemStack EXPANSION_BACKPACK = new DMG_SlimefunItemStack(
+            "EXPANSION_BACKPACK",
             Material.CHEST,
             "&f枪械扩容背包",
             "",
             "&7一个空间很大的便携式箱子，复合式枪械专用",
-            "&8FIREARM_EXPANSION_BACKPACK"
+            "&8EXPANSION_BACKPACK"
     );
 
     public final static SlimefunItemStack REINFORCED_COMPUTER_ARRAY = new DMG_SlimefunItemStack(
@@ -158,7 +159,7 @@ public final class Gun_And_Bullet {
             Gun_And_Bullet.ASSAULT_RIFLE.getDisplayName() + " + " + Gun_And_Bullet.GRENADE_LAUNCHER.getDisplayName(),
             "",
             "&7一个占位符，无实际作用，仅用于支持模式选择，属性为不可见，不应该被显示",
-            "&7需要: " + Gun_And_Bullet.RIFLE_BULLETS.getDisplayName() + " + " + Gun_And_Bullet.GRENADE.getDisplayName(),
+            "&7需要: " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + " + " + Gun_And_Bullet.GRENADE.getDisplayName(),
             "&8ASSAULT_RIFLE"
     );
 
@@ -171,6 +172,14 @@ public final class Gun_And_Bullet {
             LoreBuilder.material("基岩"),
             LoreBuilder.powerCharged(0, (int) EndlessWeapon.getMaxItemCharge_Temp()),
             "&7当前模式: %modes%",
+            "&7当前存量:",
+            "    " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "/" + Gun_And_Bullet.GRENADE.getDisplayName() + " &7> " + "0/0" + " : " + "0/0",
+            "    " + Gun_And_Bullet.STEEL_BALL.getDisplayName() + "/" + Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + " &7> " + "0/0" + " : " + "0/0",
+            "    " + Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + " &7: " + "0/0",
+            "&7当前电量:",
+            "    " + Machine.ENERGY_STORAGE_CAN_FULL.getDisplayName() + "/" + Machine.ENERGY_STORAGE_CAN_EMPTY.getDisplayName() + " &7> " + "0/0" + " : " + "0/0",
+            "&7提卡模式: " + "%modes%",
+            "&7激光指示器与显示: " + "OFF" + "-" + "&x&f&f&f&f&f&f#ff_ff_ff",
             "",
 //            LoreBuilder.RIGHT_CLICK_TO_USE,
             "&e左键&7使用副武器",
@@ -233,6 +242,7 @@ public final class Gun_And_Bullet {
         );
         EndlessWeaponItemMeta.setUnbreakable(true);
         EndlessWeaponItemMeta.addEnchant(Enchantment.DURABILITY, 10, true);
+        EndlessWeaponItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         ENDLESS_WEAPON.setItemMeta(EndlessWeaponItemMeta);
 
         // 其他物品属性
@@ -265,9 +275,9 @@ public final class Gun_And_Bullet {
         assert item_meta != null;
         item_meta.setUnbreakable(true);
         LASER_SIGHT.setItemMeta(item_meta);
-        item_meta = FIREARM_EXPANSION_BACKPACK.getItemMeta();
+        item_meta = EXPANSION_BACKPACK.getItemMeta();
         assert item_meta != null;
         item_meta.setUnbreakable(true);
-        FIREARM_EXPANSION_BACKPACK.setItemMeta(item_meta);
+        EXPANSION_BACKPACK.setItemMeta(item_meta);
     }
 }

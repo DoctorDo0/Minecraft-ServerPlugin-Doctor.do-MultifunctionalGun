@@ -8,8 +8,10 @@ import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Advanced_Mater
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Basic_Materials_Item_Setup;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Machine_Item_Setup;
+import me.Doctor_do.multifunctionalgun.utils.Events;
 
 import static org.bukkit.Bukkit.getLogger;
+import static org.bukkit.Bukkit.getServer;
 
 public class Setup {
     private Setup() {
@@ -34,5 +36,6 @@ public class Setup {
         // 测试监听器与事件
         new MobDropListener();
         new PlayerUseWeaponListener();
+        getServer().getPluginManager().registerEvents(new Events(), MultifunctionalGun.getInstance());
     }
 }
