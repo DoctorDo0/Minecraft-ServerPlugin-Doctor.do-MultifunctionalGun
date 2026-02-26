@@ -5,23 +5,30 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Utils {
     private static final NamespacedKey nonClickable = new NamespacedKey(MultifunctionalGun.getInstance(), "nonclickable");
+    private static final NamespacedKey changeMode = new NamespacedKey(MultifunctionalGun.getInstance(), "changeMode");
+    private static final NamespacedKey changeLaser = new NamespacedKey(MultifunctionalGun.getInstance(), "changeLaser");
+    private static final NamespacedKey laserSetting = new NamespacedKey(MultifunctionalGun.getInstance(), "laserSetting");
 
     private Utils() {
     }
 
-    // 来自FluffyMachine，创建不可交互的物品栈
-    public static ItemStack buildNonInteractable(Material material, @Nullable String name, @Nullable String... lore) {
+    // 已修改，来自FluffyMachine，用于创建初始物品
+    public static ItemStack buildInitialItem(Material material, @Nullable String name, @Nullable String... lore) {
         ItemStack nonClickableItem = new ItemStack(material);
         ItemMeta NCMeta = nonClickableItem.getItemMeta();
         assert NCMeta != null;
@@ -40,9 +47,51 @@ public class Utils {
             NCMeta.setLore(lines);
         }
 
+        nonClickableItem.setItemMeta(NCMeta);
+        return nonClickableItem;
+    }
+
+    // 已修改，来自FluffyMachine，创建不可交互的物品栈
+    public static ItemStack buildNonInteractable(Material material, @Nullable String name, @Nullable String... lore) {
+        ItemStack nonClickableItem = buildInitialItem(material, name, lore);
+        ItemMeta NCMeta = nonClickableItem.getItemMeta();
+        assert NCMeta != null;
         NCMeta.getPersistentDataContainer().set(nonClickable, PersistentDataType.BYTE, (byte) 1);
         nonClickableItem.setItemMeta(NCMeta);
         return nonClickableItem;
+    }
+
+    // 创建附魔光泽的物品栈
+    public static ItemStack buildEnchantGlow(Material material, @Nullable String name, @Nullable String... lore) {
+        ItemStack enchantGlowItem = buildInitialItem(material, name, lore);
+        ItemMeta EGMeta = enchantGlowItem.getItemMeta();
+        assert EGMeta != null;
+        EGMeta.getPersistentDataContainer().set(nonClickable, PersistentDataType.BYTE, (byte) 1);
+        EGMeta.addEnchant(Enchantment.DURABILITY, 10, true);
+        EGMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        enchantGlowItem.setItemMeta(EGMeta);
+        return enchantGlowItem;
+    }
+
+    // 创建可修改提卡模式的物品栈
+    public static ItemStack buildChangeMode(Material material, @Nullable String name, @Nullable String... lore) {
+        ItemStack changeModeItem = buildInitialItem(material, name, lore);
+        ItemMeta CMMeta = changeModeItem.getItemMeta();
+        assert CMMeta != null;
+        CMMeta.getPersistentDataContainer().set(changeMode, PersistentDataType.STRING, "can change mode");
+        changeModeItem.setItemMeta(CMMeta);
+        return changeModeItem;
+    }
+
+    // 创建可修改激光瞄准器设置的物品栈
+    public static ItemStack buildChangeLaser(String attribute, Material material, @Nullable String name, @Nullable String... lore) {
+        ItemStack changeLaserItem = buildInitialItem(material, name, lore);
+        ItemMeta CLMeta = changeLaserItem.getItemMeta();
+        assert CLMeta != null;
+        CLMeta.getPersistentDataContainer().set(changeLaser, PersistentDataType.STRING, "can change laser settings");
+        CLMeta.getPersistentDataContainer().set(laserSetting, PersistentDataType.STRING, attribute);
+        changeLaserItem.setItemMeta(CLMeta);
+        return changeLaserItem;
     }
 
     // 来自FluffyMachine，判断是否是不可交互的物品栈
@@ -52,6 +101,82 @@ public class Utils {
         }
 
         return item.getItemMeta().getPersistentDataContainer().getOrDefault(nonClickable, PersistentDataType.BYTE, (byte) 0) == 1;
+    }
+
+    // 通用判断逻辑
+    public static boolean checkAttributeIsSame(String attribute, NamespacedKey nsk, ItemStack item) {
+        if (item == null || item.getItemMeta() == null) {
+            return false;
+        }
+        return Objects.equals(item.getItemMeta().getPersistentDataContainer().getOrDefault(nsk, PersistentDataType.STRING, "null"), attribute);
+    }
+
+    // 判断是否是用于改变mode的物品栈
+    public static boolean checkChangeModeInteract(ItemStack item) {
+        return checkAttributeIsSame("can change mode", changeMode, item);
+    }
+
+    // 判断是否用于改变laserSetting(激光瞄准器设置)的物品栈
+    public static boolean checkChangeLaserSettingInteract(ItemStack item) {
+        return checkAttributeIsSame("can change laser settings", changeLaser, item);
+    }
+
+    // 判断是否为用于off(关闭)设置的物品栈
+    public static boolean checkChangeLaserSettingCloseInteract(ItemStack item) {
+        return checkAttributeIsSame("off", laserSetting, item);
+    }
+
+    // 判断是否为用于on(开启)设置的物品栈
+    public static boolean checkChangeLaserSettingOpenInteract(ItemStack item) {
+        return checkAttributeIsSame("on", laserSetting, item);
+    }
+
+    // 判断是否为用于增加R属性设置的物品栈
+    public static boolean checkChangeLaserSettingIncreaseRedInteract(ItemStack item) {
+        return checkAttributeIsSame("increase-red", laserSetting, item);
+    }
+
+    // 判断是否为用于减少R属性设置的物品栈
+    public static boolean checkChangeLaserSettingDecreaseRedInteract(ItemStack item) {
+        return checkAttributeIsSame("decrease-red", laserSetting, item);
+    }
+
+    // 判断是否为用于增加G属性设置的物品栈
+    public static boolean checkChangeLaserSettingIncreaseGreenInteract(ItemStack item) {
+        return checkAttributeIsSame("increase-green", laserSetting, item);
+    }
+
+    // 判断是否为用于减少G属性设置的物品栈
+    public static boolean checkChangeLaserSettingDecreaseGreenInteract(ItemStack item) {
+        return checkAttributeIsSame("decrease-green", laserSetting, item);
+    }
+
+    // 判断是否为用于增加B属性设置的物品栈
+    public static boolean checkChangeLaserSettingIncreaseBlueInteract(ItemStack item) {
+        return checkAttributeIsSame("increase-blue", laserSetting, item);
+    }
+
+    // 判断是否为用于减少属性B设置的物品栈
+    public static boolean checkChangeLaserSettingDecreaseBlueInteract(ItemStack item) {
+        return checkAttributeIsSame("decrease-blue", laserSetting, item);
+    }
+
+    // 用于使物品在界面内变为不可交互状态
+    public static void setItemNonClickable(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        pdc.set(nonClickable, PersistentDataType.BYTE, (byte) 1);
+        item.setItemMeta(meta);
+    }
+
+    // 用于使物品在界面内恢复为可交互状态
+    public static void setItemCanClickable(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        pdc.remove(nonClickable);
+        item.setItemMeta(meta);
     }
 
     // 向玩家发送信息

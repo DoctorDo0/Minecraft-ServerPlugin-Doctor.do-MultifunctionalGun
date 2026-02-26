@@ -295,12 +295,4 @@ public final class Gun_And_Bullet_Item_Setup {
         return (Scope) Scope;
     }
 
-    public static LaserSight getLaserSightInstance() {
-        return (LaserSight) LaserSight;
-    }
-
-    public static ExpansionBackpack getExpansionBackpackInstance() {
-        return (ExpansionBackpack) ExpansionBackpack;
-    }
-
 }
