@@ -21,7 +21,7 @@ public class Groups {
     public static final SubItemGroup machine_item_group = new SubItemGroup(
             new NamespacedKey(MultifunctionalGun.getInstance(), "machine_item_group"),
             main_contents_item_group,
-            new CustomItemStack(Material.IRON_BLOCK, "&7枪械 - 机器")
+            new CustomItemStack(Material.IRON_BLOCK, "&7枪械 - 能源与机器")
     );
     public static final SubItemGroup advanced_material_item_group = new SubItemGroup(
             new NamespacedKey(MultifunctionalGun.getInstance(), "advanced_material_item_group"),

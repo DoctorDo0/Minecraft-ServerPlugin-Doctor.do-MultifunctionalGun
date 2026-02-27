@@ -101,7 +101,7 @@ public final class Basic_Materials {
 
     public final static SlimefunItemStack ELECTROMAGNETIC_RAIL = new DMG_SlimefunItemStack(
             "ELECTROMAGNETIC_RAIL",
-            Material.IRON_INGOT,
+            Material.RAIL,
             "&f电磁导轨",
             "",
             "&8ELECTROMAGNETIC_RAIL"
@@ -109,7 +109,7 @@ public final class Basic_Materials {
 
     public final static SlimefunItemStack PNEUMATIC_PROPULSION_SYSTEM = new DMG_SlimefunItemStack(
             "PNEUMATIC_PROPULSION_SYSTEM",
-            Material.STICK,
+            Material.LEVER,
             "&f气动推进装置",
             "",
             "&8PNEUMATIC_PROPULSION_SYSTEM"

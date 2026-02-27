@@ -22,7 +22,7 @@ public final class Gun_And_Bullet {
 
     public final static SlimefunItemStack RIFLE_BULLET = new DMG_SlimefunItemStack(
             "RIFLE_BULLET",
-            Material.IRON_NUGGET,
+            Material.GHAST_TEAR,
             "&f步枪子弹",
             "",
             "&8RIFLE_BULLETS"
