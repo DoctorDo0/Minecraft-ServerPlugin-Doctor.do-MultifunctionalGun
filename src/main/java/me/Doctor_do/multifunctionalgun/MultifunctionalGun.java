@@ -19,6 +19,7 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onLoad() {
+        getLogger().info("Plugin Loaded!");
         getLogger().info("Doctor.do-MultifunctionalGun插件已成功载入！");
 
         if (getServer().getPluginManager().getPlugin("Slimefun") == null) {
@@ -40,13 +41,13 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
             // 你可以在这里添加自动更新功能
         }
 
-        //方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型，多态，...不定多行输入，方法回调实现链式调用，接口，接口实现，static静态代码块，注解，lambda表达式，增强for循环，匿名内部类
-        //反射，枚举
-
         // 使用设置类进行初始化
         Setup.SetupAll(cfg);
 
+        getLogger().info("Plugin Enabled!");
         getLogger().info("Doctor.do-MultifunctionalGun插件已成功启用！");
+        //1748319447
+        getLogger().info("Hash Code: " + MultifunctionalGun.getInstance().hashCode());
     }
 
 //    @Override
@@ -100,6 +101,7 @@ public class MultifunctionalGun extends JavaPlugin implements SlimefunAddon {
     public void onDisable() {
         // 禁用插件的逻辑...
 
+        getLogger().info("Plugin Disabled!");
         getLogger().info("Doctor.do-MultifunctionalGun插件已卸载！");
     }
 

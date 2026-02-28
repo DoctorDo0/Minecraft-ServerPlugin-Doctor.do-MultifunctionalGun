@@ -533,9 +533,6 @@ x  特种合金  活塞
 	(枪械及部件材料)击发装置、枪管、弹夹、枪托、电磁气压动力系统、电磁导轨、气动推进装置、气压瓶
 	(基础材料)调节器、通用接口、一小块未成形的偏折晶体片、调压二极电路、射线发生器、激光二极管、反重力虚空粒子、力场生成引擎、力场反射稳定器
 
-// 语言差异:
-	// 位置:Groups,RecipeType,EndlessWeapon,ResearchSetup,slimefun_items()
-	// 需要消除:Test_Item,MultifunctionalGun,Setup,Events
 问题:
 	// 未解锁下的物品的动作使用
 	bug:机器返还空罐
@@ -561,14 +558,9 @@ TODO:
 优化项目:
 	删除注释代码:
 	    MultifunctionalGun
-		Anti_Gravity_Void_Particle
 		MobDropListener
-		Energy_Compression_Plant(仅注释文本)
 	其他代码:
-		Setup--删除哈希码
-		ItemType_Item--修改注释，改为大段注释，并加入文本描述
 		EndlessWeapon--修改注释，改为大段注释，并加入文本描述
-		AGVP--清理无用代码
 		Gun_And_Bullet_Item_Setup--清理无用实例
 	目前希望保留:
 		ResearchSetup--模板代码
@@ -576,3 +568,9 @@ TODO:
 		Basic_Materials_Item_Setup--模板代码
 		EndlessWeapon--问题众多，待定
 		ItemType_Block--无用代码，暂做保留
+// 语言差异:
+	// 位置:Groups,RecipeType,ResearchSetup,slimefun_items(...),EndlessWeapon,Events
+	// 已处理但仍然保留:MultifunctionalGun,Test_Item
+
+//已使用:方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型，多态，...不定多行输入，方法回调实现链式调用，接口，接口实现，static静态代码块，注解，lambda表达式，增强for循环，匿名内部类
+//未使用:反射，枚举

@@ -207,7 +207,7 @@ public final class Gun_And_Bullet {
             LoreBuilder.powerPerSecond(0),
             LoreBuilder.powerCharged(0, 0),
             "&e右键&7生成随机色彩粒子",
-            "&f-->右键增加标签并覆盖本标签<--"
+            "&7cover this:&f-->右键增加标签并覆盖本标签<--"
     );
 
     // 修改物品属性，初始化时执行

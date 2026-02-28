@@ -10,7 +10,6 @@ import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Machine_Item_Setup;
 import me.Doctor_do.multifunctionalgun.utils.Events;
 
-import static org.bukkit.Bukkit.getLogger;
 import static org.bukkit.Bukkit.getServer;
 
 public class Setup {
@@ -30,8 +29,6 @@ public class Setup {
         if (cfg.getBoolean("options.enable-researches")) {
             ResearchSetup.Research_Register_Setup();
         }
-        getLogger().info("Hash Code: " + MultifunctionalGun.getInstance().hashCode());
-        //1748319447
 
         // 测试监听器与事件
         new MobDropListener();

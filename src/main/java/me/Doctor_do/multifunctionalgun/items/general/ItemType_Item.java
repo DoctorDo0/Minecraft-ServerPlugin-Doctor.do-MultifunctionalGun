@@ -29,8 +29,11 @@ public class ItemType_Item extends SlimefunItem implements NotPlaceable {
     }
 
     private void onItemRightClick(PlayerRightClickEvent event) {
+        // 这会阻止玩家的任何交互
 //        event.cancel();
+        // 这会阻止玩家与其他方块交互
 //        event.setUseBlock(Event.Result.DENY);
+        // 这会阻止玩家与该物品交互
         event.setUseItem(Event.Result.DENY);
     }
 }
