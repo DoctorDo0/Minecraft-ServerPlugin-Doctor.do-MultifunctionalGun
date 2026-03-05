@@ -569,8 +569,8 @@ TODO:
 		EndlessWeapon--问题众多，待定
 		ItemType_Block--无用代码，暂做保留
 // 语言差异:
-	// 位置:Groups,RecipeType,ResearchSetup,slimefun_items(...),EndlessWeapon,Events
+	// 位置:Groups,RecipeType,ResearchSetup,Basic_Materials,Advanced_Materials,Machine,Gun_And_Bullet,Basic_Materials_Item_Setup,EndlessWeapon,Events
 	// 已处理但仍然保留:MultifunctionalGun,Test_Item
 
-//已使用:方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型，多态，...不定多行输入，方法回调实现链式调用，接口，接口实现，static静态代码块，注解，lambda表达式，增强for循环，匿名内部类
-//未使用:反射，枚举
+//已使用:方法调用，函数调用，类实例化，方法重写，方法重载，单例模式，无对象类实例化，类继承，子类父类调用，向上转型，多态，...不定多行输入，方法回调实现链式调用，接口，接口实现，static静态代码块，注解，lambda表达式，增强for循环，匿名内部类，枚举
+//未使用:反射

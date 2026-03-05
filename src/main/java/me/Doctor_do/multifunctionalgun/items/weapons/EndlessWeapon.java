@@ -29,7 +29,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,8 +48,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private ItemStack currentItem;
     private boolean isLoaded = false;
 
-    private final NamespacedKey EndlessWeapon_Mode = new NamespacedKey(plugin, "ENDLESS_WEAPON_MODE");
-    private final List<EndlessWeapon_Mode> modes = new ArrayList<>();
+    private final NamespacedKey EndlessWeapon_Mode_nsk = new NamespacedKey(plugin, "ENDLESS_WEAPON_MODE");
 
     private final NamespacedKey RifleBullet_Count_nsk = new NamespacedKey(plugin, "RifleBullet_Count");
     private int RifleBullet_Count = 0;
@@ -87,12 +85,8 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private final NamespacedKey Laser_color_nsk = new NamespacedKey(plugin, "Laser_color");
     private String Laser_color = "#FF_FF_FF";
 
-    public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, float capacity, String[] items) {
+    public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, float capacity) {
         super(itemGroup, item, recipeType, recipe);
-
-        for (int i = 0; i < items.length; i++) {
-            modes.add(new EndlessWeapon_Mode(this, i, items[i]));
-        }
 
         if (capacity <= 0) {
             this.CAPACITY = capacity_temp;
@@ -114,10 +108,10 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         int index = i;
         do {
             index++;
-            if (index >= modes.size()) {
+            if (index >= EndlessWeapon_Mode.getCount()) {
                 index = 0;
             }
-        } while (index != i && !modes.get(index).isEnabled());
+        } while (index != i && !EndlessWeapon_Mode.get(index).isEnabled());
         return index;
     }
 
@@ -140,7 +134,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
         }
         String listText = loreList.get(line_index);
-        String modeName = modes.get(index).getItem().getItemName();
+        String modeName = EndlessWeapon_Mode.get(index).getItem().getItemName();
         // 判断是否一致，如果不一致，则统一将name替换为%modes%
         if (
                 listText.contains(assault_rifle_and_grenade_launcher_name) && !modeName.equals(assault_rifle_and_grenade_launcher_name)
@@ -472,14 +466,14 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
         var im = item.getItemMeta();
         var pdc = im.getPersistentDataContainer();
-        int index = pdc.getOrDefault(EndlessWeapon_Mode, PersistentDataType.INTEGER, 0);
+        int index = pdc.getOrDefault(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, 0);
 
         //判断是否已锁
         if (!isLoaded) {
             // 仅左键
             if (!player.isSneaking()) {
                 refreshItemLoreFromMode(item, index);
-                SlimefunItem sfItem = modes.get(index).getItem();
+                SlimefunItem sfItem = EndlessWeapon_Mode.get(index).getItem();
 
                 // 步枪+榴弹模式
                 if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
@@ -519,14 +513,14 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
         var im = item.getItemMeta();
         var pdc = im.getPersistentDataContainer();
-        int index = pdc.getOrDefault(EndlessWeapon_Mode, PersistentDataType.INTEGER, 0);
+        int index = pdc.getOrDefault(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, 0);
 
         //判断是否已锁
         if (!isLoaded) {
             // 仅右键
             if (!player.isSneaking()) {
                 refreshItemLoreFromMode(item, index);
-                SlimefunItem sfItem = modes.get(index).getItem();
+                SlimefunItem sfItem = EndlessWeapon_Mode.get(index).getItem();
 
                 // 步枪+榴弹模式
                 if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
@@ -614,7 +608,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             // shift+右键
             else {
                 index = nextIndex(index);
-                SlimefunItem selectedItem = modes.get(index).getItem();
+                SlimefunItem selectedItem = EndlessWeapon_Mode.get(index).getItem();
 
                 String itemName = selectedItem != null ? selectedItem.getItemName() : "Unknown";
 //            Slimefun.getLocalization()
@@ -624,7 +618,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                         .sendMessage(player, Gun_And_Bullet.ENDLESS_WEAPON.getDisplayName() + " 的模式已切换为: " + itemName, true, msg -> msg.replace("! Missing string \"", "")
                                 .replace("\"", ""));
 
-                pdc.set(EndlessWeapon_Mode, PersistentDataType.INTEGER, index);
+                pdc.set(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, index);
                 item.setItemMeta(im);
 
                 refreshItemLoreFromMode(item, index);

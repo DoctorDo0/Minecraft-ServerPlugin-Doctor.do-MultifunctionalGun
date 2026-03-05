@@ -16,9 +16,6 @@ import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 public final class Gun_And_Bullet_Item_Setup {
 
     private final static MultifunctionalGun plugin = MultifunctionalGun.getInstance();
@@ -37,20 +34,6 @@ public final class Gun_And_Bullet_Item_Setup {
     public static SlimefunItem Scope;
     public static SlimefunItem LaserSight;
     public static SlimefunItem ExpansionBackpack;
-
-    // 通过物品名称来反向查找指定物品，返回值为物品对象，类型为SlimefunItemStack
-    @Nullable
-    public static SlimefunItem getItemByDisplayName(@Nonnull String displayName) {
-        if (displayName.equals(Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
-            return Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getItem();
-        } else if (displayName.equals(Gun_And_Bullet.TIKA_RIFLE.getDisplayName())) {
-            return Gun_And_Bullet.TIKA_RIFLE.getItem();
-        } else if (displayName.equals(Gun_And_Bullet.LIGHT_CONE.getDisplayName())) {
-            return Gun_And_Bullet.LIGHT_CONE.getItem();
-        } else if (displayName.equals(Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName())) {
-            return Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getItem();
-        } else return null;
-    }
 
     public static void Gun_And_Bullet_Item_Register_setup() {
 
@@ -73,14 +56,7 @@ public final class Gun_And_Bullet_Item_Setup {
                         Gun_And_Bullet.GRENADE_LAUNCHER, Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE, Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY
                 },
                 // 设置最大电容，数据不符合要求会变更为默认(20000)
-                me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon.getMaxItemCharge_Temp(),
-                // 最终成品的功能模式类型
-                new String[]{
-                        Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName(),
-                        Gun_And_Bullet.TIKA_RIFLE.getDisplayName(),
-                        Gun_And_Bullet.LIGHT_CONE.getDisplayName(),
-                        Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName()
-                }
+                me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon.getMaxItemCharge_Temp()
         );
         EndlessWeapon.register(plugin);
 
