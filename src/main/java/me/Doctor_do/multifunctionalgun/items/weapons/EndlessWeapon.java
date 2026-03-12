@@ -35,11 +35,7 @@ import java.util.Objects;
 public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Rechargeable, Listener {
     public static MultifunctionalGun plugin = MultifunctionalGun.getInstance();
 
-    private final static float capacity_temp = 20000.0F;
-
-    public static float getMaxItemCharge_Temp() {
-        return capacity_temp;
-    }
+    public final static float capacity_temp = 20000.0F;
 
     private static final float COST = 1.0F;
     private final float GENERATE = 2048.0F;
@@ -48,7 +44,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private ItemStack currentItem;
     private boolean isLoaded = false;
 
-    private final NamespacedKey EndlessWeapon_Mode_nsk = new NamespacedKey(plugin, "ENDLESS_WEAPON_MODE");
+    private final NamespacedKey EndlessWeapon_Mode_nsk = Utils.createKey("ENDLESS_WEAPON_MODE");
 
     private final NamespacedKey RifleBullet_Count_nsk = new NamespacedKey(plugin, "RifleBullet_Count");
     private int RifleBullet_Count = 0;
@@ -481,7 +477,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
                     if (Grenade_Count >= 1) {
                         refreshItemLoreAndPDC(item, Grenade_Count_nsk, Grenade_Count - 1);
-                        Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().CauseDamageToEntity(event, GrenadeLauncher.DAMAGE);
+                        Utils.sendMessage(player, "A+G,success,120");
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.GRENADE.getDisplayName() + "已耗尽");
                     }
@@ -528,7 +524,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
                     if (RifleBullet_Count >= 1) {
                         refreshItemLoreAndPDC(item, RifleBullet_Count_nsk, RifleBullet_Count - 1);
-                        Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().CauseDamageToEntity(event, AssaultRifle.DAMAGE);
+                        Utils.sendMessage(player, "A+G,success,24");
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "已耗尽");
                     }
@@ -545,13 +541,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                             refreshItemLoreAndPDC(item, SteelBall_Count_nsk, SteelBall_Count - 1);
                             // 有电状态
                             if (removeItemCharge(item, COST * 2)) {
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.DAMAGE * 3);
+                                Utils.sendMessage(player, "TIKA-StB,success,18");
                             }
                             // 无电状态
                             else {
                                 // 尝试更新电量
                                 refreshAndCheckEnergy(player, item);
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.DAMAGE);
+                                Utils.sendMessage(player, "TIKA-StB,success,6");
                             }
                         } else {
                             Utils.sendMessage(player, Gun_And_Bullet.STEEL_BALL.getDisplayName() + "已耗尽");
@@ -564,13 +560,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                             refreshItemLoreAndPDC(item, BurningSteelBall_Count_nsk, BurningSteelBall_Count - 1);
                             // 有电状态
                             if (removeItemCharge(item, COST * 2)) {
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.DAMAGE * 3);
+                                Utils.sendMessage(player, "TIKA-BStB,success,18");
                             }
                             // 无电状态
                             else {
                                 // 尝试更新电量
                                 refreshAndCheckEnergy(player, item);
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().CauseDamageToEntity(event, TIKA_Rifle.DAMAGE);
+                                Utils.sendMessage(player, "TIKA-BStB,success,6");
                             }
                         } else {
                             Utils.sendMessage(player, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + "已耗尽");
@@ -581,7 +577,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                 // 光锥模式
                 if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.LIGHT_CONE.getDisplayName())) {
                     if (removeItemCharge(item, COST * 40)) {
-                        Gun_And_Bullet_Item_Setup.getLightConeInstance().CauseDamageToEntity(event, LightCone.DAMAGE);
+                        Utils.sendMessage(player, "LC,success,40");
                     } else {
                         // 尝试更新电量
                         refreshAndCheckEnergy(player, item);
@@ -598,7 +594,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                        if (sfItem != null) {
 //                            sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                        }
-                        Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().CauseDamageToEntity(event, AntiMaterielSniperRifle.DAMAGE);
+                        Utils.sendMessage(player, "ANTI,success,80");
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + "已耗尽");
                     }
@@ -690,18 +686,15 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                 Material.BEACON,
                 "&e使用说明",
                 "&7&l&n使用前建议先仔细阅读本说明",
-                "&7&n→ 第一次合成该物品并使用时，建议先打开一次背包并关闭界面，等待物品的数据保存，所有的描述变为正常文字后即为保存成功",
+                "&7&n→ 第一次合成该物品时，建议先打开背包后再关闭背包界面，等待数据保存，所有描述变为正常文字后即为保存成功",
                 "&7→ 本界面为背包界面，装填弹药、能源控制、激光瞄准器设置，都在本界面内进行操作",
-                "&7→ 左下角空区可放置" + Gun_And_Bullet.RIFLE_BULLET.getDisplayName(),
-                "&7→ 中间偏左的一个空位放置" + Gun_And_Bullet.GRENADE.getDisplayName(),
+                "&7→ 左下角空区放置" + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "&7中间偏左的一个空位放置" + Gun_And_Bullet.GRENADE.getDisplayName(),
                 "&7→ 左上角空区为" + Gun_And_Bullet.TIKA_RIFLE.getDisplayName() + "&7专用区域",
-                "&7→ 其中左侧可放置" + Gun_And_Bullet.STEEL_BALL.getDisplayName() + "&7，右侧可放置" + Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + "&7中间用于切换当前模式",
-                "&7→ 下方的两个空位为" + Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName() + "&7专用区域",
-                "&7→ 可放置" + Gun_And_Bullet.SPECIAL_BULLET.getDisplayName(),
+                "&7→ 其中左侧放置" + Gun_And_Bullet.STEEL_BALL.getDisplayName() + "&7，右侧放置" + Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + "&7，中间用于切换当前模式",
+                "&7→ 下方的两个空位为" + Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName() + "&7专用区域，可放置" + Gun_And_Bullet.SPECIAL_BULLET.getDisplayName(),
                 "&7→ 右下方为能源区域，包含物品区域与电力信息。当能源不足时再次使用将自动消耗物资并转换为电力能源",
                 "&7→ 能源区域可放置" + Machine.ENERGY_STORAGE_CAN_FULL.getDisplayName() + "&7，或拿取" + Machine.ENERGY_STORAGE_CAN_EMPTY.getDisplayName(),
-                "&7→ 右上方为" + Gun_And_Bullet.LASER_SIGHT.getDisplayName() + "&7操作区域，包含开关与颜色设置功能",
-                "&7→ 颜色设置与&cR&aG&9B&7设置相似，选择不同的&e功能按钮&7及&e按键方式&7以对某项属性值进行修改"
+                "&7→ 右上方为" + Gun_And_Bullet.LASER_SIGHT.getDisplayName() + "&7操作区域，包含开关与颜色设置功能，颜色设置与&cR&aG&9B&7设置相似，选择不同的&e功能按钮&7及&e按键方式&7以对某项属性值进行修改"
         );
         ItemStack border_yellow_Item = Utils.buildNonInteractable(
                 Material.YELLOW_STAINED_GLASS_PANE,
@@ -1114,6 +1107,8 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             ItemStack item = inventory.getItem(slot);
 
             if (item != null && !Objects.equals(item.clone().getItemMeta(), itemStack.clone().getItemMeta())) {
+                Utils.sendMessage(player, "======================================");
+                Utils.sendMessage(player, String.valueOf(item) + "===" + String.valueOf(itemStack));
                 remind = true;
                 inventory.setItem(slot, new ItemStack(Material.AIR));
                 Utils.giveOrDropItem(player, item);

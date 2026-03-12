@@ -1,17 +1,30 @@
 package me.Doctor_do.multifunctionalgun.utils;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.common.CommonPatterns;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
+import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.block.Block;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffectType;
 
 public class Events implements Listener {
+    Plugin plugin = MultifunctionalGun.getInstance();
+
     // 来自FluffyMachine，监听器，用于取消有不可交互标记的对象的交互事件
     // This is used to make the non clickable GUI items non clickable
     @EventHandler(ignoreCancelled = true)
@@ -158,6 +171,53 @@ public class Events implements Listener {
                     Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().changeLaser(event, 3, "subtract", 256);
                 }
             }
+        }
+    }
+
+    // 来自战争工艺
+    @SuppressWarnings("all")
+    @EventHandler
+    public void onEntityBulletHit(EntityDamageByEntityEvent e) {
+        if (!(e.getDamager() instanceof Projectile bullet)) return;
+
+        Entity shot = e.getEntity();
+        if (bullet.hasMetadata("DMG_GunBullet")) {
+            if (bullet.getShooter() instanceof Player shooter) {
+                if (!Slimefun.getProtectionManager().hasPermission(shooter, shot.getLocation(), Interaction.ATTACK_PLAYER)) {
+                    return;
+                }
+            }
+            Location shooterLoc = Utils.deserializeLocation(bullet.getMetadata("locInfo").get(0).asString());
+            String[] split = CommonPatterns.COLON.split(bullet.getMetadata("rangeInfo").get(0).asString());
+            double distance = shooterLoc.distance(e.getEntity().getLocation());
+            if (distance <= Integer.parseInt(split[0]) && distance >= Integer.parseInt(split[1])) {
+                e.setDamage(bullet.getMetadata("damage").get(0).asInt());
+                switch (bullet.getMetadata("options").get(0).asString()) {
+                    case "fire" -> shot.setFireTicks(e.getEntity().getFireTicks() + 1
+                            + bullet.getMetadata("keepTime").get(0).asInt());
+                    //TODO:
+                    //可扩展其他功能
+                }
+
+                if (bullet instanceof ShulkerBullet && shot instanceof LivingEntity) {
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> ((LivingEntity) shot).removePotionEffect(PotionEffectType.LEVITATION), 1);
+                }
+            } else {
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    // 来自战争工艺
+    @EventHandler
+    public void onBulletHitBlock(ProjectileHitEvent event) {
+        Block block = event.getHitBlock();
+        Entity entity = event.getEntity();
+
+        if (!(entity instanceof ShulkerBullet) || block == null) return;
+
+        if (entity.hasMetadata("DMG_GunBullet")) {
+            block.getWorld().createExplosion(block.getLocation(), 1F);
         }
     }
 }

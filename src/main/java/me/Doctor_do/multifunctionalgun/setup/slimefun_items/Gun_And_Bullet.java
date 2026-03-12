@@ -4,9 +4,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
-import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
-import me.Doctor_do.multifunctionalgun.items.weapons.LightCone;
-import me.Doctor_do.multifunctionalgun.items.weapons.TIKA_Rifle;
+import me.Doctor_do.multifunctionalgun.items.weapons.*;
+import me.Doctor_do.multifunctionalgun.items.weapons.bullet.*;
+import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -25,6 +25,7 @@ public final class Gun_And_Bullet {
             Material.GHAST_TEAR,
             "&f步枪子弹",
             "",
+            "&7伤害倍率: " + RifleBullet.multiplier,
             "&8RIFLE_BULLETS"
     );
 
@@ -33,6 +34,7 @@ public final class Gun_And_Bullet {
             Material.FIRE_CHARGE,
             "&f榴弹",
             "",
+            "&7伤害倍率: " + Grenade.multiplier,
             "&8GRENADE"
     );
 
@@ -41,6 +43,7 @@ public final class Gun_And_Bullet {
             Material.IRON_NUGGET,
             "&f钢珠",
             "",
+            "&7伤害倍率: " + SteelBall.multiplier,
             "&8STEEL_BALLS"
     );
 
@@ -49,6 +52,9 @@ public final class Gun_And_Bullet {
             Material.GOLD_NUGGET,
             "&f燃烧弹",
             "",
+            "&7伤害倍率: " + BurningSteelBall.multiplier,
+            "&7附带燃烧效果",
+            "&7持续时间" + BurningSteelBall.keepTime / 20.0 + "s",
             "&8BURNING_STEEL_BALLS"
     );
 
@@ -57,6 +63,7 @@ public final class Gun_And_Bullet {
             Material.IRON_INGOT,
             "&f特种子弹",
             "",
+            "&7伤害倍率: " + SpecialBullet.multiplier,
             "&8SPECIAL_BULLETS"
     );
 
@@ -68,6 +75,9 @@ public final class Gun_And_Bullet {
             "&7基础枪械之一，非常经典的武器",
             "&7可以快速射击，伤害不俗，子弹消耗速度很快",
             "&7需要: " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName(),
+            "&7基础伤害: " + AssaultRifle.damage,
+            "&7射程: " + AssaultRifle.range,
+            "&7射速: " + AssaultRifle.cooldown + "s/hit",
             "&8ASSAULT_RIFLE"
     );
 
@@ -79,6 +89,9 @@ public final class Gun_And_Bullet {
             "&7基础枪械之一，非常经典的武器",
             "&7将榴弹抛射出去，造成范围性的爆炸伤害，使用时请小心",
             "&7需要: " + Gun_And_Bullet.GRENADE.getDisplayName(),
+            "&7基础伤害: " + GrenadeLauncher.damage,
+            "&7射程: " + GrenadeLauncher.range,
+            "&7射速: " + GrenadeLauncher.cooldown + "s/hit",
             "&8GRENADE_LAUNCHER"
     );
 
@@ -91,6 +104,10 @@ public final class Gun_And_Bullet {
             LoreBuilder.powerCharged(0, (int) TIKA_Rifle.CAPACITY),
             "&7装载了气压瓶和电磁轨道炮模块，威力中等，消耗电力时威力更大",
             "&7需要: " + Gun_And_Bullet.STEEL_BALL.getDisplayName() + "&7 或 " + Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName(),
+            "&7电力消耗: " + TIKA_Rifle.COST + "J",
+            "&7基础伤害: " + TIKA_Rifle.damage + "&7 / " + "&7消耗电力时基础伤害: " + TIKA_Rifle.damage * 3,
+            "&7射程: " + TIKA_Rifle.range,
+            "&7射速: " + TIKA_Rifle.cooldown + "s/hit",
             "&8TIKA_RIFLE"
     );
 
@@ -101,8 +118,12 @@ public final class Gun_And_Bullet {
             "",
             "&7基础枪械之一，像一把来自未来的武器",
             LoreBuilder.powerCharged(0, (int) LightCone.CAPACITY),
-            "&7能量武器，伤害高，不消耗子弹",
+            "&7能量武器，伤害高，不消耗子弹，也没有射速限制",
             "&7需要: " + "&f消耗更多的电力",
+            "&7电力消耗: " + LightCone.COST + "J",
+            "&7基础伤害: " + LightCone.damage,
+            "&7射程: " + LightCone.range,
+            "&7射速: " + LightCone.cooldown + "s/hit",
             "&8LIGHT_CONE"
     );
 
@@ -114,6 +135,9 @@ public final class Gun_And_Bullet {
             "&7基础枪械之一，不算常见的武器",
             "&7射击速度慢，但伤害高，且射击距离极远",
             "&7需要: " + Gun_And_Bullet.SPECIAL_BULLET.getDisplayName(),
+            "&7基础伤害: " + AntiMaterielSniperRifle.damage,
+            "&7射程: " + AntiMaterielSniperRifle.range,
+            "&7射速: " + AntiMaterielSniperRifle.cooldown + "s/hit",
             "&8ANTI_MATERIEL_SNIPER_RIFLE"
     );
 
@@ -170,7 +194,7 @@ public final class Gun_And_Bullet {
             "",
             "&7仍在测试",
             LoreBuilder.material("基岩"),
-            LoreBuilder.powerCharged(0, (int) EndlessWeapon.getMaxItemCharge_Temp()),
+            LoreBuilder.powerCharged(0, (int) EndlessWeapon.capacity_temp),
             "&7当前模式: %modes%",
             "&7当前存量:",
             "    " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "/" + Gun_And_Bullet.GRENADE.getDisplayName() + " &7> " + "0/0" + " : " + "0/0",

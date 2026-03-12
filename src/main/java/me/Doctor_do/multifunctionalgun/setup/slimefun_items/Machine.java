@@ -37,9 +37,9 @@ public final class Machine {
             "",
             "&7神奇的发电机，能够将物质完全的转变为能量。&7&m应该不会爆炸",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.GENERATOR),
-            LoreBuilder.speed(Mass_Energy_Engine_Generator.SPEED),//2x
-            LoreBuilder.powerBuffer(Mass_Energy_Engine_Generator.CAPACITY),//32768
-            LoreBuilder.powerPerSecond(Mass_Energy_Engine_Generator.ENERGY_PRODUCTION * 2),//4096
+            LoreBuilder.speed(Mass_Energy_Engine_Generator.getRealSpeed()),//2x
+            LoreBuilder.powerBuffer(Mass_Energy_Engine_Generator.getRealCapacity()),//32768
+            LoreBuilder.powerPerSecond(Mass_Energy_Engine_Generator.getRealEnergyProduction() * 2),//4096
             "&8MASS_ENERGY_ENGINE_GENERATOR"
     );
 
@@ -50,9 +50,9 @@ public final class Machine {
             "",
             "&7用于将电力能源压缩注入能量存储罐中",
             LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
-            LoreBuilder.speed(Energy_Compressor.SPEED),//1x
-            LoreBuilder.powerBuffer(Energy_Compressor.CAPACITY),//4096
-            LoreBuilder.powerPerSecond(Energy_Compressor.ENERGY_CONSUMPTION * 2),//2048
+            LoreBuilder.speed(Energy_Compressor.getRealSpeed()),//1x
+            LoreBuilder.powerBuffer(Energy_Compressor.getRealCapacity()),//4096
+            LoreBuilder.powerPerSecond(Energy_Compressor.getRealEnergyConsumption() * 2),//2048
             "&8ENERGY_COMPRESSOR_PLANT"
     );
 
@@ -63,9 +63,9 @@ public final class Machine {
             "",
             "&7可以将反重力虚空粒子转变为能源并注入能量存储罐中",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
-            LoreBuilder.speed(Energy_Converter.SPEED),//4x
-            LoreBuilder.powerBuffer(Energy_Converter.CAPACITY),//16384
-            LoreBuilder.powerPerSecond(Energy_Converter.ENERGY_CONSUMPTION * 2),//8192
+            LoreBuilder.speed(Energy_Converter.getRealSpeed()),//4x
+            LoreBuilder.powerBuffer(Energy_Converter.getRealCapacity()),//16384
+            LoreBuilder.powerPerSecond(Energy_Converter.getRealEnergyConsumption() * 2),//8192
             "&8ENERGY_CONVERTER"
     );
 }

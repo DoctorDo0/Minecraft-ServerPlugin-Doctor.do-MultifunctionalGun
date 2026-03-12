@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Mass_Energy_Engine_Generator extends AGenerator implements EnergyNetProvider/*, EnergyNetComponent*/ {
-    public static final Integer ENERGY_PRODUCTION = 2048;
-    public static final Integer CAPACITY = ENERGY_PRODUCTION * 16;
-    public static final Integer SPEED = 2;
+    private static final Integer ENERGY_PRODUCTION = 2048;
+    private static final Integer CAPACITY = ENERGY_PRODUCTION * 16;
+    private static final Integer SPEED = 2;
 
     public Mass_Energy_Engine_Generator(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -71,5 +71,17 @@ public class Mass_Energy_Engine_Generator extends AGenerator implements EnergyNe
     @Override
     public int getCapacity() {
         return CAPACITY;
+    }
+
+    public static int getRealEnergyProduction() {
+        return ENERGY_PRODUCTION;
+    }
+
+    public static int getRealCapacity() {
+        return CAPACITY;
+    }
+
+    public static int getRealSpeed() {
+        return SPEED;
     }
 }

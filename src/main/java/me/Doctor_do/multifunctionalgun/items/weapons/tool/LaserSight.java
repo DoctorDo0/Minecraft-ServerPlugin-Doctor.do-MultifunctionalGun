@@ -1,4 +1,4 @@
-package me.Doctor_do.multifunctionalgun.items.weapons;
+package me.Doctor_do.multifunctionalgun.items.weapons.tool;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -14,10 +14,9 @@ import org.bukkit.inventory.ItemStack;
 
 import static org.bukkit.Bukkit.getLogger;
 
-public class AssaultRifle extends SlimefunItem implements NotPlaceable {
-    public static final int DAMAGE = 24;
+public class LaserSight extends SlimefunItem implements NotPlaceable {
 
-    public AssaultRifle(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public LaserSight(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
         enchantable = false;
         disenchantable = false;
@@ -33,19 +32,11 @@ public class AssaultRifle extends SlimefunItem implements NotPlaceable {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         event.cancel();
-        TestCanTriggerEvent(event.getInteractEvent(), DAMAGE);
+        LaserSightUseEvent(event.getInteractEvent());
     }
 
-    public void TestCanTriggerEvent(PlayerInteractEvent event, Integer damage) {
-        if (event.getPlayer().hasPermission("minecraft.admin")) {
-            event.getPlayer().sendMessage(ChatColors.color("&7是管理员"));
-            getLogger().info("&7是管理员");
-            CauseDamageToEntity(event, damage);
-        }
-    }
-
-    public void CauseDamageToEntity(PlayerInteractEvent event, Integer damage) {
-        event.getPlayer().sendMessage(ChatColors.color("&7测试:&fGun:&fAssaultRifle:&fDamage" + damage));
-        getLogger().info("&7测试:&fGun:&fAssaultRifle:&fDamage" + damage);
+    public void LaserSightUseEvent(PlayerInteractEvent event) {
+        event.getPlayer().sendMessage(ChatColors.color("&7测试:&fGun:&fLaserSight"));
+        getLogger().info("&7测试:&fGun:&fLaserSight");
     }
 }

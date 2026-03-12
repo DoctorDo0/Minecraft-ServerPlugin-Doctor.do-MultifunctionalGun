@@ -2,9 +2,7 @@ package me.Doctor_do.multifunctionalgun.utils;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -12,7 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.Plugin;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,27 @@ public class Utils {
     private static final NamespacedKey changeLaser = new NamespacedKey(MultifunctionalGun.getInstance(), "changeLaser");
     private static final NamespacedKey laserSetting = new NamespacedKey(MultifunctionalGun.getInstance(), "laserSetting");
 
+    final static Plugin plugin = MultifunctionalGun.getInstance();
+
     private Utils() {
+    }
+
+    // 创建并返回一个NamespacedKey
+    public static NamespacedKey createKey(String name) {
+        return new NamespacedKey(plugin, name);
+    }
+
+    // 向玩家发送信息
+    public static void sendMessage(Player player, String message) {
+//        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        player.sendMessage(message);
+    }
+
+    // 来自FluffyMachine，物品给予背包或掉落
+    public static void giveOrDropItem(Player p, ItemStack toGive) {
+        for (ItemStack leftover : p.getInventory().addItem(toGive).values()) {
+            p.getWorld().dropItemNaturally(p.getLocation(), leftover);
+        }
     }
 
     // 已修改，来自FluffyMachine，用于创建初始物品
@@ -179,16 +199,32 @@ public class Utils {
         item.setItemMeta(meta);
     }
 
-    // 向玩家发送信息
-    public static void sendMessage(Player player, String message) {
-//        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-        player.sendMessage(message);
+    // 来自战争工艺，未知(反序列化位置)
+    @Nonnull
+    public static Location deserializeLocation(@Nonnull String s) {
+        if (s.trim().isEmpty()) {
+            throw new IllegalArgumentException("Invalid location deserialization parameter, got " + s);
+        }
+
+        String[] parts = s.split(":");
+
+        if (parts.length == 4) {
+            World w = Bukkit.getServer().getWorld(parts[0]);
+            double x = Double.parseDouble(parts[1]);
+            double y = Double.parseDouble(parts[2]);
+            double z = Double.parseDouble(parts[3]);
+            return new Location(w, x, y, z);
+        }
+
+        throw new IllegalArgumentException("Invalid location deserialization parameter, got " + s);
     }
 
-    // 来自FluffyMachine，物品给予背包或掉落
-    public static void giveOrDropItem(Player p, ItemStack toGive) {
-        for (ItemStack leftover : p.getInventory().addItem(toGive).values()) {
-            p.getWorld().dropItemNaturally(p.getLocation(), leftover);
-        }
+    // 来自战争工艺，用于创建坐标信息
+    @Nonnull
+    public static String serializeLocation(@Nonnull Location loc) {
+        return loc.getWorld().getName() +
+                ":" + loc.getX() +
+                ":" + loc.getY() +
+                ":" + loc.getZ();
     }
 }

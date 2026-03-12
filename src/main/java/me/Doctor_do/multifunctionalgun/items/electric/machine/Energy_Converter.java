@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Energy_Converter extends AContainer implements RecipeDisplayItem/*, EnergyNetProvider*/ {
-    public static final Integer ENERGY_CONSUMPTION = 4096;
-    public static final Integer CAPACITY = ENERGY_CONSUMPTION * 4;
-    public static final Integer SPEED = 4;
+    private static final Integer ENERGY_CONSUMPTION = 4096;
+    private static final Integer CAPACITY = ENERGY_CONSUMPTION * 4;
+    private static final Integer SPEED = 4;
 
     public Energy_Converter(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -112,5 +112,17 @@ public class Energy_Converter extends AContainer implements RecipeDisplayItem/*,
     @Override
     public String getMachineIdentifier() {
         return "ENERGY_CONVERTER";
+    }
+
+    public static int getRealEnergyConsumption() {
+        return ENERGY_CONSUMPTION;
+    }
+
+    public static int getRealCapacity() {
+        return CAPACITY;
+    }
+
+    public static int getRealSpeed() {
+        return SPEED;
     }
 }

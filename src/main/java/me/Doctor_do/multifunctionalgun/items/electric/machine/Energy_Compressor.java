@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Energy_Compressor extends AContainer implements RecipeDisplayItem/*, EnergyNetProvider*/ {
-    public static final Integer ENERGY_CONSUMPTION = 1024;
-    public static final Integer CAPACITY = ENERGY_CONSUMPTION * 4;
-    public static final Integer SPEED = 1;
+    private static final Integer ENERGY_CONSUMPTION = 1024;
+    private static final Integer CAPACITY = ENERGY_CONSUMPTION * 4;
+    private static final Integer SPEED = 1;
 
     public Energy_Compressor(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -96,5 +96,17 @@ public class Energy_Compressor extends AContainer implements RecipeDisplayItem/*
     @Override
     public String getMachineIdentifier() {
         return "ENERGY_COMPRESSOR";
+    }
+
+    public static int getRealEnergyConsumption() {
+        return ENERGY_CONSUMPTION;
+    }
+
+    public static int getRealCapacity() {
+        return CAPACITY;
+    }
+
+    public static int getRealSpeed() {
+        return SPEED;
     }
 }

@@ -6,9 +6,13 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
-import me.Doctor_do.multifunctionalgun.items.general.ItemType_Item;
 import me.Doctor_do.multifunctionalgun.items.items.Test_Item;
 import me.Doctor_do.multifunctionalgun.items.weapons.*;
+import me.Doctor_do.multifunctionalgun.items.weapons.bullet.*;
+import me.Doctor_do.multifunctionalgun.items.weapons.tool.ExpansionBackpack;
+import me.Doctor_do.multifunctionalgun.items.weapons.tool.LaserSight;
+import me.Doctor_do.multifunctionalgun.items.weapons.tool.Scope;
+import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
@@ -35,6 +39,12 @@ public final class Gun_And_Bullet_Item_Setup {
     public static SlimefunItem LaserSight;
     public static SlimefunItem ExpansionBackpack;
 
+    public static SlimefunItem RifleBullet;
+    public static SlimefunItem Grenade;
+    public static SlimefunItem SteelBall;
+    public static SlimefunItem BurningSteelBall;
+    public static SlimefunItem SpecialBullet;
+
     public static void Gun_And_Bullet_Item_Register_setup() {
 
         // 一个测试物品，修改了部分属性，右键修改物品的lore，附上一些插件内部数据，装饰用
@@ -56,7 +66,7 @@ public final class Gun_And_Bullet_Item_Setup {
                         Gun_And_Bullet.GRENADE_LAUNCHER, Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE, Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY
                 },
                 // 设置最大电容，数据不符合要求会变更为默认(20000)
-                me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon.getMaxItemCharge_Temp()
+                me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon.capacity_temp
         );
         EndlessWeapon.register(plugin);
 
@@ -69,14 +79,16 @@ public final class Gun_And_Bullet_Item_Setup {
         );
         AssaultRifle_And_GrenadeLauncher.register(plugin);
 
-        GunAndBullet_ItemType_Item(
+        new SlimefunItem(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         Advanced_Materials.REGULATOR_ARRAY, Advanced_Materials.SENSOR_MONITORING_ARRAY, Advanced_Materials.INTERFACE_ARRAY,
                         Advanced_Materials.STRUCTURAL_REINFORCEMENT_MODULE, Advanced_Materials.CENTRAL_DATA_PROCESSING_HUB, Machine.MASS_ENERGY_ENGINE_GENERATOR,
                         Advanced_Materials.TEMPERATURE_RAISE_COMPONENTS, Advanced_Materials.HIGH_ENERGY_STORAGE_ARRAY, Advanced_Materials.TEMPERATURE_REDUCE_COMPONENTS
                 }
-        );
+        ).register(plugin);
 
         AssaultRifle = new AssaultRifle(
                 Groups.gun_and_bullet_item_group,
@@ -174,8 +186,10 @@ public final class Gun_And_Bullet_Item_Setup {
         );
         ExpansionBackpack.register(plugin);
 
-        GunAndBullet_ItemType_Item(
+        RifleBullet = new RifleBullet(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.RIFLE_BULLET,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         null, SlimefunItems.HARDENED_METAL_INGOT, null,
                         SlimefunItems.STEEL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.STEEL_INGOT,
@@ -183,18 +197,25 @@ public final class Gun_And_Bullet_Item_Setup {
                 },
                 new SlimefunItemStack(Gun_And_Bullet.RIFLE_BULLET, 8)
         );
+        RifleBullet.register(plugin);
 
-        GunAndBullet_ItemType_Item(
+        Grenade = new Grenade(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.GRENADE,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         SlimefunItems.REINFORCED_ALLOY_INGOT, Basic_Materials.FUSE, SlimefunItems.REINFORCED_ALLOY_INGOT,
                         Basic_Materials.HIGH_EXPLOSIVE, Basic_Materials.DETONATOR, Basic_Materials.HIGH_EXPLOSIVE,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.HARDENED_METAL_INGOT
-                }
+                },
+                new SlimefunItemStack(Gun_And_Bullet.GRENADE, 1)
         );
+        Grenade.register(plugin);
 
-        GunAndBullet_ItemType_Item(
+        SteelBall = new SteelBall(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.STEEL_BALL,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         null, new ItemStack(Material.IRON_NUGGET), null,
                         new ItemStack(Material.IRON_NUGGET), SlimefunItems.STEEL_INGOT, new ItemStack(Material.IRON_NUGGET),
@@ -202,9 +223,12 @@ public final class Gun_And_Bullet_Item_Setup {
                 },
                 new SlimefunItemStack(Gun_And_Bullet.STEEL_BALL, 16)
         );
+        SteelBall.register(plugin);
 
-        GunAndBullet_ItemType_Item(
+        BurningSteelBall = new BurningSteelBall(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.BURNING_STEEL_BALL,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         null, SlimefunItems.STEEL_INGOT, null,
                         new ItemStack(Material.GLASS_PANE), Basic_Materials.HIGH_EXPLOSIVE, new ItemStack(Material.GLASS_PANE),
@@ -212,9 +236,12 @@ public final class Gun_And_Bullet_Item_Setup {
                 },
                 new SlimefunItemStack(Gun_And_Bullet.BURNING_STEEL_BALL, 4)
         );
+        BurningSteelBall.register(plugin);
 
-        GunAndBullet_ItemType_Item(
+        SpecialBullet = new SpecialBullet(
+                Groups.gun_and_bullet_item_group,
                 Gun_And_Bullet.SPECIAL_BULLET,
+                RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{
                         null, SlimefunItems.REINFORCED_ALLOY_INGOT, null,
                         SlimefunItems.HARDENED_METAL_INGOT, Basic_Materials.HIGH_EXPLOSIVE, SlimefunItems.HARDENED_METAL_INGOT,
@@ -222,25 +249,7 @@ public final class Gun_And_Bullet_Item_Setup {
                 },
                 new SlimefunItemStack(Gun_And_Bullet.SPECIAL_BULLET, 2)
         );
-    }
-
-    public static void GunAndBullet_ItemType_Item(SlimefunItemStack item, ItemStack[] itemStack) {
-        new ItemType_Item(
-                Groups.gun_and_bullet_item_group,
-                item,
-                RecipeType.ENHANCED_CRAFTING_TABLE,
-                itemStack
-        ).register(plugin);
-    }
-
-    public static void GunAndBullet_ItemType_Item(SlimefunItemStack item, ItemStack[] itemStack, ItemStack recipeOutput) {
-        new ItemType_Item(
-                Groups.gun_and_bullet_item_group,
-                item,
-                RecipeType.ENHANCED_CRAFTING_TABLE,
-                itemStack,
-                recipeOutput
-        ).register(plugin);
+        SpecialBullet.register(plugin);
     }
 
     public static EndlessWeapon getEndlessWeaponInstance() {
