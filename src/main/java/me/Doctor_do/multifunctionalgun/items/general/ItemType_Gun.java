@@ -32,7 +32,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ItemType_Gun extends SlimefunItem implements NotPlaceable, DamageableItem {
-    Plugin plugin = MultifunctionalGun.getInstance();
+    public static Plugin plugin = MultifunctionalGun.getInstance();
 
     protected int damage;
     protected int maxRange;
@@ -89,11 +89,11 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
             return;
         }
 
-        shoot(player, bullet);
+        shoot(player, bullet, multiplier);
     }
 
     // 来自战争工艺，射击效果
-    public void shoot(@Nonnull Player player, @Nonnull ItemType_Bullet bullet) {
+    public void shoot(@Nonnull Player player, @Nonnull ItemType_Bullet bullet, double multiplier) {
 
         Vector vector = player.getEyeLocation().subtract(0, 1, 0).getDirection().multiply(20);
         LlamaSpit spit = player.launchProjectile(LlamaSpit.class);
@@ -101,7 +101,7 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
         spit.setMetadata("damage",
                 new FixedMetadataValue(plugin, this.damage * bullet.getMultiplier() * multiplier)
         );
-        spit.setMetadata("options", new FixedMetadataValue(plugin, bullet.getOptions()));
+        spit.setMetadata("effect", new FixedMetadataValue(plugin, bullet.getEffect()));
         spit.setMetadata("keepTime", new FixedMetadataValue(plugin, bullet.getKeepTime()));
         spit.setMetadata("locInfo", new FixedMetadataValue(
                 plugin,

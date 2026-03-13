@@ -10,18 +10,24 @@ import org.bukkit.inventory.ItemStack;
 public class ItemType_Bullet extends SlimefunItem implements NotPlaceable {
     protected ItemType_Gun gun;
     protected double multiplier;
-    protected String options;
+    protected String effect;
     protected int keepTime;
+    protected double radius;
 
-    public ItemType_Bullet(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput, ItemType_Gun gun, double multiplier, String options, int keepTime) {
+    public ItemType_Bullet(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput, ItemType_Gun gun, double multiplier, String effect, int keepTime, double radius) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
         this.gun = gun;
         this.multiplier = multiplier;
-        this.options = options;
+        this.effect = effect;
         this.keepTime = keepTime;
+        this.radius = radius;
     }
 
-    public ItemType_Gun getGun(){
+    public ItemType_Bullet(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput, ItemType_Gun gun, double multiplier, String effect, int keepTime) {
+        this(itemGroup, item, recipeType, recipe, recipeOutput, gun, multiplier, effect, keepTime, 0);
+    }
+
+    public ItemType_Gun getGun() {
         return gun;
     }
 
@@ -29,11 +35,15 @@ public class ItemType_Bullet extends SlimefunItem implements NotPlaceable {
         return multiplier;
     }
 
-    public String getOptions() {
-        return options;
+    public String getEffect() {
+        return effect;
     }
 
     public int getKeepTime() {
         return keepTime;
+    }
+
+    public double getRadius() {
+        return radius;
     }
 }

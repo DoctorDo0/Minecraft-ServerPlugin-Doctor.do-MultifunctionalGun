@@ -9,6 +9,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
+import me.Doctor_do.multifunctionalgun.items.general.ItemType_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
@@ -477,7 +478,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
                     if (Grenade_Count >= 1) {
                         refreshItemLoreAndPDC(item, Grenade_Count_nsk, Grenade_Count - 1);
-                        Utils.sendMessage(player, "A+G,success,120");
+                        Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, 1.5);
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.GRENADE.getDisplayName() + "已耗尽");
                     }
@@ -524,7 +525,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
                     if (RifleBullet_Count >= 1) {
                         refreshItemLoreAndPDC(item, RifleBullet_Count_nsk, RifleBullet_Count - 1);
-                        Utils.sendMessage(player, "A+G,success,24");
+                        Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, 1.5);
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "已耗尽");
                     }
@@ -541,13 +542,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                             refreshItemLoreAndPDC(item, SteelBall_Count_nsk, SteelBall_Count - 1);
                             // 有电状态
                             if (removeItemCharge(item, COST * 2)) {
-                                Utils.sendMessage(player, "TIKA-StB,success,18");
+                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, 4.5);
                             }
                             // 无电状态
                             else {
                                 // 尝试更新电量
                                 refreshAndCheckEnergy(player, item);
-                                Utils.sendMessage(player, "TIKA-StB,success,6");
+                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, 1.5);
                             }
                         } else {
                             Utils.sendMessage(player, Gun_And_Bullet.STEEL_BALL.getDisplayName() + "已耗尽");
@@ -560,13 +561,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                             refreshItemLoreAndPDC(item, BurningSteelBall_Count_nsk, BurningSteelBall_Count - 1);
                             // 有电状态
                             if (removeItemCharge(item, COST * 2)) {
-                                Utils.sendMessage(player, "TIKA-BStB,success,18");
+                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, 4.5);
                             }
                             // 无电状态
                             else {
                                 // 尝试更新电量
                                 refreshAndCheckEnergy(player, item);
-                                Utils.sendMessage(player, "TIKA-BStB,success,6");
+                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, 1.5);
                             }
                         } else {
                             Utils.sendMessage(player, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + "已耗尽");
@@ -577,7 +578,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                 // 光锥模式
                 if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.LIGHT_CONE.getDisplayName())) {
                     if (removeItemCharge(item, COST * 40)) {
-                        Utils.sendMessage(player, "LC,success,40");
+                        Gun_And_Bullet_Item_Setup.getLightConeInstance().shoot(player, 4.5);
                     } else {
                         // 尝试更新电量
                         refreshAndCheckEnergy(player, item);
@@ -594,7 +595,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                        if (sfItem != null) {
 //                            sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                        }
-                        Utils.sendMessage(player, "ANTI,success,80");
+                        Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, 1.5);
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + "已耗尽");
                     }
@@ -1107,8 +1108,6 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             ItemStack item = inventory.getItem(slot);
 
             if (item != null && !Objects.equals(item.clone().getItemMeta(), itemStack.clone().getItemMeta())) {
-                Utils.sendMessage(player, "======================================");
-                Utils.sendMessage(player, String.valueOf(item) + "===" + String.valueOf(itemStack));
                 remind = true;
                 inventory.setItem(slot, new ItemStack(Material.AIR));
                 Utils.giveOrDropItem(player, item);

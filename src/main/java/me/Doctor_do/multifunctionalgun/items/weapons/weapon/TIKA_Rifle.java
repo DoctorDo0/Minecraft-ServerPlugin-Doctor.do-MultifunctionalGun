@@ -16,7 +16,6 @@ import org.bukkit.inventory.PlayerInventory;
 import javax.annotation.Nonnull;
 
 public class TIKA_Rifle extends ItemType_Gun implements NotPlaceable, Rechargeable {
-
     public static final float CAPACITY = 200.0F;
     public static final float COST = 2.0F;
     public static final int damage = 6;
@@ -58,7 +57,7 @@ public class TIKA_Rifle extends ItemType_Gun implements NotPlaceable, Rechargeab
             multiplier = 1;
         }
 
-        shoot(player, bullet);
+        shoot(player, bullet, multiplier);
     }
 
     @Override
