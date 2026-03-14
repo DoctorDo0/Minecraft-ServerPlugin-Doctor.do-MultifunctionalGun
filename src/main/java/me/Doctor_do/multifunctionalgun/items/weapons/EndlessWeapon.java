@@ -10,6 +10,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Bullet;
+import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
@@ -42,44 +43,48 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private final float GENERATE = 2048.0F;
     private final float CAPACITY;
 
+    private final double multiplier = 1.5;
+
     private ItemStack currentItem;
     private boolean isLoaded = false;
 
-    private final NamespacedKey EndlessWeapon_Mode_nsk = Utils.createKey("ENDLESS_WEAPON_MODE");
+    private final NamespacedKey EndlessWeapon_Mode_nsk = new NamespacedKey(plugin, "ENDLESS_WEAPON_MODE");
+    private final NamespacedKey LAST_USE_nsk = Utils.createKey("Last_Use");
+    private long Last_Use = 0;
 
-    private final NamespacedKey RifleBullet_Count_nsk = new NamespacedKey(plugin, "RifleBullet_Count");
+    private final NamespacedKey RifleBullet_Count_nsk = Utils.createKey("RifleBullet_Count");
     private int RifleBullet_Count = 0;
-    private final NamespacedKey RifleBullet_Contain_Count_nsk = new NamespacedKey(plugin, "RifleBullet_Contain_Count");
+    private final NamespacedKey RifleBullet_Contain_Count_nsk = Utils.createKey("RifleBullet_Contain_Count");
     private int RifleBullet_Contain_Count = 0;
-    private final NamespacedKey Grenade_Count_nsk = new NamespacedKey(plugin, "Grenade_Count");
+    private final NamespacedKey Grenade_Count_nsk = Utils.createKey("Grenade_Count");
     private int Grenade_Count = 0;
-    private final NamespacedKey Grenade_Contain_Count_nsk = new NamespacedKey(plugin, "Grenade_Contain_Count");
+    private final NamespacedKey Grenade_Contain_Count_nsk = Utils.createKey("Grenade_Contain_Count");
     private int Grenade_Contain_Count = 0;
-    private final NamespacedKey SteelBall_Count_nsk = new NamespacedKey(plugin, "SteelBall_Count");
+    private final NamespacedKey SteelBall_Count_nsk = Utils.createKey("SteelBall_Count");
     private int SteelBall_Count = 0;
-    private final NamespacedKey SteelBall_Contain_Count_nsk = new NamespacedKey(plugin, "SteelBall_Contain_Count");
+    private final NamespacedKey SteelBall_Contain_Count_nsk = Utils.createKey("SteelBall_Contain_Count");
     private int SteelBall_Contain_Count = 0;
-    private final NamespacedKey BurningSteelBall_Count_nsk = new NamespacedKey(plugin, "BurningSteelBall_Count");
+    private final NamespacedKey BurningSteelBall_Count_nsk = Utils.createKey("BurningSteelBall_Count");
     private int BurningSteelBall_Count = 0;
-    private final NamespacedKey BurningSteelBall_Contain_Count_nsk = new NamespacedKey(plugin, "BurningSteelBall_Contain_Count");
+    private final NamespacedKey BurningSteelBall_Contain_Count_nsk = Utils.createKey("BurningSteelBall_Contain_Count");
     private int BurningSteelBall_Contain_Count = 0;
-    private final NamespacedKey SpecialBullet_Count_nsk = new NamespacedKey(plugin, "SpecialBullet_Count");
+    private final NamespacedKey SpecialBullet_Count_nsk = Utils.createKey("SpecialBullet_Count");
     private int SpecialBullet_Count = 0;
-    private final NamespacedKey SpecialBullet_Contain_Count_nsk = new NamespacedKey(plugin, "SpecialBullet_Contain_Count");
+    private final NamespacedKey SpecialBullet_Contain_Count_nsk = Utils.createKey("SpecialBullet_Contain_Count");
     private int SpecialBullet_Contain_Count = 0;
-    private final NamespacedKey EnergyStorageCanFull_Count_nsk = new NamespacedKey(plugin, "EnergyStorageCanFull_Count");
+    private final NamespacedKey EnergyStorageCanFull_Count_nsk = Utils.createKey("EnergyStorageCanFull_Count");
     private int EnergyStorageCanFull_Count = 0;
-    private final NamespacedKey EnergyStorageCanFull_Contain_Count_nsk = new NamespacedKey(plugin, "EnergyStorageCanFull_Contain_Count");
+    private final NamespacedKey EnergyStorageCanFull_Contain_Count_nsk = Utils.createKey("EnergyStorageCanFull_Contain_Count");
     private int EnergyStorageCanFull_Contain_Count = 0;
-    private final NamespacedKey EnergyStorageCanEmpty_Count_nsk = new NamespacedKey(plugin, "EnergyStorageCanEmpty_Count");
+    private final NamespacedKey EnergyStorageCanEmpty_Count_nsk = Utils.createKey("EnergyStorageCanEmpty_Count");
     private int EnergyStorageCanEmpty_Count = 0;
-    private final NamespacedKey EnergyStorageCanEmpty_Contain_Count_nsk = new NamespacedKey(plugin, "EnergyStorageCanEmpty_Contain_Count");
+    private final NamespacedKey EnergyStorageCanEmpty_Contain_Count_nsk = Utils.createKey("EnergyStorageCanEmpty_Contain_Count");
     private int EnergyStorageCanEmpty_Contain_Count = 0;
-    private final NamespacedKey TIKA_mode_nsk = new NamespacedKey(plugin, "TIKA_Mode");
+    private final NamespacedKey TIKA_mode_nsk = Utils.createKey("TIKA_Mode");
     private String TIKA_mode = Gun_And_Bullet.STEEL_BALL.getDisplayName();
-    private final NamespacedKey Laser_state_nsk = new NamespacedKey(plugin, "Laser_state");
+    private final NamespacedKey Laser_state_nsk = Utils.createKey("Laser_state");
     private String Laser_state = "OFF";
-    private final NamespacedKey Laser_color_nsk = new NamespacedKey(plugin, "Laser_color");
+    private final NamespacedKey Laser_color_nsk = Utils.createKey("Laser_color");
     private String Laser_color = "#FF_FF_FF";
 
     public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, float capacity) {
@@ -165,11 +170,18 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
     // 按输入字符串内容进行匹配，将输入对象赋值给pdc，修改lore和pdc，再修改物品
     @SuppressWarnings("all")
-    private void refreshItemLoreAndPDC(ItemStack item, NamespacedKey type, Object object) {
+    private void refreshItemLoreAndPDC(ItemStack item, NamespacedKey type, Object value) {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         List<String> loreList = meta.getLore();
         int line_index = 0;
+
+        // type = LAST_USE_nsk
+        if (Objects.equals(type, LAST_USE_nsk)) {
+            // 设置pdc
+            Last_Use = (long) value;
+            pdc.set(LAST_USE_nsk, PersistentDataType.LONG, Last_Use);
+        }
 
         // type = RifleBullet_Count_nsk || type = Grenade_Count_nsk || type = RifleBullet_Contain_Count_nsk || type = Grenade_Contain_Count_nsk
         if (Objects.equals(type, RifleBullet_Count_nsk)
@@ -184,19 +196,19 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
             // 设置值
             if (Objects.equals(type, RifleBullet_Count_nsk)) {
-                RifleBullet_Count = (int) object;
+                RifleBullet_Count = (int) value;
             }
             if (Objects.equals(type, Grenade_Count_nsk)) {
-                Grenade_Count = (int) object;
+                Grenade_Count = (int) value;
             }
             if (Objects.equals(type, RifleBullet_Contain_Count_nsk)) {
-                RifleBullet_Contain_Count = (int) object;
+                RifleBullet_Contain_Count = (int) value;
             }
             if (Objects.equals(type, Grenade_Contain_Count_nsk)) {
-                Grenade_Contain_Count = (int) object;
+                Grenade_Contain_Count = (int) value;
             }
             // 设置pdc
-            pdc.set(type, PersistentDataType.INTEGER, (int) object);
+            pdc.set(type, PersistentDataType.INTEGER, (int) value);
             // 设置lore
             String listText = "    " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "/" + Gun_And_Bullet.GRENADE.getDisplayName()
                     + " §7> " + RifleBullet_Count + "/" + RifleBullet_Contain_Count + " : " + Grenade_Count + "/" + Grenade_Contain_Count;
@@ -217,19 +229,19 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
             // 设置值
             if (Objects.equals(type, SteelBall_Count_nsk)) {
-                SteelBall_Count = (int) object;
+                SteelBall_Count = (int) value;
             }
             if (Objects.equals(type, BurningSteelBall_Count_nsk)) {
-                BurningSteelBall_Count = (int) object;
+                BurningSteelBall_Count = (int) value;
             }
             if (Objects.equals(type, SteelBall_Contain_Count_nsk)) {
-                SteelBall_Contain_Count = (int) object;
+                SteelBall_Contain_Count = (int) value;
             }
             if (Objects.equals(type, BurningSteelBall_Contain_Count_nsk)) {
-                BurningSteelBall_Contain_Count = (int) object;
+                BurningSteelBall_Contain_Count = (int) value;
             }
             // 设置pdc
-            pdc.set(type, PersistentDataType.INTEGER, (int) object);
+            pdc.set(type, PersistentDataType.INTEGER, (int) value);
             // 设置lore
             String listText = "    " + Gun_And_Bullet.STEEL_BALL.getDisplayName() + "/" + Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName()
                     + " §7> " + SteelBall_Count + "/" + SteelBall_Contain_Count + " : " + BurningSteelBall_Count + "/" + BurningSteelBall_Contain_Count;
@@ -248,13 +260,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
             // 设置值
             if (Objects.equals(type, SpecialBullet_Count_nsk)) {
-                SpecialBullet_Count = (int) object;
+                SpecialBullet_Count = (int) value;
             }
             if (Objects.equals(type, SpecialBullet_Contain_Count_nsk)) {
-                SpecialBullet_Contain_Count = (int) object;
+                SpecialBullet_Contain_Count = (int) value;
             }
             // 设置pdc
-            pdc.set(type, PersistentDataType.INTEGER, (int) object);
+            pdc.set(type, PersistentDataType.INTEGER, (int) value);
             // 设置lore
             String listText = "    " + Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + " §7: " + SpecialBullet_Count + "/" + SpecialBullet_Contain_Count;
             loreList.set(line_index, listText);
@@ -274,19 +286,19 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
             // 设置pdc
             if (Objects.equals(type, EnergyStorageCanFull_Count_nsk)) {
-                EnergyStorageCanFull_Count = (int) object;
+                EnergyStorageCanFull_Count = (int) value;
             }
             if (Objects.equals(type, EnergyStorageCanEmpty_Count_nsk)) {
-                EnergyStorageCanEmpty_Count = (int) object;
+                EnergyStorageCanEmpty_Count = (int) value;
             }
             if (Objects.equals(type, EnergyStorageCanFull_Contain_Count_nsk)) {
-                EnergyStorageCanFull_Contain_Count = (int) object;
+                EnergyStorageCanFull_Contain_Count = (int) value;
             }
             if (Objects.equals(type, EnergyStorageCanEmpty_Contain_Count_nsk)) {
-                EnergyStorageCanEmpty_Contain_Count = (int) object;
+                EnergyStorageCanEmpty_Contain_Count = (int) value;
             }
             // 设置pdc
-            pdc.set(type, PersistentDataType.INTEGER, (int) object);
+            pdc.set(type, PersistentDataType.INTEGER, (int) value);
             // 设置lore
             String listText = "    " + Machine.ENERGY_STORAGE_CAN_FULL.getDisplayName() + "/" + Machine.ENERGY_STORAGE_CAN_EMPTY.getDisplayName()
                     + " §7> " + EnergyStorageCanFull_Count + "/" + EnergyStorageCanFull_Contain_Count + " : " + EnergyStorageCanEmpty_Count + "/" + EnergyStorageCanEmpty_Contain_Count;
@@ -303,7 +315,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                 }
             }
             // 设置pdc与lore
-            TIKA_mode = (String) object;
+            TIKA_mode = (String) value;
             pdc.set(TIKA_mode_nsk, PersistentDataType.STRING, TIKA_mode);
             String listText = "§7提卡模式: " + TIKA_mode;
             loreList.set(line_index, listText);
@@ -320,11 +332,11 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
             // 设置pdc与lore
             if (Objects.equals(type, Laser_state_nsk)) {
-                Laser_state = (String) object;
+                Laser_state = (String) value;
                 pdc.set(Laser_state_nsk, PersistentDataType.STRING, Laser_state);
             }
             if (Objects.equals(type, Laser_color_nsk)) {
-                Laser_color = (String) object;
+                Laser_color = (String) value;
                 pdc.set(Laser_color_nsk, PersistentDataType.STRING, Laser_color);
             }
             String listText = "§7激光指示器与显示: " + Laser_state + "§7 - " + Laser_color;
@@ -338,45 +350,49 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     // 按输入物品的电量与pdc进行计算，触发不同效果，进行修改物品操作，修改lore和pdc，修改电量，或输出提示
     @SuppressWarnings("all")
     private void refreshAndCheckEnergy(Player player, ItemStack item) {
+        float delta = getMaxItemCharge(item) - getItemCharge(item);
+        if (delta < GENERATE) {
+            return;
+        }
+        int needCount = (int) (delta / GENERATE);
+        int realCount;
+
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         List<String> loreList = meta.getLore();
         int line_index = 0;
-        // type = Rifle_Bullet
         // 取得包含模式信息的字符串位置
         for (String lore : loreList) {
             if (lore.contains(Machine.ENERGY_STORAGE_CAN_FULL.getDisplayName() + "/" + Machine.ENERGY_STORAGE_CAN_EMPTY.getDisplayName())) {
                 line_index = loreList.indexOf(lore);
             }
         }
-        // 判断数量并转入不同结果
+        // 获取当前存储值
         EnergyStorageCanFull_Count = pdc.getOrDefault(EnergyStorageCanFull_Count_nsk, PersistentDataType.INTEGER, 0);
         EnergyStorageCanEmpty_Count = pdc.getOrDefault(EnergyStorageCanEmpty_Count_nsk, PersistentDataType.INTEGER, 0);
+        // 判断应该消耗的数量并计算
+        realCount = Math.min(needCount, EnergyStorageCanFull_Count);
+        realCount = Math.min(realCount, EnergyStorageCanEmpty_Contain_Count - EnergyStorageCanEmpty_Count);
         // 满罐数量为空
         if (EnergyStorageCanFull_Count == 0) {
             Utils.sendMessage(player, Machine.ENERGY_STORAGE_CAN_FULL.getDisplayName() + "已耗尽");
+            return;
         }
         // 空罐数量为满
         if (EnergyStorageCanEmpty_Count == EnergyStorageCanEmpty_Contain_Count) {
             Utils.sendMessage(player, Machine.ENERGY_STORAGE_CAN_EMPTY.getDisplayName() + "已满");
+            return;
         }
         // 正常情况
         if (EnergyStorageCanFull_Count > 0 && EnergyStorageCanEmpty_Count < EnergyStorageCanEmpty_Contain_Count) {
             // 数量操作
-            EnergyStorageCanFull_Count = EnergyStorageCanFull_Count - 1;
-            EnergyStorageCanEmpty_Count = EnergyStorageCanEmpty_Count + 1;
-            // pdc更新
-            pdc.set(EnergyStorageCanFull_Count_nsk, PersistentDataType.INTEGER, EnergyStorageCanFull_Count);
-            pdc.set(EnergyStorageCanEmpty_Count_nsk, PersistentDataType.INTEGER, EnergyStorageCanEmpty_Count);
-            // lore更新
-            String listText = "    " + Machine.ENERGY_STORAGE_CAN_FULL.getDisplayName() + "/" + Machine.ENERGY_STORAGE_CAN_EMPTY.getDisplayName()
-                    + " §7> " + EnergyStorageCanFull_Count + "/" + EnergyStorageCanEmpty_Count;
-            loreList.set(line_index, listText);
-            meta.setLore(loreList);
-            // 物品数据更新
-            item.setItemMeta(meta);
+            EnergyStorageCanFull_Count = EnergyStorageCanFull_Count - realCount;
+            EnergyStorageCanEmpty_Count = EnergyStorageCanEmpty_Count + realCount;
+            // lore与pdc更新
+            refreshItemLoreAndPDC(item, EnergyStorageCanFull_Count_nsk, EnergyStorageCanFull_Count);
+            refreshItemLoreAndPDC(item, EnergyStorageCanEmpty_Count_nsk, EnergyStorageCanEmpty_Count);
             // 增加物品电量
-            addItemCharge(item, GENERATE);
+            addItemCharge(item, realCount * GENERATE);
         }
     }
 
@@ -465,38 +481,50 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         var pdc = im.getPersistentDataContainer();
         int index = pdc.getOrDefault(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, 0);
 
+        // 尝试更新电量
+        refreshAndCheckEnergy(player, item);
+
         //判断是否已锁
-        if (!isLoaded) {
-            // 仅左键
-            if (!player.isSneaking()) {
-                refreshItemLoreFromMode(item, index);
-                SlimefunItem sfItem = EndlessWeapon_Mode.get(index).getItem();
+        if (isLoaded) {
+            Utils.sendMessage(player, ChatColor.GRAY + "等待装载中...");
+            return;
+        }
 
-                // 步枪+榴弹模式
-                if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
-                    Grenade_Count = pdc.getOrDefault(Grenade_Count_nsk, PersistentDataType.INTEGER, 0);
+        // 仅左键
+        if (!player.isSneaking()) {
+            refreshItemLoreFromMode(item, index);
+            SlimefunItem sfItem = EndlessWeapon_Mode.get(index).getItem();
 
-                    if (Grenade_Count >= 1) {
-                        refreshItemLoreAndPDC(item, Grenade_Count_nsk, Grenade_Count - 1);
-                        Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, 1.5);
-                    } else {
-                        Utils.sendMessage(player, Gun_And_Bullet.GRENADE.getDisplayName() + "已耗尽");
-                    }
+            // 步枪+榴弹模式
+            if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
+                Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - Last_Use) < GrenadeLauncher.cooldown * 1000) {
+                    player.sendMessage(ChatColor.YELLOW + "换弹中!");
+                    return;
                 }
+                Last_Use = currentTime;
+                refreshItemLoreAndPDC(item, LAST_USE_nsk, Last_Use);
+                Grenade_Count = pdc.getOrDefault(Grenade_Count_nsk, PersistentDataType.INTEGER, 0);
 
-                // 其他模式
-                if (!Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
-                    Gun_And_Bullet_Item_Setup.getScopeInstance().ScopeUseEvent(event);
+                if (Grenade_Count >= 1) {
+                    refreshItemLoreAndPDC(item, Grenade_Count_nsk, Grenade_Count - 1);
+                    Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, multiplier);
+                } else {
+                    Utils.sendMessage(player, Gun_And_Bullet.GRENADE.getDisplayName() + ChatColor.RED + "已耗尽");
                 }
             }
 
-            // shift+左键
-            else {
-                refreshItemLoreFromMode(item, index);
-                openFirearmExpansionBackpack(player, item);
+            // 其他模式
+            if (!Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
+                Gun_And_Bullet_Item_Setup.getScopeInstance().ScopeUseEvent(event);
             }
-        } else {
-            Utils.sendMessage(player, "等待装载中...");
+        }
+
+        // shift+左键
+        else {
+            refreshItemLoreFromMode(item, index);
+            openFirearmExpansionBackpack(player, item);
         }
     }
 
@@ -512,116 +540,146 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         var pdc = im.getPersistentDataContainer();
         int index = pdc.getOrDefault(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, 0);
 
+        // 尝试更新电量
+        refreshAndCheckEnergy(player, item);
+
         //判断是否已锁
-        if (!isLoaded) {
-            // 仅右键
-            if (!player.isSneaking()) {
-                refreshItemLoreFromMode(item, index);
-                SlimefunItem sfItem = EndlessWeapon_Mode.get(index).getItem();
+        if (isLoaded) {
+            Utils.sendMessage(player, ChatColor.GRAY + "等待装载中...");
+            return;
+        }
 
-                // 步枪+榴弹模式
-                if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
-                    RifleBullet_Count = pdc.getOrDefault(RifleBullet_Count_nsk, PersistentDataType.INTEGER, 0);
+        // 仅右键
+        if (!player.isSneaking()) {
+            refreshItemLoreFromMode(item, index);
+            SlimefunItem sfItem = EndlessWeapon_Mode.get(index).getItem();
 
-                    if (RifleBullet_Count >= 1) {
-                        refreshItemLoreAndPDC(item, RifleBullet_Count_nsk, RifleBullet_Count - 1);
-                        Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, 1.5);
-                    } else {
-                        Utils.sendMessage(player, Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "已耗尽");
-                    }
+            // 步枪+榴弹模式
+            if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER.getDisplayName())) {
+                Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - Last_Use) < AssaultRifle.cooldown * 1000) {
+                    player.sendMessage(ChatColor.YELLOW + "换弹中!");
+                    return;
                 }
+                Last_Use = currentTime;
+                refreshItemLoreAndPDC(item, LAST_USE_nsk, Last_Use);
+                RifleBullet_Count = pdc.getOrDefault(RifleBullet_Count_nsk, PersistentDataType.INTEGER, 0);
 
-                // 提卡模式
-                if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.TIKA_RIFLE.getDisplayName())) {
-                    // 获取当前提卡模式
-                    TIKA_mode = pdc.getOrDefault(TIKA_mode_nsk, PersistentDataType.STRING, Gun_And_Bullet.STEEL_BALL.getDisplayName());
-                    // 钢珠模式
-                    if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName())) {
-                        SteelBall_Count = pdc.getOrDefault(SteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
-                        if (SteelBall_Count >= 1) {
-                            refreshItemLoreAndPDC(item, SteelBall_Count_nsk, SteelBall_Count - 1);
-                            // 有电状态
-                            if (removeItemCharge(item, COST * 2)) {
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, 4.5);
-                            }
-                            // 无电状态
-                            else {
-                                // 尝试更新电量
-                                refreshAndCheckEnergy(player, item);
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, 1.5);
-                            }
-                        } else {
-                            Utils.sendMessage(player, Gun_And_Bullet.STEEL_BALL.getDisplayName() + "已耗尽");
+                if (RifleBullet_Count >= 1) {
+                    refreshItemLoreAndPDC(item, RifleBullet_Count_nsk, RifleBullet_Count - 1);
+                    Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, multiplier);
+                } else {
+                    Utils.sendMessage(player, Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + ChatColor.RED + "已耗尽");
+                }
+            }
+
+            // 提卡模式
+            if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.TIKA_RIFLE.getDisplayName())) {
+                Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - Last_Use) < TIKA_Rifle.cooldown * 1000) {
+                    player.sendMessage(ChatColor.YELLOW + "换弹中!");
+                    return;
+                }
+                Last_Use = currentTime;
+                refreshItemLoreAndPDC(item, LAST_USE_nsk, Last_Use);
+                // 获取当前提卡模式
+                TIKA_mode = pdc.getOrDefault(TIKA_mode_nsk, PersistentDataType.STRING, Gun_And_Bullet.STEEL_BALL.getDisplayName());
+                // 钢珠模式
+                if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName())) {
+                    SteelBall_Count = pdc.getOrDefault(SteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
+                    if (SteelBall_Count >= 1) {
+                        refreshItemLoreAndPDC(item, SteelBall_Count_nsk, SteelBall_Count - 1);
+                        // 有电状态
+                        if (removeItemCharge(item, COST * 2)) {
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, multiplier * 3);
                         }
-                    }
-                    // 燃烧弹模式
-                    if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName())) {
-                        BurningSteelBall_Count = pdc.getOrDefault(BurningSteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
-                        if (BurningSteelBall_Count >= 1) {
-                            refreshItemLoreAndPDC(item, BurningSteelBall_Count_nsk, BurningSteelBall_Count - 1);
-                            // 有电状态
-                            if (removeItemCharge(item, COST * 2)) {
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, 4.5);
-                            }
-                            // 无电状态
-                            else {
-                                // 尝试更新电量
-                                refreshAndCheckEnergy(player, item);
-                                Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, 1.5);
-                            }
-                        } else {
-                            Utils.sendMessage(player, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + "已耗尽");
+                        // 无电状态
+                        else {
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, multiplier);
                         }
+                    } else {
+                        Utils.sendMessage(player, Gun_And_Bullet.STEEL_BALL.getDisplayName() + ChatColor.RED + "已耗尽");
                     }
                 }
-
-                // 光锥模式
-                if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.LIGHT_CONE.getDisplayName())) {
-                    if (removeItemCharge(item, COST * 40)) {
-                        Gun_And_Bullet_Item_Setup.getLightConeInstance().shoot(player, 4.5);
+                // 燃烧弹模式
+                if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName())) {
+                    BurningSteelBall_Count = pdc.getOrDefault(BurningSteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
+                    if (BurningSteelBall_Count >= 1) {
+                        refreshItemLoreAndPDC(item, BurningSteelBall_Count_nsk, BurningSteelBall_Count - 1);
+                        // 有电状态
+                        if (removeItemCharge(item, COST * 2)) {
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, multiplier * 3);
+                        }
+                        // 无电状态
+                        else {
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, multiplier);
+                        }
                     } else {
-                        // 尝试更新电量
-                        refreshAndCheckEnergy(player, item);
-                    }
-                }
-
-                // 反器材模式
-                if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName())) {
-                    SpecialBullet_Count = pdc.getOrDefault(SpecialBullet_Count_nsk, PersistentDataType.INTEGER, 0);
-                    if (SpecialBullet_Count >= 1) {
-                        refreshItemLoreAndPDC(item, SpecialBullet_Count_nsk, SpecialBullet_Count - 1);
-//                        SlimefunItem sfItem = modes.get(index).getItem();
-
-//                        if (sfItem != null) {
-//                            sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
-//                        }
-                        Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, 1.5);
-                    } else {
-                        Utils.sendMessage(player, Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + "已耗尽");
+                        Utils.sendMessage(player, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + ChatColor.RED + "已耗尽");
                     }
                 }
             }
 
-            // shift+右键
-            else {
-                index = nextIndex(index);
-                SlimefunItem selectedItem = EndlessWeapon_Mode.get(index).getItem();
+            // 光锥模式
+            if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.LIGHT_CONE.getDisplayName())) {
+                Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - Last_Use) < LightCone.cooldown * 1000) {
+                    player.sendMessage(ChatColor.YELLOW + "换弹中!");
+                    return;
+                }
+                Last_Use = currentTime;
+                refreshItemLoreAndPDC(item, LAST_USE_nsk, Last_Use);
+                if (removeItemCharge(item, COST * 40)) {
+                    Gun_And_Bullet_Item_Setup.getLightConeInstance().shoot(player, multiplier);
+                }
+            }
 
-                String itemName = selectedItem != null ? selectedItem.getItemName() : "Unknown";
+            // 反器材模式
+            if (Objects.equals(sfItem.getItemName(), Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE.getDisplayName())) {
+                Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - Last_Use) < AntiMaterielSniperRifle.cooldown * 1000) {
+                    player.sendMessage(ChatColor.YELLOW + "换弹中!");
+                    return;
+                }
+                Last_Use = currentTime;
+                refreshItemLoreAndPDC(item, LAST_USE_nsk, Last_Use);
+                SpecialBullet_Count = pdc.getOrDefault(SpecialBullet_Count_nsk, PersistentDataType.INTEGER, 0);
+
+                if (SpecialBullet_Count >= 1) {
+                    refreshItemLoreAndPDC(item, SpecialBullet_Count_nsk, SpecialBullet_Count - 1);
+//                    SlimefunItem sfItem = modes.get(index).getItem();
+
+//                    if (sfItem != null) {
+//                        sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
+//                    }
+                    Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, multiplier);
+                } else {
+                    Utils.sendMessage(player, Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + ChatColor.RED + "已耗尽");
+                }
+            }
+        }
+
+        // shift+右键
+        else {
+            index = nextIndex(index);
+            SlimefunItem selectedItem = EndlessWeapon_Mode.get(index).getItem();
+
+            String itemName = selectedItem != null ? selectedItem.getItemName() : "Unknown";
 //            Slimefun.getLocalization()
 //                    .sendMessage(player, "messages.EndlessWeapon.mode-change", true, msg -> msg.replace("%device%", "多功能工具")
 //                            .replace("%mode%", ChatColor.stripColor(itemName)));
-                Slimefun.getLocalization()
-                        .sendMessage(player, Gun_And_Bullet.ENDLESS_WEAPON.getDisplayName() + " 的模式已切换为: " + itemName, true, msg -> msg.replace("! Missing string \"", "")
-                                .replace("\"", ""));
+            Slimefun.getLocalization()
+                    .sendMessage(player, Gun_And_Bullet.ENDLESS_WEAPON.getDisplayName() + " 的模式已切换为: " + itemName, true, msg -> msg.replace("! Missing string \"", "")
+                            .replace("\"", ""));
 
-                pdc.set(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, index);
-                item.setItemMeta(im);
+            pdc.set(EndlessWeapon_Mode_nsk, PersistentDataType.INTEGER, index);
+            item.setItemMeta(im);
 
-                refreshItemLoreFromMode(item, index);
-            }
-        } else {
-            Utils.sendMessage(player, "等待装载中...");
+            refreshItemLoreFromMode(item, index);
         }
     }
 
@@ -1124,8 +1182,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                 itemStack.setAmount(64);
                 inventory.setItem(slot[i], itemStack);
                 count = count - 64;
-            }
-            if (count <= 64) {
+            } else {
                 itemStack.setAmount(count);
                 inventory.setItem(slot[i], itemStack);
                 count = 0;

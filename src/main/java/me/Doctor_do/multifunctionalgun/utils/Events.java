@@ -13,6 +13,7 @@ import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Dropper;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,7 @@ import javax.annotation.Nonnull;
 public class Events implements Listener {
     Plugin plugin = MultifunctionalGun.getInstance();
 
-    // 来自FluffyMachine，监听器，用于取消有不可交互标记的对象的交互事件
+    // 来自FluffyMachines，监听器，用于取消有不可交互标记的对象的交互事件
     // This is used to make the non clickable GUI items non clickable
     @EventHandler(ignoreCancelled = true)
     public void onNonClickableClick(InventoryClickEvent e) {
@@ -179,7 +180,7 @@ public class Events implements Listener {
         }
     }
 
-    // 来自战争工艺
+    // 来自SlimefunWarfare
     // 子弹击中实体产生的效果
     @SuppressWarnings("all")
     @EventHandler
@@ -214,7 +215,7 @@ public class Events implements Listener {
         }
     }
 
-    // 来自战争工艺
+    // 来自SlimefunWarfare
     @EventHandler
     public void onBulletHitBlock(ProjectileHitEvent event) {
         Block block = event.getHitBlock();
@@ -258,7 +259,7 @@ public class Events implements Listener {
         }
     }
 
-    // 已修改，来自战争工艺
+    // 已修改，来自SlimefunWarfare
     // 榴弹爆炸产生的效果
     @SuppressWarnings("all")
     public void grenadeEffect(Entity grenade, Location loc) {
@@ -266,8 +267,8 @@ public class Events implements Listener {
         AreaEffectCloud cloud;
         switch (effect) {
             case "normal" -> {
-                explosiveDamageEffect(grenade);
                 grenade.getWorld().createExplosion(grenade.getLocation(), grenade.getMetadata("radius").get(0).asFloat());
+                explosiveDamageEffect(grenade);
                 cloud = (AreaEffectCloud) grenade.getWorld()
                         .spawnEntity(loc, EntityType.AREA_EFFECT_CLOUD);
                 cloud.setDuration(grenade.getMetadata("keepTime").get(0).asInt());
@@ -292,6 +293,8 @@ public class Events implements Listener {
             double distanceSquared = distanceVector.lengthSquared();
             double damage = grenade.getMetadata("damage").get(0).asInt() * ((double) 1.0F - distanceSquared / (double) (2 * radius * radius));
             if (!entity.getUniqueId().equals(grenade.getUniqueId())) {
+                //修复死循环重复触发的bug
+                grenade.removeMetadata("DMG_GunGrenade", plugin);
                 EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(grenade, entity, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, damage);
                 Bukkit.getPluginManager().callEvent(event);
                 if (!event.isCancelled()) {
@@ -307,6 +310,6 @@ public class Events implements Listener {
     // 来自粘液科技
     // 判断实体是否可被造成伤害
     private boolean canDamage(@Nonnull Entity n) {
-        return n instanceof LivingEntity && !(n instanceof ArmorStand) && n.isValid();
+        return n instanceof LivingEntity && !(n instanceof ArmorStand) && n.isValid() && !(n instanceof Dropper);
     }
 }

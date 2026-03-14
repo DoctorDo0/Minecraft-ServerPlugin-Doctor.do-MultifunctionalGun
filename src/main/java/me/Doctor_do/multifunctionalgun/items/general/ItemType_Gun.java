@@ -53,7 +53,7 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
         addItemHandler(getItemHandler());
     }
 
-    // 来自战争工艺，判定触发间隔(冷却时间)
+    // 来自SlimefunWarfare，判定触发间隔(冷却时间)
     public ItemUseHandler getItemHandler() {
         return event -> {
             event.cancel();
@@ -92,7 +92,7 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
         shoot(player, bullet, multiplier);
     }
 
-    // 来自战争工艺，射击效果
+    // 来自SlimefunWarfare，射击效果
     public void shoot(@Nonnull Player player, @Nonnull ItemType_Bullet bullet, double multiplier) {
 
         Vector vector = player.getEyeLocation().subtract(0, 1, 0).getDirection().multiply(20);
@@ -114,7 +114,7 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
         spit.setVelocity(vector);
     }
 
-    // 来自战争工艺，判定弹药位置与类型
+    // 来自SlimefunWarfare，判定弹药位置与类型
     @Nullable
     protected static ItemType_Bullet checkAndConsumeInv(@Nullable Player player, @Nonnull Inventory inv, @Nonnull ItemStack gun) {
         ItemType_Bullet bullet = null;
@@ -135,7 +135,7 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
         return bullet;
     }
 
-    // 来自战争工艺，判定弹药位置与类型
+    // 来自SlimefunWarfare，判定弹药位置与类型
     @SuppressWarnings("all")
     @Nullable
     protected static ItemType_Bullet checkAndConsume(@Nonnull ItemStack gun, @Nonnull ItemStack stack) {

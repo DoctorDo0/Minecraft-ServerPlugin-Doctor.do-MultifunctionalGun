@@ -52,7 +52,6 @@ public class LightCone extends ItemType_Gun implements NotPlaceable, Rechargeabl
         shoot(player, multiplier);
     }
 
-    // 来自战争工艺，射击效果
     public void shoot(@Nonnull Player player, double multiplier) {
 
         Vector vector = player.getEyeLocation().subtract(0, 1, 0).getDirection().multiply(10);

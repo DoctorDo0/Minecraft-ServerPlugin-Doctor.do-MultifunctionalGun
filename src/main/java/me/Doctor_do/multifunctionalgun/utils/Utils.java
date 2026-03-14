@@ -40,14 +40,14 @@ public class Utils {
         player.sendMessage(message);
     }
 
-    // 来自FluffyMachine，物品给予背包或掉落
+    // 来自FluffyMachines，物品给予背包或掉落
     public static void giveOrDropItem(Player p, ItemStack toGive) {
         for (ItemStack leftover : p.getInventory().addItem(toGive).values()) {
             p.getWorld().dropItemNaturally(p.getLocation(), leftover);
         }
     }
 
-    // 已修改，来自FluffyMachine，用于创建初始物品
+    // 已修改，来自FluffyMachines，用于创建初始物品
     public static ItemStack buildInitialItem(Material material, @Nullable String name, @Nullable String... lore) {
         ItemStack nonClickableItem = new ItemStack(material);
         ItemMeta NCMeta = nonClickableItem.getItemMeta();
@@ -71,7 +71,7 @@ public class Utils {
         return nonClickableItem;
     }
 
-    // 已修改，来自FluffyMachine，创建不可交互的物品栈
+    // 已修改，来自FluffyMachines，创建不可交互的物品栈
     public static ItemStack buildNonInteractable(Material material, @Nullable String name, @Nullable String... lore) {
         ItemStack nonClickableItem = buildInitialItem(material, name, lore);
         ItemMeta NCMeta = nonClickableItem.getItemMeta();
@@ -114,7 +114,7 @@ public class Utils {
         return changeLaserItem;
     }
 
-    // 来自FluffyMachine，判断是否是不可交互的物品栈
+    // 来自FluffyMachines，判断是否是不可交互的物品栈
     public static boolean checkNonInteractable(ItemStack item) {
         if (item == null || item.getItemMeta() == null) {
             return false;
@@ -199,7 +199,7 @@ public class Utils {
         item.setItemMeta(meta);
     }
 
-    // 来自战争工艺，未知(反序列化位置)
+    // 来自SlimefunWarfare，未知(反序列化位置)
     @Nonnull
     public static Location deserializeLocation(@Nonnull String s) {
         if (s.trim().isEmpty()) {
@@ -219,7 +219,7 @@ public class Utils {
         throw new IllegalArgumentException("Invalid location deserialization parameter, got " + s);
     }
 
-    // 来自战争工艺，用于创建坐标信息
+    // 来自SlimefunWarfare，用于创建坐标信息
     @Nonnull
     public static String serializeLocation(@Nonnull Location loc) {
         return loc.getWorld().getName() +
