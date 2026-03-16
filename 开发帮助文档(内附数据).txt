@@ -537,39 +537,29 @@ x  特种合金  活塞
 	// 未解锁下的物品的动作使用
 	bug:机器返还空罐
 	优化:物品名称二次优化，物品类型换为头
+	优化:调整背包界面(排版，分割线描述文本)
 	优化:配方优化
-	优化:继续调整参数
+	优化:继续调整伤害参数
+	//??:Endless原初问题，界面物品选取与本体物品选取，位置参数获取
 TODO:
 	新增弹药判断机制，最终武器不仅使用内置背包，还可读取玩家背包与玩家背包中的粘液背包
 	实现瞄准镜与激光瞄准器功能
 	EndlessWeapon内部方法泛用化，武器冷却由向上转型统一方法获取，弹药机制改为实际inventory，不再依靠pdc获取的整型变量值计算
-//测试:说明文本
-//测试:修改分割线
-//??:Endless原初问题，界面物品选取与本体物品选取，位置参数获取
 
 	检查炼金术自传无法使用原因
-	查看网络的切换物品附魔发光代码
-	查看蓬松科技的附魔发光代码
-
-	修改名称
-	修改界面
-	调整伤害，伤害补强
 
 优化项目:
-	删除注释代码:
-	    MultifunctionalGun
-		MobDropListener
 	其他代码:
-		EndlessWeapon--修改注释，改为大段注释，并加入文本描述
+		MobDropListener--检索遗留的代码含义
+		EndlessWeapon--检索遗留的代码含义
 		Gun_And_Bullet_Item_Setup--清理无用实例
-		Utils--清理无用代码
-		ItemType_Gun--改为抽象方法
 	目前希望保留:
+		MultifunctionalGun--模板代码
 		ResearchSetup--模板代码
 		Basic_Materials--模板代码
 		Basic_Materials_Item_Setup--模板代码
-		EndlessWeapon--问题众多，待定
 		ItemType_Block--无用代码，暂做保留
+		ItemType_Machine--无用代码，暂做保留
 // 语言差异:
 	// 位置:Groups,RecipeType,ResearchSetup,Basic_Materials,Advanced_Materials,Machine,Gun_And_Bullet,Basic_Materials_Item_Setup,EndlessWeapon,Events
 	// 已处理但仍然保留:MultifunctionalGun,Test_Item

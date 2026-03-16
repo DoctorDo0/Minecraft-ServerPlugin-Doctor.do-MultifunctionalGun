@@ -51,13 +51,14 @@ public class TIKA_Rifle extends ItemType_Gun implements NotPlaceable, Rechargeab
             return;
         }
 
+        double current_multiplier;
         if (removeItemCharge(gun, COST)) {
-            multiplier = 3;
+            current_multiplier = multiplier * 3;
         } else {
-            multiplier = 1;
+            current_multiplier = multiplier * 1;
         }
 
-        shoot(player, bullet, multiplier);
+        shoot(player, bullet, current_multiplier);
     }
 
     @Override

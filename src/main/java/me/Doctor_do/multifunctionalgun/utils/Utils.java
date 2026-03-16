@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
@@ -181,25 +180,7 @@ public class Utils {
         return checkAttributeIsSame("decrease-blue", laserSetting, item);
     }
 
-    // 用于使物品在界面内变为不可交互状态
-    public static void setItemNonClickable(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        assert meta != null;
-        PersistentDataContainer pdc = meta.getPersistentDataContainer();
-        pdc.set(nonClickable, PersistentDataType.BYTE, (byte) 1);
-        item.setItemMeta(meta);
-    }
-
-    // 用于使物品在界面内恢复为可交互状态
-    public static void setItemCanClickable(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        assert meta != null;
-        PersistentDataContainer pdc = meta.getPersistentDataContainer();
-        pdc.remove(nonClickable);
-        item.setItemMeta(meta);
-    }
-
-    // 来自SlimefunWarfare，未知(反序列化位置)
+    // 来自SlimefunWarfare，反序列化位置信息
     @Nonnull
     public static Location deserializeLocation(@Nonnull String s) {
         if (s.trim().isEmpty()) {
@@ -219,9 +200,10 @@ public class Utils {
         throw new IllegalArgumentException("Invalid location deserialization parameter, got " + s);
     }
 
-    // 来自SlimefunWarfare，用于创建坐标信息
+    // 来自SlimefunWarfare，序列化位置信息
     @Nonnull
     public static String serializeLocation(@Nonnull Location loc) {
+        assert loc.getWorld() != null;
         return loc.getWorld().getName() +
                 ":" + loc.getX() +
                 ":" + loc.getY() +

@@ -1,6 +1,5 @@
 package me.Doctor_do.multifunctionalgun.items.weapons;
 
-import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -396,22 +395,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         }
     }
 
-    @Override
-    public void preRegister() {
-        super.preRegister();
-//        BlockUseHandler blockUseHandler = this::onBlockRightClick;
-//        addItemHandler(blockUseHandler);
-
-//        ItemUseHandler itemUseHandler_rightClick = this::onItemUseRightClick;
-//        addItemHandler(itemUseHandler_rightClick);
-
-
-//        ItemHandler itemUseHandler_leftClick = this::Test_LeftClickEvent;
-//        addItemHandler(itemUseHandler_leftClick);
-
-//        ItemUseHandler itemUseHandler_Left = this::onItemUseLeftClick;
-//        addItemHandler(itemUseHandler_Left);
-    }
+    //TODO:
+//    @Override
+//    public void preRegister() {
+//        super.preRegister();
+//        //ItemUseHandler itemUseHandler_rightClick = this::onItemUseRightClick;
+//        //addItemHandler(itemUseHandler_rightClick);
+//    }
 
 //    private void onBlockRightClick(PlayerRightClickEvent event) {
 //        // 这会阻止玩家食用该蛋糕
@@ -420,22 +410,23 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //        event.getPlayer().setFireTicks(5 * 20);
 //    }
 
-    private void onItemUseRightClick(PlayerRightClickEvent event) {
-        // 如果在这里调用 event.cancel() 会阻止玩家放置蛋糕
+//    private void onItemUseRightClick(PlayerRightClickEvent event) {
+//        // 如果在这里调用 event.cancel() 会阻止玩家放置蛋糕
 //        event.getPlayer().giveExpLevels(1);
-        Player player = event.getPlayer();
-        ItemStack item = event.getItem();
-        event.cancel();
-        // 同一个物品栈
+//        Player player = event.getPlayer();
+//        ItemStack item = event.getItem();
+//        //event.cancel();
+//        // 同一个物品栈
 //        ItemStack item1 = player.getInventory().getItemInMainHand();
 //        ItemStack item2 = event.getItem();
 //        ItemStack item3 = event.getPlayer().getInventory().getItemInMainHand();
-        // Permission 权限区分
+//        // Permission 权限区分
 //        if (player.hasPermission("minecraft.admin")) {}
-        // MainHand 玩家主手物品类型判断
+//        // MainHand 玩家主手物品类型判断
 //        if (player.getInventory().getItemInMainHand().getType() == Material.DIAMOND) {}
-        // Sneaking+Initializer 玩家潜行判断+物品模式初始化(?)
+//        // Sneaking+Initializer 玩家潜行判断+物品模式初始化(?)
 //        int index = (Integer)this.selectedMode.getOrDefault(p.getUniqueId(), 0);
+//        // 来自slimefun原版的多功能工具的逻辑
 //        if (!p.isSneaking()) {
 //            if (this.removeItemCharge(item, 0.3F)) {
 //                SlimefunItem sfItem = ((MultiToolMode)this.modes.get(index)).getItem();
@@ -451,6 +442,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //            this.selectedMode.put(p.getUniqueId(), index);
 //        }
 
+//        // 最初始的判断逻辑
 //        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
 //            if (player.isSneaking()) {
 //                player.sendMessage(ChatColors.color("&7测试:&fGun:&f右键+潜行 正常"));
@@ -467,7 +459,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                player.sendMessage(ChatColors.color("&7测试:&fGun:&f左键+!潜行 正常"));
 //            }
 //        }
-    }
+//    }
 
     // 左键点击事件
     @SuppressWarnings("all")
@@ -509,7 +501,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
                 if (Grenade_Count >= 1) {
                     refreshItemLoreAndPDC(item, Grenade_Count_nsk, Grenade_Count - 1);
-                    Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, multiplier);
+                    Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, GrenadeLauncher.multiplier * multiplier);
                 } else {
                     Utils.sendMessage(player, Gun_And_Bullet.GRENADE.getDisplayName() + ChatColor.RED + "已耗尽");
                 }
@@ -568,7 +560,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
                 if (RifleBullet_Count >= 1) {
                     refreshItemLoreAndPDC(item, RifleBullet_Count_nsk, RifleBullet_Count - 1);
-                    Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, multiplier);
+                    Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, AssaultRifle.multiplier * multiplier);
                 } else {
                     Utils.sendMessage(player, Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + ChatColor.RED + "已耗尽");
                 }
@@ -593,11 +585,11 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                         refreshItemLoreAndPDC(item, SteelBall_Count_nsk, SteelBall_Count - 1);
                         // 有电状态
                         if (removeItemCharge(item, COST * 2)) {
-                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, multiplier * 3);
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier * 3);
                         }
                         // 无电状态
                         else {
-                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, multiplier);
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier);
                         }
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.STEEL_BALL.getDisplayName() + ChatColor.RED + "已耗尽");
@@ -610,11 +602,11 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                         refreshItemLoreAndPDC(item, BurningSteelBall_Count_nsk, BurningSteelBall_Count - 1);
                         // 有电状态
                         if (removeItemCharge(item, COST * 2)) {
-                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, multiplier * 3);
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier * 3);
                         }
                         // 无电状态
                         else {
-                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, multiplier);
+                            Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier);
                         }
                     } else {
                         Utils.sendMessage(player, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + ChatColor.RED + "已耗尽");
@@ -633,7 +625,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                 Last_Use = currentTime;
                 refreshItemLoreAndPDC(item, LAST_USE_nsk, Last_Use);
                 if (removeItemCharge(item, COST * 40)) {
-                    Gun_And_Bullet_Item_Setup.getLightConeInstance().shoot(player, multiplier);
+                    Gun_And_Bullet_Item_Setup.getLightConeInstance().shoot(player, LightCone.multiplier * multiplier);
                 }
             }
 
@@ -656,7 +648,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 //                    if (sfItem != null) {
 //                        sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(new PlayerRightClickEvent(event)));
 //                    }
-                    Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, multiplier);
+                    Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, AntiMaterielSniperRifle.multiplier * multiplier);
                 } else {
                     Utils.sendMessage(player, Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + ChatColor.RED + "已耗尽");
                 }
