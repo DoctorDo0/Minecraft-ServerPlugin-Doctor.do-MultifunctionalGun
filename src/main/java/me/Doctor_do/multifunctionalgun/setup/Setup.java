@@ -2,6 +2,7 @@ package me.Doctor_do.multifunctionalgun.setup;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
+import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
 import me.Doctor_do.multifunctionalgun.listener.MobDropListener;
 import me.Doctor_do.multifunctionalgun.listener.PlayerUseWeaponListener;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Advanced_Materials_Item_Setup;
@@ -23,11 +24,25 @@ public class Setup {
         Advanced_Materials_Item_Setup.Advanced_Materials_Item_Register_Setup();
         Machine_Item_Setup.Machine_Item_Register_Setup();
         Gun_And_Bullet_Item_Setup.Gun_And_Bullet_Item_Register_setup();
-        //15,5,12,22
+        //21,12,5,16
 
         // 注册研究流程方法
         if (cfg.getBoolean("options.enable-researches")) {
             ResearchSetup.Research_Register_Setup();
+        }
+
+        // 最终物品配置
+        if (cfg.contains("options.endless-weapon.capacity")) {
+            EndlessWeapon.setCAPACITY(cfg.getFloat("options.endless-weapon.capacity"));
+        }
+        if (cfg.contains("options.endless-weapon.generate")) {
+            EndlessWeapon.setGENERATE(cfg.getFloat("options.endless-weapon.generate"));
+        }
+        if (cfg.contains("options.endless-weapon.cost")) {
+            EndlessWeapon.setCOST(cfg.getFloat("options.endless-weapon.cost"));
+        }
+        if (cfg.contains("options.endless-weapon.multiplier")) {
+            EndlessWeapon.setMultiplier(cfg.getFloat("options.endless-weapon.multiplier"));
         }
 
         // 测试监听器与事件

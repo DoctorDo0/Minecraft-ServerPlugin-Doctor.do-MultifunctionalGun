@@ -136,7 +136,6 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
     }
 
     // 来自SlimefunWarfare，判定弹药位置与类型
-    @SuppressWarnings("all")
     @Nullable
     protected static ItemType_Bullet checkAndConsume(@Nonnull ItemStack gun, @Nonnull ItemStack stack) {
         AtomicReference<ItemType_Bullet> bullet = new AtomicReference<>(null);

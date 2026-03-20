@@ -7,11 +7,11 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.items.Test_Item;
-import me.Doctor_do.multifunctionalgun.items.weapons.*;
+import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
+import me.Doctor_do.multifunctionalgun.items.weapons.auxiliary.ExpansionBackpack;
+import me.Doctor_do.multifunctionalgun.items.weapons.auxiliary.LaserSight;
+import me.Doctor_do.multifunctionalgun.items.weapons.auxiliary.Scope;
 import me.Doctor_do.multifunctionalgun.items.weapons.bullet.*;
-import me.Doctor_do.multifunctionalgun.items.weapons.tool.ExpansionBackpack;
-import me.Doctor_do.multifunctionalgun.items.weapons.tool.LaserSight;
-import me.Doctor_do.multifunctionalgun.items.weapons.tool.Scope;
 import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Advanced_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
@@ -29,7 +29,6 @@ public final class Gun_And_Bullet_Item_Setup {
     }
 
     public static SlimefunItem EndlessWeapon = null;
-    public static SlimefunItem AssaultRifle_And_GrenadeLauncher;
     public static SlimefunItem AssaultRifle;
     public static SlimefunItem GrenadeLauncher;
     public static SlimefunItem TIKA_Rifle;
@@ -64,20 +63,9 @@ public final class Gun_And_Bullet_Item_Setup {
                         Gun_And_Bullet.LASER_SIGHT, Gun_And_Bullet.SCOPE, Gun_And_Bullet.EXPANSION_BACKPACK,
                         Gun_And_Bullet.ASSAULT_RIFLE, Gun_And_Bullet.TIKA_RIFLE, Gun_And_Bullet.LIGHT_CONE,
                         Gun_And_Bullet.GRENADE_LAUNCHER, Gun_And_Bullet.ANTI_MATERIEL_SNIPER_RIFLE, Gun_And_Bullet.REINFORCED_COMPUTER_ARRAY
-                },
-                // 设置最大电容，数据不符合要求会变更为默认(20000)
-                me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon.capacity_temp
+                }
         );
         EndlessWeapon.register(plugin);
-
-        // 一个占位符，物品可被注册但不可见，用于支持被模式选择
-        AssaultRifle_And_GrenadeLauncher = new AssaultRifle_And_GrenadeLauncher(
-                Groups.gun_and_bullet_item_group,
-                Gun_And_Bullet.ASSAULT_RIFLE_AND_GRENADE_LAUNCHER,
-                RecipeType.NULL,
-                new ItemStack[9]
-        );
-        AssaultRifle_And_GrenadeLauncher.register(plugin);
 
         new SlimefunItem(
                 Groups.gun_and_bullet_item_group,
@@ -278,6 +266,10 @@ public final class Gun_And_Bullet_Item_Setup {
 
     public static Scope getScopeInstance() {
         return (Scope) Scope;
+    }
+
+    public static LaserSight getLaserSightInstance() {
+        return (LaserSight) LaserSight;
     }
 
 }

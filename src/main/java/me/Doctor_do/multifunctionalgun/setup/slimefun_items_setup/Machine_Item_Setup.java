@@ -1,17 +1,18 @@
 package me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
-import me.Doctor_do.multifunctionalgun.items.general.ItemType_Item;
+import me.Doctor_do.multifunctionalgun.items.electric.generator.Mass_Energy_Engine_Generator;
 import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Compressor;
 import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Converter;
-import me.Doctor_do.multifunctionalgun.items.electric.generator.Mass_Energy_Engine_Generator;
+import me.Doctor_do.multifunctionalgun.items.general.ItemType_Item;
+import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
-import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,9 +24,12 @@ public final class Machine_Item_Setup {
         // 构造器访问权限控制，禁止新建对象
     }
 
+    public static SlimefunItem EnergyStorageCanEmpty;
+    public static SlimefunItem EnergyStorageCanFull;
+
     public static void Machine_Item_Register_Setup() {
 
-        new ItemType_Item(
+        EnergyStorageCanEmpty = new ItemType_Item(
                 Groups.machine_item_group,
                 Machine.ENERGY_STORAGE_CAN_EMPTY,
                 RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -35,16 +39,18 @@ public final class Machine_Item_Setup {
                         SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.HARDENED_GLASS, SlimefunItems.REINFORCED_ALLOY_INGOT
                 },
                 new SlimefunItemStack(Machine.ENERGY_STORAGE_CAN_EMPTY, 4)
-        ).register(plugin);
+        );
+        EnergyStorageCanEmpty.register(plugin);
 
-        new ItemType_Item(
+        EnergyStorageCanFull = new ItemType_Item(
                 Groups.machine_item_group,
                 Machine.ENERGY_STORAGE_CAN_FULL,
                 RecipeTypes.ENERGY_PLANT,
                 new ItemStack[]{
                         null, null, null, null, Machine.ENERGY_STORAGE_CAN_EMPTY, null, null, null, null
                 }
-        ).register(plugin);
+        );
+        EnergyStorageCanFull.register(plugin);
 
         new Mass_Energy_Engine_Generator(
                 Groups.machine_item_group,

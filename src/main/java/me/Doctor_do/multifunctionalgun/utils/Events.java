@@ -64,11 +64,11 @@ public class Events implements Listener {
 
     // 用于监听修改提卡模式
     @EventHandler(ignoreCancelled = true)
-    public void onChangeModeClickInteract(InventoryClickEvent event) {
+    public void onChangeTIKAModeClickInteract(InventoryClickEvent event) {
         ItemStack item = event.getCurrentItem();
-        if (item != null && item.getType() != Material.AIR && Utils.checkChangeModeInteract(item)) {
+        if (item != null && item.getType() != Material.AIR && Utils.checkChangeTIKAModeInteract(item)) {
             event.setCancelled(true);
-            Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().changeMode(event);
+            Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().changeTIKAMode(event);
         }
     }
 
@@ -180,6 +180,16 @@ public class Events implements Listener {
         }
     }
 
+    // 用于监听修改能源模块生产模式
+    @EventHandler(ignoreCancelled = true)
+    public void onChangeGenerateModeClickInteract(InventoryClickEvent event) {
+        ItemStack item = event.getCurrentItem();
+        if (item != null && item.getType() != Material.AIR && Utils.checkChangeGenerateModeInteract(item)) {
+            event.setCancelled(true);
+            Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().changeGenerateMode(event);
+        }
+    }
+
     // 来自SlimefunWarfare
     // 子弹击中实体产生的效果
     @SuppressWarnings("all")
@@ -284,6 +294,7 @@ public class Events implements Listener {
 
     // 已修改，来自粘液科技
     // 爆炸对周围生物造成伤害
+    @SuppressWarnings("all")
     public void explosiveDamageEffect(Entity grenade) {
         double radius = grenade.hasMetadata("radius") ? grenade.getMetadata("radius").get(0).asFloat() : 5;
 
@@ -292,9 +303,9 @@ public class Events implements Listener {
             Vector distanceVector = entity.getLocation().toVector().subtract(grenade.getLocation().toVector()).add(new Vector((double) 0.0F, (double) 0.75F, (double) 0.0F));
             double distanceSquared = distanceVector.lengthSquared();
             double damage = grenade.getMetadata("damage").get(0).asInt() * ((double) 1.0F - distanceSquared / (double) (2 * radius * radius));
+            //修复死循环重复触发的bug
+            grenade.removeMetadata("DMG_GunGrenade", plugin);
             if (!entity.getUniqueId().equals(grenade.getUniqueId())) {
-                //修复死循环重复触发的bug
-                grenade.removeMetadata("DMG_GunGrenade", plugin);
                 EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(grenade, entity, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, damage);
                 Bukkit.getPluginManager().callEvent(event);
                 if (!event.isCancelled()) {

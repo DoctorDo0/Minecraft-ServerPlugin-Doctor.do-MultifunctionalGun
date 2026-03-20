@@ -1,7 +1,7 @@
 package me.Doctor_do.multifunctionalgun.listener;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
-import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,7 +28,7 @@ public class PlayerUseWeaponListener implements Listener {
 
         if (item != null && item.hasItemMeta() &&
                 Objects.requireNonNull(item.getItemMeta()).hasDisplayName() &&
-                item.getItemMeta().getDisplayName().equals(Gun_And_Bullet.ENDLESS_WEAPON.getDisplayName())) {
+                Objects.equals(SlimefunItem.getByItem(item), Gun_And_Bullet_Item_Setup.EndlessWeapon)) {
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                 Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().LeftClickEvent(player, event, item);
             }

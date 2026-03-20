@@ -4,7 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
-import me.Doctor_do.multifunctionalgun.items.weapons.*;
+import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
 import me.Doctor_do.multifunctionalgun.items.weapons.bullet.*;
 import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
@@ -98,7 +98,7 @@ public final class Gun_And_Bullet {
     public final static SlimefunItemStack TIKA_RIFLE = new DMG_SlimefunItemStack(
             "TIKA_RIFLE",
             Material.CROSSBOW,
-            "&f提卡气动步枪",
+            "&f提卡气动电磁步枪",
             "",
             "&7基础枪械之一，做工粗糙，但耐用的武器",
             LoreBuilder.powerCharged(0, (int) TIKA_Rifle.CAPACITY),
@@ -177,24 +177,14 @@ public final class Gun_And_Bullet {
             "&8REINFORCED_COMPUTER_ARRAY"
     );
 
-    public final static SlimefunItemStack ASSAULT_RIFLE_AND_GRENADE_LAUNCHER = new DMG_SlimefunItemStack(
-            Gun_And_Bullet.ASSAULT_RIFLE.getItemId() + "+" + Gun_And_Bullet.GRENADE_LAUNCHER.getItemId(),
-            Material.BARRIER,
-            Gun_And_Bullet.ASSAULT_RIFLE.getDisplayName() + " + " + Gun_And_Bullet.GRENADE_LAUNCHER.getDisplayName(),
-            "",
-            "&7一个占位符，无实际作用，仅用于支持模式选择，属性为不可见，不应该被显示",
-            "&7需要: " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + " + " + Gun_And_Bullet.GRENADE.getDisplayName(),
-            "&8ASSAULT_RIFLE"
-    );
-
     public final static SlimefunItemStack ENDLESS_WEAPON = new DMG_SlimefunItemStack(
             "ENDLESS_WEAPON",
             Material.REPEATER,
             "&f最终成品",
             "",
-            "&7仍在测试",
+            "&f集合所有的武器与工具于一体，拥有独立的背包与能源模块，并将所有的伤害提升至原有的 " + EndlessWeapon.getMultiplier() + " 倍",
             LoreBuilder.material("基岩"),
-            LoreBuilder.powerCharged(0, (int) EndlessWeapon.capacity_temp),
+            LoreBuilder.powerCharged(0, (int) EndlessWeapon.getCAPACITY()),
             "&7当前模式: %modes%",
             "&7当前存量:",
             "    " + Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + "/" + Gun_And_Bullet.GRENADE.getDisplayName() + " &7> " + "0/0" + " : " + "0/0",

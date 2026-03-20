@@ -93,13 +93,13 @@ public class Utils {
     }
 
     // 创建可修改提卡模式的物品栈
-    public static ItemStack buildChangeMode(Material material, @Nullable String name, @Nullable String... lore) {
-        ItemStack changeModeItem = buildInitialItem(material, name, lore);
-        ItemMeta CMMeta = changeModeItem.getItemMeta();
-        assert CMMeta != null;
-        CMMeta.getPersistentDataContainer().set(changeMode, PersistentDataType.STRING, "can change mode");
-        changeModeItem.setItemMeta(CMMeta);
-        return changeModeItem;
+    public static ItemStack buildChangeTIKAMode(Material material, @Nullable String name, @Nullable String... lore) {
+        ItemStack changeTIKAModeItem = buildInitialItem(material, name, lore);
+        ItemMeta CTMMeta = changeTIKAModeItem.getItemMeta();
+        assert CTMMeta != null;
+        CTMMeta.getPersistentDataContainer().set(changeMode, PersistentDataType.STRING, "can change TIKA mode");
+        changeTIKAModeItem.setItemMeta(CTMMeta);
+        return changeTIKAModeItem;
     }
 
     // 创建可修改激光瞄准器设置的物品栈
@@ -111,6 +111,16 @@ public class Utils {
         CLMeta.getPersistentDataContainer().set(laserSetting, PersistentDataType.STRING, attribute);
         changeLaserItem.setItemMeta(CLMeta);
         return changeLaserItem;
+    }
+
+    // 创建可修改能源模块生产模式的物品栈
+    public static ItemStack buildChangeGenerateMode(Material material, @Nullable String name, @Nullable String... lore) {
+        ItemStack changeGenerateModeItem = buildInitialItem(material, name, lore);
+        ItemMeta CGMMeta = changeGenerateModeItem.getItemMeta();
+        assert CGMMeta != null;
+        CGMMeta.getPersistentDataContainer().set(changeMode, PersistentDataType.STRING, "can change generate mode");
+        changeGenerateModeItem.setItemMeta(CGMMeta);
+        return changeGenerateModeItem;
     }
 
     // 来自FluffyMachines，判断是否是不可交互的物品栈
@@ -130,9 +140,9 @@ public class Utils {
         return Objects.equals(item.getItemMeta().getPersistentDataContainer().getOrDefault(nsk, PersistentDataType.STRING, "null"), attribute);
     }
 
-    // 判断是否是用于改变mode的物品栈
-    public static boolean checkChangeModeInteract(ItemStack item) {
-        return checkAttributeIsSame("can change mode", changeMode, item);
+    // 判断是否是用于改变TIKAmode的物品栈
+    public static boolean checkChangeTIKAModeInteract(ItemStack item) {
+        return checkAttributeIsSame("can change TIKA mode", changeMode, item);
     }
 
     // 判断是否用于改变laserSetting(激光瞄准器设置)的物品栈
@@ -178,6 +188,11 @@ public class Utils {
     // 判断是否为用于减少属性B设置的物品栈
     public static boolean checkChangeLaserSettingDecreaseBlueInteract(ItemStack item) {
         return checkAttributeIsSame("decrease-blue", laserSetting, item);
+    }
+
+    // 判断是否是用于改变发电模块生产模式的物品栈
+    public static boolean checkChangeGenerateModeInteract(ItemStack item) {
+        return checkAttributeIsSame("can change generate mode", changeMode, item);
     }
 
     // 来自SlimefunWarfare，反序列化位置信息
