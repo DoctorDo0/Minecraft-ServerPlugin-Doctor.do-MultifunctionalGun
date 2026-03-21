@@ -8,10 +8,7 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Dropper;
 import org.bukkit.entity.*;
@@ -322,5 +319,28 @@ public class Events implements Listener {
     // 判断实体是否可被造成伤害
     private boolean canDamage(@Nonnull Entity n) {
         return n instanceof LivingEntity && !(n instanceof ArmorStand) && n.isValid() && !(n instanceof Dropper);
+    }
+
+    // 激光瞄准器击中实体产生的效果
+    @SuppressWarnings("all")
+    @EventHandler
+    public void onLaserSightHitEntity(EntityDamageByEntityEvent e) {
+        if (!(e.getDamager() instanceof Projectile bullet) || !bullet.hasMetadata("DMG_LaserSight")) return;
+        e.setCancelled(true);
+
+        Entity shot = e.getEntity();
+        Location shooterLoc = Utils.deserializeLocation(bullet.getMetadata("locInfo").get(0).asString());
+        String[] split = CommonPatterns.COLON.split(bullet.getMetadata("rangeInfo").get(0).asString());
+        double distance = shooterLoc.distance(e.getEntity().getLocation());
+        if (distance <= Integer.parseInt(split[0]) && distance >= Integer.parseInt(split[1])) {
+            if (shot instanceof LivingEntity) {
+                ((LivingEntity) shot).addPotionEffect(PotionEffectType.GLOWING.createEffect(
+                        bullet.getMetadata("keepTime").get(0).asInt(),
+                        1
+                ));
+            }
+        } else {
+            e.setCancelled(true);
+        }
     }
 }

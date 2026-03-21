@@ -78,6 +78,7 @@ public final class Gun_And_Bullet {
             "&7基础伤害: " + AssaultRifle.damage,
             "&7射程: " + AssaultRifle.range,
             "&7射速: " + AssaultRifle.cooldown + "s/hit",
+            "&e左键&7 使用武器",
             "&8ASSAULT_RIFLE"
     );
 
@@ -92,6 +93,7 @@ public final class Gun_And_Bullet {
             "&7基础伤害: " + GrenadeLauncher.damage,
             "&7射程: " + GrenadeLauncher.range,
             "&7射速: " + GrenadeLauncher.cooldown + "s/hit",
+            "&e左键&7 使用武器",
             "&8GRENADE_LAUNCHER"
     );
 
@@ -108,6 +110,7 @@ public final class Gun_And_Bullet {
             "&7基础伤害: " + TIKA_Rifle.damage + "&7 / " + "&7消耗电力时基础伤害: " + TIKA_Rifle.damage * 3,
             "&7射程: " + TIKA_Rifle.range,
             "&7射速: " + TIKA_Rifle.cooldown + "s/hit",
+            "&e左键&7 使用武器",
             "&8TIKA_RIFLE"
     );
 
@@ -124,6 +127,7 @@ public final class Gun_And_Bullet {
             "&7基础伤害: " + LightCone.damage,
             "&7射程: " + LightCone.range,
             "&7射速: " + LightCone.cooldown + "s/hit",
+            "&e左键&7 使用武器",
             "&8LIGHT_CONE"
     );
 
@@ -138,6 +142,7 @@ public final class Gun_And_Bullet {
             "&7基础伤害: " + AntiMaterielSniperRifle.damage,
             "&7射程: " + AntiMaterielSniperRifle.range,
             "&7射速: " + AntiMaterielSniperRifle.cooldown + "s/hit",
+            "&e左键&7 使用武器",
             "&8ANTI_MATERIEL_SNIPER_RIFLE"
     );
 
@@ -147,6 +152,7 @@ public final class Gun_And_Bullet {
             "&f瞄准镜",
             "",
             "&7另一种望远镜，可以看的较远",
+            "&e左键&7 使用工具",
             "&8SCOPE"
     );
 
@@ -156,6 +162,8 @@ public final class Gun_And_Bullet {
             "&f激光瞄准器",
             "",
             "&7照射到生物身上，并使其发光，用于辅助校准",
+            LoreBuilder.powerCharged(0, (int) TIKA_Rifle.CAPACITY),
+            "&e左键&7 使用工具",
             "&8LASER_SIGHT"
     );
 
@@ -165,6 +173,7 @@ public final class Gun_And_Bullet {
             "&f枪械扩容背包",
             "",
             "&7一个空间很大的便携式箱子，复合式枪械专用",
+            "&e左键&7 使用工具",
             "&8EXPANSION_BACKPACK"
     );
 

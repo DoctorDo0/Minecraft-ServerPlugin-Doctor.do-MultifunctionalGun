@@ -11,6 +11,7 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Auxiliary;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Bullet;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Gun;
+import me.Doctor_do.multifunctionalgun.items.weapons.bullet.*;
 import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
@@ -592,40 +593,43 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         }
     }
 
+    // 武器的事件链
     public void GunEventChain(Player player, SlimefunItem tools, PersistentDataContainer pdc) {
         ItemType_Gun gun = (ItemType_Gun) tools;
 
-        Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
-        long currentTime = System.currentTimeMillis();
-        if ((currentTime - Last_Use) < gun.getCooldown() * 1000) {
-            player.sendMessage(ChatColor.YELLOW + "换弹中!");
+        if (!checkUseTime(player, gun, pdc)) {
             return;
         }
-        Last_Use = currentTime;
-        refreshItemLoreAndPDC(currentItem, LAST_USE_nsk, Last_Use);
+        ItemType_Bullet bullet = null;
+        if (!Objects.equals(gun, Gun_And_Bullet_Item_Setup.LightCone) && !Objects.equals(gun, Gun_And_Bullet_Item_Setup.TIKA_Rifle)) {
+            bullet = checkAndConsumeBullet(player, gun);
+        }
+        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.TIKA_Rifle)) {
+            if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName())) {
+                bullet = checkAndConsumeBullet(player, gun, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall);
+            }
+            if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName())) {
+                bullet = checkAndConsumeBullet(player, gun, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall);
+            }
+        }
+        if (!Objects.equals(gun, Gun_And_Bullet_Item_Setup.LightCone) && bullet == null) {
+            return;
+        }
 
         // 武器为步枪
         if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.AssaultRifle)) {
             RifleBullet_Count = pdc.getOrDefault(RifleBullet_Count_nsk, PersistentDataType.INTEGER, 0);
-
-            if (RifleBullet_Count >= 1) {
-                refreshItemLoreAndPDC(currentItem, RifleBullet_Count_nsk, RifleBullet_Count - 1);
-                Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, AssaultRifle.multiplier * multiplier);
-            } else {
-                Utils.sendMessage(player, Gun_And_Bullet.RIFLE_BULLET.getDisplayName() + ChatColor.RED + "已耗尽");
-            }
+            RifleBullet_Count = Math.max(0, RifleBullet_Count - 1);
+            refreshItemLoreAndPDC(currentItem, RifleBullet_Count_nsk, RifleBullet_Count);
+            Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, AssaultRifle.multiplier * multiplier);
         }
 
         // 武器为榴弹
         if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.GrenadeLauncher)) {
             Grenade_Count = pdc.getOrDefault(Grenade_Count_nsk, PersistentDataType.INTEGER, 0);
-
-            if (Grenade_Count >= 1) {
-                refreshItemLoreAndPDC(currentItem, Grenade_Count_nsk, Grenade_Count - 1);
-                Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, GrenadeLauncher.multiplier * multiplier);
-            } else {
-                Utils.sendMessage(player, Gun_And_Bullet.GRENADE.getDisplayName() + ChatColor.RED + "已耗尽");
-            }
+            Grenade_Count = Math.max(0, Grenade_Count - 1);
+            refreshItemLoreAndPDC(currentItem, Grenade_Count_nsk, Grenade_Count);
+            Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, GrenadeLauncher.multiplier * multiplier);
         }
 
         // 武器为TIKA步枪
@@ -635,35 +639,29 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             // 钢珠模式
             if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName())) {
                 SteelBall_Count = pdc.getOrDefault(SteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
-                if (SteelBall_Count >= 1) {
-                    refreshItemLoreAndPDC(currentItem, SteelBall_Count_nsk, SteelBall_Count - 1);
-                    // 有电状态
-                    if (removeItemCharge(currentItem, COST * 2)) {
-                        Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier * 3);
-                    }
-                    // 无电状态
-                    else {
-                        Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier);
-                    }
-                } else {
-                    Utils.sendMessage(player, Gun_And_Bullet.STEEL_BALL.getDisplayName() + ChatColor.RED + "已耗尽");
+                SteelBall_Count = Math.max(0, SteelBall_Count - 1);
+                refreshItemLoreAndPDC(currentItem, SteelBall_Count_nsk, SteelBall_Count);
+                // 有电状态
+                if (removeItemCharge(currentItem, COST * 2)) {
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier * 3);
+                }
+                // 无电状态
+                else {
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier);
                 }
             }
             // 燃烧弹模式
             if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName())) {
                 BurningSteelBall_Count = pdc.getOrDefault(BurningSteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
-                if (BurningSteelBall_Count >= 1) {
-                    refreshItemLoreAndPDC(currentItem, BurningSteelBall_Count_nsk, BurningSteelBall_Count - 1);
-                    // 有电状态
-                    if (removeItemCharge(currentItem, COST * 2)) {
-                        Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier * 3);
-                    }
-                    // 无电状态
-                    else {
-                        Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier);
-                    }
-                } else {
-                    Utils.sendMessage(player, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName() + ChatColor.RED + "已耗尽");
+                BurningSteelBall_Count = Math.max(0, BurningSteelBall_Count - 1);
+                refreshItemLoreAndPDC(currentItem, BurningSteelBall_Count_nsk, BurningSteelBall_Count);
+                // 有电状态
+                if (removeItemCharge(currentItem, COST * 2)) {
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier * 3);
+                }
+                // 无电状态
+                else {
+                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier);
                 }
             }
         }
@@ -678,28 +676,70 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         // 武器为反器材狙击步枪
         if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.AntiMaterielSniperRifle)) {
             SpecialBullet_Count = pdc.getOrDefault(SpecialBullet_Count_nsk, PersistentDataType.INTEGER, 0);
-
-            if (SpecialBullet_Count >= 1) {
-                refreshItemLoreAndPDC(currentItem, SpecialBullet_Count_nsk, SpecialBullet_Count - 1);
-                Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, AntiMaterielSniperRifle.multiplier * multiplier);
-            } else {
-                Utils.sendMessage(player, Gun_And_Bullet.SPECIAL_BULLET.getDisplayName() + ChatColor.RED + "已耗尽");
-            }
+            SpecialBullet_Count = Math.max(0, SpecialBullet_Count - 1);
+            refreshItemLoreAndPDC(currentItem, SpecialBullet_Count_nsk, SpecialBullet_Count);
+            Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, AntiMaterielSniperRifle.multiplier * multiplier);
         }
     }
 
+    // 辅助部件的事件链
     public void AuxEventChain(Player player, SlimefunItem tools) {
         ItemType_Auxiliary aux = (ItemType_Auxiliary) tools;
 
-        // 辅助为瞄准镜
+        // 部件为瞄准镜
         if (Objects.equals(aux, Gun_And_Bullet_Item_Setup.Scope)) {
             Gun_And_Bullet_Item_Setup.getScopeInstance().effect(player);
         }
 
-        // 辅助为激光瞄准器
+        // 部件为激光瞄准器
         if (Objects.equals(aux, Gun_And_Bullet_Item_Setup.LaserSight)) {
             Gun_And_Bullet_Item_Setup.getLaserSightInstance().effect(player);
         }
+    }
+
+    // 检查发射冷却
+    public boolean checkUseTime(Player player, ItemType_Gun gun, PersistentDataContainer pdc) {
+        Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - Last_Use) < gun.getCooldown() * 1000) {
+            player.sendMessage(ChatColor.YELLOW + "换弹中!");
+            return false;
+        }
+        Last_Use = currentTime;
+        refreshItemLoreAndPDC(currentItem, LAST_USE_nsk, Last_Use);
+        return true;
+    }
+
+    // 检查弹药存量
+    public ItemType_Bullet checkAndConsumeBullet(Player player, ItemType_Gun gun) {
+        ItemType_Bullet bullet = ItemType_Gun.checkAndConsumeInv(currentInventory, gun.getItem());
+        if (bullet == null) {
+            bullet = ItemType_Gun.checkAndConsume(gun.getItem(), player.getInventory().getItemInOffHand());
+        }
+        if (bullet == null) {
+            bullet = ItemType_Gun.checkAndConsumeInv(player.getInventory(), gun.getItem());
+        }
+        if (bullet == null) {
+            Utils.sendMessage(player, ChatColor.RED + "子弹耗尽!");
+            return null;
+        }
+        return bullet;
+    }
+
+    // 检查弹药存量
+    public ItemType_Bullet checkAndConsumeBullet(Player player, ItemType_Gun gun, ItemType_Bullet target) {
+        ItemType_Bullet bullet = ItemType_Gun.checkAndConsumeInv(currentInventory, gun.getItem());
+        if (bullet == null) {
+            bullet = ItemType_Gun.checkAndConsume(gun.getItem(), player.getInventory().getItemInOffHand(), target);
+        }
+        if (bullet == null) {
+            bullet = ItemType_Gun.checkAndConsumeInv(player.getInventory(), gun.getItem(), target);
+        }
+        if (bullet == null) {
+            Utils.sendMessage(player, ChatColor.RED + "子弹耗尽!");
+            return null;
+        }
+        return bullet;
     }
 
     // 打开背包界面功能

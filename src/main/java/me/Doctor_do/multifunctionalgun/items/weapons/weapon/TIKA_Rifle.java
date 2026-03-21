@@ -44,7 +44,7 @@ public class TIKA_Rifle extends ItemType_Gun implements NotPlaceable, Rechargeab
     public void preprocessingAndShoot(@Nonnull Player player, @Nonnull ItemStack gun) {
         PlayerInventory inventory = player.getInventory();
 
-        ItemType_Bullet bullet = checkAndConsumeInv(player, inventory, gun);
+        ItemType_Bullet bullet = checkAndConsumeInv(inventory, gun);
 
         if (bullet == null) {
             Utils.sendMessage(player, ChatColor.RED + "子弹耗尽!");
