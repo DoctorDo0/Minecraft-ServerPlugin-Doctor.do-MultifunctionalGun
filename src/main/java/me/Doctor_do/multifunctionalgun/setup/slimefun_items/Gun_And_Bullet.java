@@ -215,7 +215,7 @@ public final class Gun_And_Bullet {
     public final static SlimefunItemStack TEST_ITEM = new DMG_SlimefunItemStack(
             "TEST_ITEM",
             Material.COMMAND_BLOCK,
-            "&f测试物品",
+            "   &f测试物品 ",
             "",
             LoreBuilder.machine(MachineTier.BASIC, MachineType.MACHINE),
             LoreBuilder.machine(MachineTier.AVERAGE, MachineType.MACHINE),

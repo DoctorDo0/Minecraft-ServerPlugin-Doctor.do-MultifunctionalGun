@@ -3,17 +3,17 @@ package me.Doctor_do.multifunctionalgun.setup;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.items.weapons.EndlessWeapon;
-import me.Doctor_do.multifunctionalgun.listener.MobDropListener;
-import me.Doctor_do.multifunctionalgun.listener.PlayerUseWeaponListener;
+import me.Doctor_do.multifunctionalgun.listener.*;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Advanced_Materials_Item_Setup;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Basic_Materials_Item_Setup;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Machine_Item_Setup;
-import me.Doctor_do.multifunctionalgun.utils.Events;
-
-import static org.bukkit.Bukkit.getServer;
+import me.Doctor_do.multifunctionalgun.utils.GlowEffectManager;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Setup {
+    public static final JavaPlugin plugin = MultifunctionalGun.getInstance();
+
     private Setup() {
         // 禁止实例化对象
     }
@@ -45,9 +45,18 @@ public class Setup {
             EndlessWeapon.setMultiplier(cfg.getFloat("options.endless-weapon.multiplier"));
         }
 
-        // 测试监听器与事件
+        // 注册监听器与事件
+        // 生物掉落监听器(凋零掉落AGVP)
         new MobDropListener();
+        // 玩家动作监听器(玩家使用EndlessWeapon的动作监听)
         new PlayerUseWeaponListener();
-        getServer().getPluginManager().registerEvents(new Events(), MultifunctionalGun.getInstance());
+        // 使用武器时的监听器和事件处理器(包含子弹和榴弹的效果，以及爆炸效果)
+        new WeaponUseHandler();
+        // 背包容器处理器(主要针对EndlessWeapon的背包容器)
+        new InventoryHandler();
+        // 初始化发光效果管理器（使用单例）
+        GlowEffectManager.getInstance(plugin);
+        // 注册事件监听器
+        new LaserSightListener(plugin);
     }
 }

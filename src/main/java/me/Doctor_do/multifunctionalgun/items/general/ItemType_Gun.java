@@ -14,11 +14,11 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -28,6 +28,7 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -63,36 +64,66 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
                 return;
             }
 
-            ItemMeta meta = gun.getItemMeta();
-            assert meta != null;
-            PersistentDataContainer pdc = meta.getPersistentDataContainer();
-            long lastUse = pdc.getOrDefault(ItemType_Gun.LAST_USE, PersistentDataType.LONG, 0L);
-            long currentTime = System.currentTimeMillis();
-            if ((currentTime - lastUse) < cooldown) {
-                player.sendMessage(ChatColor.YELLOW + "换弹中!");
-                return;
-            }
-            pdc.set(LAST_USE, PersistentDataType.LONG, currentTime);
-            gun.setItemMeta(meta);
-            preprocessingAndShoot(player, gun);
+            preprocessingCutInPoint(player, gun, null, 1.0F);
         };
     }
 
-    // 预处理，前置判断等，不同类型拥有不同判断和状态
-    public void preprocessingAndShoot(@Nonnull Player player, @Nonnull ItemStack gun) {
-        PlayerInventory inventory = player.getInventory();
+    // 预处理切入点，用于实现本武器或最终武器的自定义调用
+    public void preprocessingCutInPoint(@Nonnull Player player, @Nonnull ItemStack gun, @Nullable List<Inventory> inventories, @Nullable Float customerMultiplier) {
+        preprocessingAndShoot(player, gun, this, inventories, customerMultiplier, null);
+    }
 
-        ItemType_Bullet bullet = checkAndConsume(gun, inventory.getItemInOffHand());
-        if (bullet == null) {
-            bullet = checkAndConsumeInv(inventory, gun);
+    /**
+     * 关于具体实现类(子类)的使用说明，电力部分:
+     * <p>
+     * 如果需要用到获取当前物品的电容量
+     * <p>
+     * !!!请自行设置容量字段为CAPACITY
+     * <p>
+     * !!!并设置实现接口的getMaxItemCharge方法，使之return ChargeUtil.getMaxItemCharge(itemStack, this)
+     * <p>
+     * 工具类中使用了反射的方式，来获取目标物品的真正电容，故电容字段一定需要为CAPACITY
+     */
+    // 预处理，前置判断等，不同类型拥有不同判断和状态
+    public void preprocessingAndShoot(@Nonnull Player player, @Nonnull ItemStack currentGun, @Nonnull SlimefunItem gunType, @Nullable List<Inventory> inventories, @Nullable Float customerMultiplier, @Nullable ItemType_Bullet target) {
+        // 击发冷却判断
+        ItemMeta meta = currentGun.getItemMeta();
+        assert meta != null;
+        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        long lastUse = pdc.getOrDefault(ItemType_Gun.LAST_USE, PersistentDataType.LONG, 0L);
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - lastUse) < cooldown) {
+            // 玩家提示
+            player.sendMessage(ChatColor.YELLOW + "换弹中!");
+            return;
+        }
+        pdc.set(LAST_USE, PersistentDataType.LONG, currentTime);
+        currentGun.setItemMeta(meta);
+
+        // 弹药判断
+        ItemType_Bullet bullet;
+        if (target == null) {
+            bullet = checkAndConsumeInv(player, inventories, gunType);
+        } else {
+            bullet = checkAndConsumeInv(player, inventories, gunType, target);
         }
 
         if (bullet == null) {
+            // 玩家提示
             Utils.sendMessage(player, ChatColor.RED + "子弹耗尽!");
+            // 播放音效
+            player.playSound(player.getLocation(), Sound.BLOCK_DISPENSER_FAIL, 1.0f, 1.0f);
             return;
         }
 
-        shoot(player, bullet, multiplier);
+        // 修正后的倍率，方便最终武器修改
+        if (customerMultiplier == null) {
+            customerMultiplier = 1.0F;
+        }
+        // 播放音效
+        player.playSound(player.getLocation(), Sound.BLOCK_DISPENSER_DISPENSE, 1.0f, 1.0f);
+        // 实际击发效果
+        shoot(player, bullet, multiplier * customerMultiplier);
     }
 
     // 来自SlimefunWarfare，射击效果
@@ -119,13 +150,34 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
 
     // 来自SlimefunWarfare，判定弹药位置与类型
     @Nullable
-    public static ItemType_Bullet checkAndConsumeInv(@Nonnull Inventory inv, @Nonnull ItemStack gun) {
+    public static ItemType_Bullet checkAndConsumeInv(@Nullable Player player, @Nullable List<Inventory> inventories, @Nonnull SlimefunItem gun) {
         ItemType_Bullet bullet = null;
 
-        for (ItemStack itemStack : inv) {
-            bullet = checkAndConsume(gun, itemStack);
+        if (inventories != null) {
+            for (Inventory inv : inventories) {
+                for (ItemStack itemStack : inv) {
+                    if (itemStack != null) {
+                        bullet = checkAndConsume(gun, itemStack);
+                        if (bullet != null) {
+                            return bullet;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (player != null) {
+            bullet = checkAndConsume(gun, player.getInventory().getItemInOffHand());
             if (bullet != null) {
-                break;
+                return bullet;
+            }
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack != null) {
+                    bullet = checkAndConsume(gun, itemStack);
+                    if (bullet != null) {
+                        return bullet;
+                    }
+                }
             }
         }
 
@@ -133,13 +185,34 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
     }
 
     @Nullable
-    public static ItemType_Bullet checkAndConsumeInv(@Nonnull Inventory inv, @Nonnull ItemStack gun, @Nonnull ItemType_Bullet target) {
+    public static ItemType_Bullet checkAndConsumeInv(@Nullable Player player, @Nullable List<Inventory> inventories, @Nonnull SlimefunItem gun, @Nonnull ItemType_Bullet target) {
         ItemType_Bullet bullet = null;
 
-        for (ItemStack itemStack : inv) {
-            bullet = checkAndConsume(gun, itemStack, target);
+        if (inventories != null) {
+            for (Inventory inv : inventories) {
+                for (ItemStack itemStack : inv) {
+                    if (itemStack != null) {
+                        bullet = checkAndConsume(gun, itemStack, target);
+                        if (bullet != null) {
+                            return bullet;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (player != null) {
+            bullet = checkAndConsume(gun, player.getInventory().getItemInOffHand(), target);
             if (bullet != null) {
-                break;
+                return bullet;
+            }
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack != null) {
+                    bullet = checkAndConsume(gun, itemStack, target);
+                    if (bullet != null) {
+                        return bullet;
+                    }
+                }
             }
         }
 
@@ -148,38 +221,39 @@ public class ItemType_Gun extends SlimefunItem implements NotPlaceable, Damageab
 
     // 来自SlimefunWarfare，判定弹药位置与类型
     @Nullable
-    public static ItemType_Bullet checkAndConsume(@Nonnull ItemStack gun, @Nonnull ItemStack stack) {
+    public static ItemType_Bullet checkAndConsume(@Nonnull SlimefunItem gun, @Nonnull ItemStack stack) {
         AtomicReference<ItemType_Bullet> bullet = new AtomicReference<>(null);
 
         SlimefunItem item = SlimefunItem.getByItem(stack);
 
         if (item instanceof ItemType_Bullet && Objects.equals(
                 ((ItemType_Bullet) item).getGun(),
-                SlimefunItem.getByItem(gun)
+                gun
         )) {
             bullet.set((ItemType_Bullet) item);
             ItemUtils.consumeItem(stack, true);
         } else if (item instanceof SlimefunBackpack) {
-            PlayerProfile.getBackpack(stack, backpack -> bullet.set(checkAndConsumeInv(backpack.getInventory(), gun)));
+            PlayerProfile.getBackpack(stack, backpack -> bullet.set(checkAndConsumeInv(null, List.of(backpack.getInventory()), gun)));
         }
 
         return bullet.get();
     }
 
+    // 判定特定类型的弹药
     @Nullable
-    public static ItemType_Bullet checkAndConsume(@Nonnull ItemStack gun, @Nonnull ItemStack stack, @Nonnull ItemType_Bullet target) {
+    public static ItemType_Bullet checkAndConsume(@Nonnull SlimefunItem gun, @Nonnull ItemStack stack, @Nonnull ItemType_Bullet target) {
         AtomicReference<ItemType_Bullet> bullet = new AtomicReference<>(null);
 
         SlimefunItem item = SlimefunItem.getByItem(stack);
 
         if (item instanceof ItemType_Bullet && Objects.equals(
                 ((ItemType_Bullet) item).getGun(),
-                SlimefunItem.getByItem(gun)
+                gun
         ) && Objects.equals(item, target)) {
             bullet.set((ItemType_Bullet) item);
             ItemUtils.consumeItem(stack, true);
         } else if (item instanceof SlimefunBackpack) {
-            PlayerProfile.getBackpack(stack, backpack -> bullet.set(checkAndConsumeInv(backpack.getInventory(), gun)));
+            PlayerProfile.getBackpack(stack, backpack -> bullet.set(checkAndConsumeInv(null, List.of(backpack.getInventory()), gun, target)));
         }
 
         return bullet.get();

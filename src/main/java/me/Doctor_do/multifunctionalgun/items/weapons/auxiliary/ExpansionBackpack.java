@@ -23,7 +23,7 @@ public class ExpansionBackpack extends ItemType_Auxiliary implements NotPlaceabl
     }
 
     @Override
-    public void effect(Player player) {
+    public void effect(Player player, ItemStack itemStack) {
         final int INVENTORY_SIZE = 54;
         Inventory inventory = Bukkit.createInventory(null, INVENTORY_SIZE, ChatColor.GOLD + Gun_And_Bullet.EXPANSION_BACKPACK.getDisplayName());
         ItemStack backgroundItem = Utils.buildNonInteractable(Material.BLACK_STAINED_GLASS_PANE, "&f无连接");

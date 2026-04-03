@@ -4,9 +4,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
+import me.Doctor_do.multifunctionalgun.items.electric.generator.Mass_Energy_Engine_Generator;
 import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Compressor;
 import me.Doctor_do.multifunctionalgun.items.electric.machine.Energy_Converter;
-import me.Doctor_do.multifunctionalgun.items.electric.generator.Mass_Energy_Engine_Generator;
 import me.Doctor_do.multifunctionalgun.setup.DMG_SlimefunItemStack;
 import org.bukkit.Material;
 

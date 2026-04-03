@@ -224,4 +224,52 @@ public class Utils {
                 ":" + loc.getY() +
                 ":" + loc.getZ();
     }
+
+    // 序列化颜色，将color转换为String，该String仅用于显示颜色配置
+    @Nonnull
+    public static String serializeColor(@Nonnull Color color) {
+        String red = Integer.toHexString(color.getRed()).toUpperCase();
+        String green = Integer.toHexString(color.getGreen()).toUpperCase();
+        String blue = Integer.toHexString(color.getBlue()).toUpperCase();
+        return serializeColorToChat(color) + "#" + red + "_" + green + "_" + blue;
+//        return String.format("#%02x_%02x_%02x", red, green, blue);
+    }
+
+    // 反序列化颜色，将String转换为color
+    @Nonnull
+    public static Color deserializeColor(@Nonnull String s) {
+        String[] color = s.split("[#_]");
+        if (color.length != 4) {
+            throw new IllegalArgumentException("Invalid color deserialization parameter, got " + s);
+        }
+        if (color[1].isEmpty() || Integer.parseInt(color[1], 16) > 255 || Integer.parseInt(color[1], 16) < 0) {
+            throw new IllegalArgumentException("Invalid color deserialization parameter, got " + s);
+        }
+        if (color[2].isEmpty() || Integer.parseInt(color[2], 16) > 255 || Integer.parseInt(color[2], 16) < 0) {
+            throw new IllegalArgumentException("Invalid color deserialization parameter, got " + s);
+        }
+        if (color[3].isEmpty() || Integer.parseInt(color[3], 16) > 255 || Integer.parseInt(color[3], 16) < 0) {
+            throw new IllegalArgumentException("Invalid color deserialization parameter, got " + s);
+        }
+        return Color.fromRGB(Integer.parseInt(color[1], 16), Integer.parseInt(color[2], 16), Integer.parseInt(color[3], 16));
+    }
+
+    // 序列化颜色为聊天颜色代码
+    @Nonnull
+    public static String serializeColorToChat(@Nonnull Color color) {
+        // 确保 RGB 值在有效范围内
+        int red = Math.min(255, Math.max(0, color.getRed()));
+        int green = Math.min(255, Math.max(0, color.getGreen()));
+        int blue = Math.min(255, Math.max(0, color.getBlue()));
+
+        // 格式化为 2 位十六进制字符串，不足 2 位时补 0
+        String redHex = String.format("%02X", red);
+        String greenHex = String.format("%02X", green);
+        String blueHex = String.format("%02X", blue);
+
+        return "§x"
+                + "§" + redHex.charAt(0) + "§" + redHex.charAt(1)
+                + "§" + greenHex.charAt(0) + "§" + greenHex.charAt(1)
+                + "§" + blueHex.charAt(0) + "§" + blueHex.charAt(1);
+    }
 }

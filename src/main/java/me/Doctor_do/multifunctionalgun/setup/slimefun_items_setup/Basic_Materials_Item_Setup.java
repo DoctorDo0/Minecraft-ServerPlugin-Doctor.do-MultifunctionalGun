@@ -8,8 +8,8 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.categories.Groups;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Item;
 import me.Doctor_do.multifunctionalgun.items.items.mobdrops.Anti_Gravity_Void_Particle;
-import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import me.Doctor_do.multifunctionalgun.recipetypes.RecipeTypes;
+import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Basic_Materials;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

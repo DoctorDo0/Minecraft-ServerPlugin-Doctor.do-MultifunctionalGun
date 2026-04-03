@@ -27,7 +27,6 @@ public class PlayerUseWeaponListener implements Listener {
         ItemStack item = event.getItem();
 
         if (item != null && item.hasItemMeta() &&
-                Objects.requireNonNull(item.getItemMeta()).hasDisplayName() &&
                 Objects.equals(SlimefunItem.getByItem(item), Gun_And_Bullet_Item_Setup.EndlessWeapon)) {
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                 Gun_And_Bullet_Item_Setup.getEndlessWeaponInstance().LeftClickEvent(player, event, item);

@@ -20,7 +20,7 @@ public class Scope extends ItemType_Auxiliary implements NotPlaceable {
     }
 
     @Override
-    public void effect(Player player) {
+    public void effect(Player player, ItemStack itemStack) {
         player.sendMessage(ChatColors.color("&7测试:&fGun:&fScope"));
         getLogger().info("&7测试:&fGun:&fScope");
     }

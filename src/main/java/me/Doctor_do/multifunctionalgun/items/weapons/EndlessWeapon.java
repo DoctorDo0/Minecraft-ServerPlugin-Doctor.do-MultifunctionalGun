@@ -11,12 +11,11 @@ import me.Doctor_do.multifunctionalgun.MultifunctionalGun;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Auxiliary;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Bullet;
 import me.Doctor_do.multifunctionalgun.items.general.ItemType_Gun;
-import me.Doctor_do.multifunctionalgun.items.weapons.bullet.*;
-import me.Doctor_do.multifunctionalgun.items.weapons.weapon.*;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Gun_And_Bullet;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items.Machine;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Gun_And_Bullet_Item_Setup;
 import me.Doctor_do.multifunctionalgun.setup.slimefun_items_setup.Machine_Item_Setup;
+import me.Doctor_do.multifunctionalgun.utils.ChargeUtil;
 import me.Doctor_do.multifunctionalgun.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -44,7 +43,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private static float GENERATE = 2048.0F;
     private static float COST = 1.0F;
 
-    private static double multiplier = 1.5;
+    private static float multiplier = 1.5F;
 
     private ItemStack currentItem;
     private Inventory currentInventory;
@@ -52,7 +51,6 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
     private final NamespacedKey EndlessWeapon_Mode_nsk = new NamespacedKey(plugin, "ENDLESS_WEAPON_MODE");
     private final NamespacedKey LAST_USE_nsk = Utils.createKey("Last_Use");
-    private long Last_Use = 0;
 
     private final NamespacedKey RifleBullet_Count_nsk = Utils.createKey("RifleBullet_Count");
     private int RifleBullet_Count = 0;
@@ -91,6 +89,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     private final NamespacedKey Power_generate_mode_nsk = Utils.createKey("Power_generate_mode");
     private String Power_generate_mode = "ON";
 
+    private int[] Global_ItemStack_RIFLE_BULLET_SLOT;
+    private int[] Global_ItemStack_GRENADE_SLOT;
+    private int[] Global_ItemStack_STEEL_BALL_SLOT;
+    private int[] Global_ItemStack_BURNING_STEEL_BALL_SLOT;
+    private int[] Global_ItemStack_SPECIAL_BULLET_SLOT;
+    private int[] Global_ItemStack_ENERGY_STORAGE_CAN_FULL_SLOT;
+    private int[] Global_ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT;
     private int Global_LASERSIGHT_INFO_SLOT;
 
     public EndlessWeapon(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
@@ -103,8 +108,9 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     }
 
     // 返回电容量
+    @Override
     public float getMaxItemCharge(ItemStack itemStack) {
-        return CAPACITY;
+        return ChargeUtil.getMaxItemCharge(itemStack, this);
     }
 
     public static float getCAPACITY() {
@@ -136,7 +142,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         EndlessWeapon.COST = COST;
     }
 
-    public static void setMultiplier(double multiplier) {
+    public static void setMultiplier(float multiplier) {
         if (multiplier <= 1.0F) {
             multiplier = 1.0F;
         }
@@ -202,8 +208,8 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         // type = LAST_USE_nsk
         if (Objects.equals(type, LAST_USE_nsk)) {
             // 设置pdc
-            Last_Use = (long) value;
-            pdc.set(LAST_USE_nsk, PersistentDataType.LONG, Last_Use);
+            long last_Use = (long) value;
+            pdc.set(LAST_USE_nsk, PersistentDataType.LONG, last_Use);
         }
 
         // type = RifleBullet_Count_nsk || type = Grenade_Count_nsk || type = RifleBullet_Contain_Count_nsk || type = Grenade_Contain_Count_nsk
@@ -376,10 +382,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         }
         // 修改物品操作
         item.setItemMeta(meta);
+        currentItem.setItemMeta(meta);
     }
 
     // 按输入物品的电量与pdc进行计算，触发不同效果，进行修改物品操作，修改lore和pdc，修改电量，或输出提示
     private void refreshAndCheckEnergy(Player player, ItemStack item) {
+        assert currentItem.getItemMeta() != null;
+        Power_generate_mode = currentItem.getItemMeta().getPersistentDataContainer().getOrDefault(Power_generate_mode_nsk, PersistentDataType.STRING, "ON");
         if (Objects.equals(Power_generate_mode, "OFF")) {
             return;
         }
@@ -420,6 +429,26 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             // 增加物品电量
             addItemCharge(item, realCount * GENERATE);
         }
+    }
+
+    // 根据当前的武器类型和配置返回特定类型的弹药
+    public ItemType_Bullet getBulletByGun(ItemType_Gun gun) {
+        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.AssaultRifle)) {
+            return (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet;
+        }
+        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.GrenadeLauncher)) {
+            return (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade;
+        }
+        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.TIKA_Rifle)) {
+            if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName()))
+                return (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall;
+            if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName()))
+                return (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall;
+        }
+        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.AntiMaterielSniperRifle)) {
+            return (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet;
+        }
+        return null;
     }
 
     //TODO:
@@ -491,6 +520,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
     // 左键点击事件
     @SuppressWarnings("all")
     public void LeftClickEvent(Player player, PlayerInteractEvent event, ItemStack item) {
+        // 不要做空判断，每个物品即一个单独对象，但sf类相同，且对象仅一个，可以通过相同判断检测，进而导致物品不会刷新，会丢失当前物品信息，指向错误的地址
         currentItem = item;
 
         event.setUseInteractedBlock(Event.Result.DENY);
@@ -516,25 +546,36 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             // 对象类型为ItemType_Gun类型
             if (secondaryItem instanceof ItemType_Gun) {
-                GunEventChain(player, secondaryItem, pdc);
+                ItemType_Gun gun = (ItemType_Gun) secondaryItem;
+                gun.preprocessingAndShoot(
+                        player,
+                        currentItem,
+                        secondaryItem,
+                        List.of(currentInventory),
+                        multiplier,
+                        getBulletByGun(gun)
+                );
+                refreshAllCountWithLoreAndPDC();
             }
 
             // 对象类型为ItemType_Auxiliary类型
             if (secondaryItem instanceof ItemType_Auxiliary) {
-                AuxEventChain(player, secondaryItem);
+                ItemType_Auxiliary auxiliary = (ItemType_Auxiliary) secondaryItem;
+                auxiliary.effect(player, currentItem);
             }
         }
 
         // shift+左键，打开背包
         else {
             refreshItemLoreFromMode(item, index);
-            openFirearmExpansionBackpack(player, item);
+            createAndOpenFirearmExpansionBackpack(player, item, true);
         }
     }
 
     // 右键点击事件
     @SuppressWarnings("all")
     public void RightClickEvent(Player player, PlayerInteractEvent event, ItemStack item) {
+        // 不要做空判断，每个物品即一个单独对象，但sf类相同，且对象仅一个，可以通过相同判断检测，进而导致物品不会刷新，会丢失当前物品信息，指向错误的地址
         currentItem = item;
 
         event.setUseInteractedBlock(Event.Result.DENY);
@@ -560,14 +601,25 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
 
             // 对象类型为ItemType_Gun类型
             if (primaryItem instanceof ItemType_Gun) {
-                GunEventChain(player, primaryItem, pdc);
+                ItemType_Gun gun = (ItemType_Gun) primaryItem;
+                gun.preprocessingAndShoot(
+                        player,
+                        currentItem,
+                        primaryItem,
+                        List.of(currentInventory),
+                        multiplier,
+                        getBulletByGun(gun)
+                );
+                refreshAllCountWithLoreAndPDC();
             }
 
             // 对象类型为ItemType_Auxiliary类型
             if (primaryItem instanceof ItemType_Auxiliary) {
-                AuxEventChain(player, primaryItem);
+                ItemType_Auxiliary auxiliary = (ItemType_Auxiliary) primaryItem;
+                auxiliary.effect(player, currentItem);
             }
 
+            // 旧版直接调用物品的右键handler
 //            SlimefunItem sfItem = modes.get(index).getItem();
 //
 //            if (sfItem != null) {
@@ -593,159 +645,9 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         }
     }
 
-    // 武器的事件链
-    public void GunEventChain(Player player, SlimefunItem tools, PersistentDataContainer pdc) {
-        ItemType_Gun gun = (ItemType_Gun) tools;
-
-        if (!checkUseTime(player, gun, pdc)) {
-            return;
-        }
-        ItemType_Bullet bullet = null;
-        if (!Objects.equals(gun, Gun_And_Bullet_Item_Setup.LightCone) && !Objects.equals(gun, Gun_And_Bullet_Item_Setup.TIKA_Rifle)) {
-            bullet = checkAndConsumeBullet(player, gun);
-        }
-        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.TIKA_Rifle)) {
-            if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName())) {
-                bullet = checkAndConsumeBullet(player, gun, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall);
-            }
-            if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName())) {
-                bullet = checkAndConsumeBullet(player, gun, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall);
-            }
-        }
-        if (!Objects.equals(gun, Gun_And_Bullet_Item_Setup.LightCone) && bullet == null) {
-            return;
-        }
-
-        // 武器为步枪
-        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.AssaultRifle)) {
-            RifleBullet_Count = pdc.getOrDefault(RifleBullet_Count_nsk, PersistentDataType.INTEGER, 0);
-            RifleBullet_Count = Math.max(0, RifleBullet_Count - 1);
-            refreshItemLoreAndPDC(currentItem, RifleBullet_Count_nsk, RifleBullet_Count);
-            Gun_And_Bullet_Item_Setup.getAssaultRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.RifleBullet, AssaultRifle.multiplier * multiplier);
-        }
-
-        // 武器为榴弹
-        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.GrenadeLauncher)) {
-            Grenade_Count = pdc.getOrDefault(Grenade_Count_nsk, PersistentDataType.INTEGER, 0);
-            Grenade_Count = Math.max(0, Grenade_Count - 1);
-            refreshItemLoreAndPDC(currentItem, Grenade_Count_nsk, Grenade_Count);
-            Gun_And_Bullet_Item_Setup.getGrenadeLauncherInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.Grenade, GrenadeLauncher.multiplier * multiplier);
-        }
-
-        // 武器为TIKA步枪
-        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.TIKA_Rifle)) {
-            // 获取当前提卡模式
-            TIKA_mode = pdc.getOrDefault(TIKA_mode_nsk, PersistentDataType.STRING, Objects.requireNonNull(Gun_And_Bullet.STEEL_BALL.getDisplayName()));
-            // 钢珠模式
-            if (Objects.equals(TIKA_mode, Gun_And_Bullet.STEEL_BALL.getDisplayName())) {
-                SteelBall_Count = pdc.getOrDefault(SteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
-                SteelBall_Count = Math.max(0, SteelBall_Count - 1);
-                refreshItemLoreAndPDC(currentItem, SteelBall_Count_nsk, SteelBall_Count);
-                // 有电状态
-                if (removeItemCharge(currentItem, COST * 2)) {
-                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier * 3);
-                }
-                // 无电状态
-                else {
-                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SteelBall, TIKA_Rifle.multiplier * multiplier);
-                }
-            }
-            // 燃烧弹模式
-            if (Objects.equals(TIKA_mode, Gun_And_Bullet.BURNING_STEEL_BALL.getDisplayName())) {
-                BurningSteelBall_Count = pdc.getOrDefault(BurningSteelBall_Count_nsk, PersistentDataType.INTEGER, 0);
-                BurningSteelBall_Count = Math.max(0, BurningSteelBall_Count - 1);
-                refreshItemLoreAndPDC(currentItem, BurningSteelBall_Count_nsk, BurningSteelBall_Count);
-                // 有电状态
-                if (removeItemCharge(currentItem, COST * 2)) {
-                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier * 3);
-                }
-                // 无电状态
-                else {
-                    Gun_And_Bullet_Item_Setup.getTIKA_RifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.BurningSteelBall, TIKA_Rifle.multiplier * multiplier);
-                }
-            }
-        }
-
-        // 武器为光锥
-        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.LightCone)) {
-            if (removeItemCharge(currentItem, COST * 40)) {
-                Gun_And_Bullet_Item_Setup.getLightConeInstance().shoot(player, LightCone.multiplier * multiplier);
-            }
-        }
-
-        // 武器为反器材狙击步枪
-        if (Objects.equals(gun, Gun_And_Bullet_Item_Setup.AntiMaterielSniperRifle)) {
-            SpecialBullet_Count = pdc.getOrDefault(SpecialBullet_Count_nsk, PersistentDataType.INTEGER, 0);
-            SpecialBullet_Count = Math.max(0, SpecialBullet_Count - 1);
-            refreshItemLoreAndPDC(currentItem, SpecialBullet_Count_nsk, SpecialBullet_Count);
-            Gun_And_Bullet_Item_Setup.getAntiMaterielSniperRifleInstance().shoot(player, (ItemType_Bullet) Gun_And_Bullet_Item_Setup.SpecialBullet, AntiMaterielSniperRifle.multiplier * multiplier);
-        }
-    }
-
-    // 辅助部件的事件链
-    public void AuxEventChain(Player player, SlimefunItem tools) {
-        ItemType_Auxiliary aux = (ItemType_Auxiliary) tools;
-
-        // 部件为瞄准镜
-        if (Objects.equals(aux, Gun_And_Bullet_Item_Setup.Scope)) {
-            Gun_And_Bullet_Item_Setup.getScopeInstance().effect(player);
-        }
-
-        // 部件为激光瞄准器
-        if (Objects.equals(aux, Gun_And_Bullet_Item_Setup.LaserSight)) {
-            Gun_And_Bullet_Item_Setup.getLaserSightInstance().effect(player);
-        }
-    }
-
-    // 检查发射冷却
-    public boolean checkUseTime(Player player, ItemType_Gun gun, PersistentDataContainer pdc) {
-        Last_Use = pdc.getOrDefault(LAST_USE_nsk, PersistentDataType.LONG, 0L);
-        long currentTime = System.currentTimeMillis();
-        if ((currentTime - Last_Use) < gun.getCooldown() * 1000) {
-            player.sendMessage(ChatColor.YELLOW + "换弹中!");
-            return false;
-        }
-        Last_Use = currentTime;
-        refreshItemLoreAndPDC(currentItem, LAST_USE_nsk, Last_Use);
-        return true;
-    }
-
-    // 检查弹药存量
-    public ItemType_Bullet checkAndConsumeBullet(Player player, ItemType_Gun gun) {
-        ItemType_Bullet bullet = ItemType_Gun.checkAndConsumeInv(currentInventory, gun.getItem());
-        if (bullet == null) {
-            bullet = ItemType_Gun.checkAndConsume(gun.getItem(), player.getInventory().getItemInOffHand());
-        }
-        if (bullet == null) {
-            bullet = ItemType_Gun.checkAndConsumeInv(player.getInventory(), gun.getItem());
-        }
-        if (bullet == null) {
-            Utils.sendMessage(player, ChatColor.RED + "子弹耗尽!");
-            return null;
-        }
-        return bullet;
-    }
-
-    // 检查弹药存量
-    public ItemType_Bullet checkAndConsumeBullet(Player player, ItemType_Gun gun, ItemType_Bullet target) {
-        ItemType_Bullet bullet = ItemType_Gun.checkAndConsumeInv(currentInventory, gun.getItem());
-        if (bullet == null) {
-            bullet = ItemType_Gun.checkAndConsume(gun.getItem(), player.getInventory().getItemInOffHand(), target);
-        }
-        if (bullet == null) {
-            bullet = ItemType_Gun.checkAndConsumeInv(player.getInventory(), gun.getItem(), target);
-        }
-        if (bullet == null) {
-            Utils.sendMessage(player, ChatColor.RED + "子弹耗尽!");
-            return null;
-        }
-        return bullet;
-    }
-
     // 打开背包界面功能
     @SuppressWarnings("all")
-    public void openFirearmExpansionBackpack(Player player, ItemStack item) {
-        isLoaded = true;
+    public void createAndOpenFirearmExpansionBackpack(Player player, ItemStack item, boolean open) {
 
         // Get variables
         final ItemMeta meta = item.getItemMeta();
@@ -785,6 +687,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         final int[] ItemStack_ENERGY_STORAGE_CAN_FULL_SLOT = {42, 51};
         final int[] ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT = {44, 53};
         //全局参数初始化
+        Global_ItemStack_RIFLE_BULLET_SLOT = ItemStack_RIFLE_BULLET_SLOT;
+        Global_ItemStack_GRENADE_SLOT = ItemStack_GRENADE_SLOT;
+        Global_ItemStack_STEEL_BALL_SLOT = ItemStack_STEEL_BALL_SLOT;
+        Global_ItemStack_BURNING_STEEL_BALL_SLOT = ItemStack_BURNING_STEEL_BALL_SLOT;
+        Global_ItemStack_SPECIAL_BULLET_SLOT = ItemStack_SPECIAL_BULLET_SLOT;
+        Global_ItemStack_ENERGY_STORAGE_CAN_FULL_SLOT = ItemStack_ENERGY_STORAGE_CAN_FULL_SLOT;
+        Global_ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT = ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT;
         Global_LASERSIGHT_INFO_SLOT = LASERSIGHT_INFO_SLOT;
 
         Inventory inventory;
@@ -1021,6 +930,13 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
         count = pdc.getOrDefault(EnergyStorageCanEmpty_Count_nsk, PersistentDataType.INTEGER, 0);
         fillInventory(inventory, ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT, Machine.ENERGY_STORAGE_CAN_EMPTY, count);
 
+        // 结束任务，仅执行前面的创建任务，而不执行后面的打开任务
+        if (!open) {
+            return;
+        }
+
+        isLoaded = true;
+
         // 打开容器界面
         player.openInventory(inventory);
 
@@ -1047,27 +963,7 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
                     cancel();
 
                     // 检查数量，并赋值
-                    // RifleBullet_Count
-                    RifleBullet_Count = getCount(inventory, ItemStack_RIFLE_BULLET_SLOT, Gun_And_Bullet_Item_Setup.RifleBullet);
-                    refreshItemLoreAndPDC(item, RifleBullet_Count_nsk, RifleBullet_Count);
-                    // Grenade_Count
-                    Grenade_Count = getCount(inventory, ItemStack_GRENADE_SLOT, Gun_And_Bullet_Item_Setup.Grenade);
-                    refreshItemLoreAndPDC(item, Grenade_Count_nsk, Grenade_Count);
-                    // SteelBall_Count
-                    SteelBall_Count = getCount(inventory, ItemStack_STEEL_BALL_SLOT, Gun_And_Bullet_Item_Setup.SteelBall);
-                    refreshItemLoreAndPDC(item, SteelBall_Count_nsk, SteelBall_Count);
-                    // BurningSteelBall_Count
-                    BurningSteelBall_Count = getCount(inventory, ItemStack_BURNING_STEEL_BALL_SLOT, Gun_And_Bullet_Item_Setup.BurningSteelBall);
-                    refreshItemLoreAndPDC(item, BurningSteelBall_Count_nsk, BurningSteelBall_Count);
-                    // SpecialBullet_Count
-                    SpecialBullet_Count = getCount(inventory, ItemStack_SPECIAL_BULLET_SLOT, Gun_And_Bullet_Item_Setup.SpecialBullet);
-                    refreshItemLoreAndPDC(item, SpecialBullet_Count_nsk, SpecialBullet_Count);
-                    // EnergyStorageCanFull_Count
-                    EnergyStorageCanFull_Count = getCount(inventory, ItemStack_ENERGY_STORAGE_CAN_FULL_SLOT, Machine_Item_Setup.EnergyStorageCanFull);
-                    refreshItemLoreAndPDC(item, EnergyStorageCanFull_Count_nsk, EnergyStorageCanFull_Count);
-                    // EnergyStorageCanEmpty_Count
-                    EnergyStorageCanEmpty_Count = getCount(inventory, ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT, Machine_Item_Setup.EnergyStorageCanEmpty);
-                    refreshItemLoreAndPDC(item, EnergyStorageCanEmpty_Count_nsk, EnergyStorageCanEmpty_Count);
+                    refreshAllCountWithLoreAndPDC();
 
                     // 检查当前物品功能配置，并初始化赋值，写入当前物品pdc数据
                     PersistentDataContainer currentItemPDC = currentItem.getItemMeta().getPersistentDataContainer();
@@ -1136,6 +1032,32 @@ public class EndlessWeapon extends SlimefunItem implements NotPlaceable, Recharg
             }
         }
         return count;
+    }
+
+    // 集中方法，用于刷新所有的弹药/能源数量
+    private void refreshAllCountWithLoreAndPDC() {
+        // 检查数量，并赋值
+        // RifleBullet_Count
+        RifleBullet_Count = getCount(currentInventory, Global_ItemStack_RIFLE_BULLET_SLOT, Gun_And_Bullet_Item_Setup.RifleBullet);
+        refreshItemLoreAndPDC(currentItem, RifleBullet_Count_nsk, RifleBullet_Count);
+        // Grenade_Count
+        Grenade_Count = getCount(currentInventory, Global_ItemStack_GRENADE_SLOT, Gun_And_Bullet_Item_Setup.Grenade);
+        refreshItemLoreAndPDC(currentItem, Grenade_Count_nsk, Grenade_Count);
+        // SteelBall_Count
+        SteelBall_Count = getCount(currentInventory, Global_ItemStack_STEEL_BALL_SLOT, Gun_And_Bullet_Item_Setup.SteelBall);
+        refreshItemLoreAndPDC(currentItem, SteelBall_Count_nsk, SteelBall_Count);
+        // BurningSteelBall_Count
+        BurningSteelBall_Count = getCount(currentInventory, Global_ItemStack_BURNING_STEEL_BALL_SLOT, Gun_And_Bullet_Item_Setup.BurningSteelBall);
+        refreshItemLoreAndPDC(currentItem, BurningSteelBall_Count_nsk, BurningSteelBall_Count);
+        // SpecialBullet_Count
+        SpecialBullet_Count = getCount(currentInventory, Global_ItemStack_SPECIAL_BULLET_SLOT, Gun_And_Bullet_Item_Setup.SpecialBullet);
+        refreshItemLoreAndPDC(currentItem, SpecialBullet_Count_nsk, SpecialBullet_Count);
+        // EnergyStorageCanFull_Count
+        EnergyStorageCanFull_Count = getCount(currentInventory, Global_ItemStack_ENERGY_STORAGE_CAN_FULL_SLOT, Machine_Item_Setup.EnergyStorageCanFull);
+        refreshItemLoreAndPDC(currentItem, EnergyStorageCanFull_Count_nsk, EnergyStorageCanFull_Count);
+        // EnergyStorageCanEmpty_Count
+        EnergyStorageCanEmpty_Count = getCount(currentInventory, Global_ItemStack_ENERGY_STORAGE_CAN_EMPTY_SLOT, Machine_Item_Setup.EnergyStorageCanEmpty);
+        refreshItemLoreAndPDC(currentItem, EnergyStorageCanEmpty_Count_nsk, EnergyStorageCanEmpty_Count);
     }
 
     // 按数量填充界面，用于回显

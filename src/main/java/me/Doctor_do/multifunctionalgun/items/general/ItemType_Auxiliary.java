@@ -23,11 +23,11 @@ public class ItemType_Auxiliary extends SlimefunItem implements NotPlaceable {
     public ItemUseHandler getItemHandler() {
         return event -> {
             event.cancel();
-            effect(event.getPlayer());
+            effect(event.getPlayer(), event.getItem());
         };
     }
 
-    public void effect(Player player) {
+    public void effect(Player player, ItemStack itemStack) {
         //
     }
 }
